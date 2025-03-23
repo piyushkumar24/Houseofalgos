@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#4B0082" />
   <meta name="theme-color" content="#8A2BE2" />
   <title>House of Algo's | Algorithmic Forex Trading Solutions</title>
   <!-- External CSS Libraries -->
@@ -38,6 +40,8 @@
       --up-color: #00c853;
       --down-color: #ff3d00;
       --ticker-height: 60px;
+      --nav-height-desktop: 90px;
+      --nav-height-mobile: 70px;
     }
     * {
       box-sizing: border-box;
@@ -79,74 +83,80 @@
       background: linear-gradient(135deg, rgba(75,0,130,0.95) 0%, rgba(128,0,128,0.95) 50%, rgba(148,0,211,0.95) 100%);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      padding: 0.8rem 2rem;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       box-shadow: var(--shadow-sm);
       z-index: 1000;
       transition: var(--transition);
-    }
-    .sticky-nav.scrolled {
-      padding: 0.6rem 2rem;
-      box-shadow: var(--shadow-md);
+      height: var(--nav-height-desktop);
+      border-bottom: 2px solid transparent;
+      background-clip: padding-box;
     }
     
-    .sticky-nav.scrolled .logo-container {
-      height: 60px;
-      width: 200px;
+    .sticky-nav.scrolled {
+      box-shadow: var(--shadow-md);
+      border-bottom-color: rgba(255,215,0,0.3);
+      background: linear-gradient(135deg, rgba(75,0,130,0.98) 0%, rgba(128,0,128,0.98) 50%, rgba(148,0,211,0.98) 100%);
+      height: calc(var(--nav-height-desktop) - 15px);
     }
+    
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    
     .logo {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
-      font-weight: bold;
-      position: relative;
+      gap: 1rem;
+      height: 100%;
     }
+    
     .logo-container {
-      position: relative;
-      height: 80px;
-      width: 250px;
+      height: 60px;
+      width: auto;
       display: flex;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
       transition: var(--transition);
     }
+    
     .logo-img {
-      width: 100%;
-      height: auto;
-      max-height: 70px;
+      height: 100%;
+      width: auto;
+      max-width: 180px;
       object-fit: contain;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     }
+    
     .logo-text {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      gap: 0.3rem;
-      text-align: center;
+      gap: 0.2rem;
     }
+    
     .logo-text span {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: 700;
       background: var(--gradient-1);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      line-height: 1;
+      line-height: 1.2;
+      white-space: nowrap;
     }
-    .logo small {
-      display: block;
-      font-size: 1rem;
+    
+    .logo-text small {
+      font-size: 0.85rem;
       font-weight: 500;
       color: var(--text-light);
-      letter-spacing: 0.8px;
-      margin-top: 0.2rem;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
     }
+    
     .nav-links {
       display: flex;
       gap: 1.5rem;
@@ -154,26 +164,10 @@
       margin: 0;
       padding: 0;
       transition: var(--transition);
+      height: 100%;
+      align-items: center;
     }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        position: fixed;
-        top: 80px;
-        left: -100%;
-        height: calc(100vh - 80px);
-        width: 80%;
-        flex-direction: column;
-        background: rgba(75, 0, 130, 0.98);
-        backdrop-filter: blur(10px);
-        padding: 2rem;
-        box-shadow: var(--shadow-lg);
-      }
-      
-      .nav-links.active {
-        left: 0;
-      }
-    }
+    
     .nav-links li a {
       font-weight: 500;
       font-size: 0.95rem;
@@ -181,6 +175,7 @@
       position: relative;
       padding: 0.3rem 0;
     }
+    
     .nav-links li a::after {
       content: '';
       position: absolute;
@@ -191,12 +186,15 @@
       background: var(--gradient-1);
       transition: var(--transition-fast);
     }
+    
     .nav-links li a:hover {
       color: var(--primary-1);
     }
+    
     .nav-links li a:hover::after {
       width: 100%;
     }
+    
     /* Mobile Menu Toggle Styles */
     .menu-toggle {
       display: none;
@@ -209,15 +207,11 @@
       transition: var(--transition);
       z-index: 1001;
     }
-
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-    }
+    
     .menu-toggle:hover {
       color: var(--primary-1);
     }
+    
     .sr-only {
       position: absolute;
       width: 1px;
@@ -229,19 +223,21 @@
       white-space: nowrap;
       border: 0;
     }
+    
     /* Hero Section with Video */
     .hero {
       position: relative;
-      height: 100vh;
+      min-height: 100vh;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding-top: 80px;
+      padding-top: var(--nav-height-desktop);
       overflow: hidden;
       color: var(--text-light);
     }
+    
     .hero::before {
       content: '';
       position: absolute;
@@ -250,6 +246,7 @@
       z-index: 1;
       mix-blend-mode: multiply;
     }
+    
     /* Video Background */
     .video-background {
       position: absolute;
@@ -261,6 +258,7 @@
       overflow: hidden;
       background: #000;
     }
+    
     .video-background video {
       position: absolute;
       top: 50%;
@@ -274,6 +272,7 @@
       opacity: 1;
       transition: opacity 1s ease;
     }
+    
     /* Hero Content Overlay */
     .hero-content {
       position: relative;
@@ -283,6 +282,7 @@
       padding: 0 20px;
       animation: fadeIn 1s ease-out;
     }
+    
     .hero-content h1 {
       font-size: 3.5rem;
       font-weight: 700;
@@ -293,6 +293,7 @@
       position: relative;
       display: inline-block;
     }
+    
     .hero-content h1::after {
       content: '';
       position: absolute;
@@ -304,6 +305,7 @@
       background: var(--gradient-3);
       border-radius: 2px;
     }
+    
     .hero-content p {
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
@@ -314,6 +316,7 @@
       color: var(--text-light);
       text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
+    
     .hero-content ul {
       list-style: none;
       margin: 1.5rem 0;
@@ -322,6 +325,7 @@
       justify-content: center;
       gap: 1rem;
     }
+    
     .hero-content ul li {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(5px);
@@ -336,14 +340,17 @@
       opacity: 0;
       color: var(--text-light);
     }
+    
     .hero-content ul li:nth-child(1) { animation-delay: 0.3s; }
     .hero-content ul li:nth-child(2) { animation-delay: 0.6s; }
     .hero-content ul li:nth-child(3) { animation-delay: 0.9s; }
     .hero-content ul li:nth-child(4) { animation-delay: 1.2s; }
+    
     .hero-content ul li:hover {
       transform: translateY(-3px);
       background: rgba(255, 255, 255, 0.25);
     }
+    
     .cta-text {
       font-weight: bold; 
       margin-top: 1rem; 
@@ -352,70 +359,74 @@
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
       animation: pulse 2s infinite;
     }
-/* Enhanced Live Forex Ticker with Currency Symbols */
-.forex-ticker-wrapper {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: var(--ticker-height);
-  background: rgba(0, 0, 0, 0.8);
-  overflow: hidden;
-  z-index: 3;
-  border-top: 1px solid rgba(255, 215, 0, 0.3);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.forex-ticker-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.forex-ticker {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  position: absolute;
-  white-space: nowrap;
-  will-change: transform;
-  left: 0;
-  top: 0;
-  animation: ticker-scroll 60s linear infinite;
-}
-
-@keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.forex-ticker:hover {
-  animation-play-state: paused;
-}
-
-.currency-pair {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 20px;
-  position: relative;
-  transition: var(--transition);
-  border-right: 1px solid rgba(255, 215, 0, 0.1);
-  min-width: 150px;
-}
-
+    
+    /* Enhanced Live Forex Ticker with Currency Symbols */
+    .forex-ticker-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: var(--ticker-height);
+      background: rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+      z-index: 3;
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .forex-ticker-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .forex-ticker {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      position: absolute;
+      white-space: nowrap;
+      will-change: transform;
+      left: 0;
+      top: 0;
+      animation: ticker-scroll 60s linear infinite;
+    }
+    
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    .forex-ticker:hover {
+      animation-play-state: paused;
+    }
+    
+    .currency-pair {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 20px;
+      position: relative;
+      transition: var(--transition);
+      border-right: 1px solid rgba(255, 215, 0, 0.1);
+      min-width: 150px;
+    }
+    
     .currency-pair:hover {
       background: rgba(255, 255, 255, 0.1);
     }
+    
     .currency-pair:last-child {
       border-right: none;
     }
+    
     .currency-flags {
       display: flex;
       align-items: center;
       margin-right: 10px;
     }
+    
     .currency-flag {
       width: 24px;
       height: 24px;
@@ -425,36 +436,44 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       position: relative;
     }
+    
     .currency-flag:first-child { z-index: 2; }
     .currency-flag:last-child { margin-left: -8px; z-index: 1; }
+    
     .currency-info {
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
+    
     .currency-name {
       font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-light);
       margin-bottom: 2px;
     }
+    
     .currency-value {
       font-size: 0.85rem;
       font-weight: 500;
       display: flex;
       align-items: center;
     }
+    
     .currency-value.up { color: var(--up-color); }
     .currency-value.down { color: var(--down-color); }
+    
     .currency-value i {
       margin-left: 5px;
       font-size: 0.8rem;
     }
+    
     .currency-change {
       font-size: 0.75rem;
       margin-left: 5px;
       opacity: 0.9;
     }
+    
     /* Optional Currency Symbols */
     .currency-symbol {
       width: 20px;
@@ -467,6 +486,7 @@
       border-radius: 50%;
       margin-right: 8px;
     }
+    
     .symbol-usd { background: #4CAF50; color: white; }
     .symbol-eur { background: #2196F3; color: white; }
     .symbol-gbp { background: #9C27B0; color: white; }
@@ -488,6 +508,7 @@
     .symbol-pln { background: #E53935; color: white; }
     .symbol-sek { background: #1E88E5; color: white; }
     .symbol-nok { background: #D32F2F; color: white; }
+    
     /* Section Styles */
     section {
       padding: 5rem 2rem;
@@ -496,19 +517,23 @@
       overflow: hidden;
       width: 100%;
     }
+    
     section:nth-child(even) {
       background: rgba(75, 0, 130, 0.85);
       color: var(--text-light);
     }
+    
     section:nth-child(odd) {
       background: rgba(148, 0, 211, 0.85);
       color: var(--text-light);
     }
+    
     .section-header {
       margin-bottom: 2.5rem;
       position: relative;
       z-index: 1;
     }
+    
     .section-header h2 {
       font-size: 2.5rem;
       font-weight: 700;
@@ -519,12 +544,14 @@
       color: transparent;
       display: inline-block;
     }
+    
     .section-header p {
       font-size: 1.1rem;
       color: var(--text-light);
       max-width: 700px;
       margin: 0 auto;
     }
+    
     .section-divider {
       height: 4px;
       width: 80px;
@@ -532,10 +559,12 @@
       margin: 1rem auto 2rem;
       border-radius: 2px;
     }
+    
     .section-content {
       max-width: 800px;
       margin: 0 auto 2rem;
     }
+    
     /* Content Grids */
     .services-grid,
     .content-grid {
@@ -546,6 +575,7 @@
       margin: 0 auto;
       padding: 1rem;
     }
+    
     .service-card {
       background: rgba(255, 255, 255, 0.1);
       padding: 2rem;
@@ -562,11 +592,13 @@
       justify-content: space-between;
       color: var(--text-light);
     }
+    
     .service-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-lg);
       background: rgba(255, 255, 255, 0.15);
     }
+    
     .service-card i {
       font-size: 2.5rem;
       margin-bottom: 1.5rem;
@@ -581,22 +613,26 @@
       margin: 0 auto 1.5rem;
       transition: var(--transition);
     }
+    
     .service-card:hover i {
       transform: scale(1.1);
       background: var(--gradient-1);
       color: white;
     }
+    
     .service-card h3 {
       margin-bottom: 1rem;
       font-size: 1.4rem;
       font-weight: 600;
       color: var(--text-light);
     }
+    
     .service-card p {
       color: var(--text-light);
       font-size: 0.95rem;
       line-height: 1.6;
     }
+    
     /* Vision Cards */
     .vision-card {
       background: rgba(255, 255, 255, 0.1);
@@ -608,11 +644,13 @@
       text-align: left;
       color: var(--text-light);
     }
+    
     .vision-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-md);
       background: rgba(255, 255, 255, 0.15);
     }
+    
     .vision-card h3 {
       font-size: 1.8rem;
       font-weight: 600;
@@ -621,6 +659,7 @@
       position: relative;
       display: inline-block;
     }
+    
     .vision-card h3::after {
       content: '';
       position: absolute;
@@ -631,16 +670,19 @@
       background: var(--gradient-1);
       border-radius: 2px;
     }
+    
     .vision-card p {
       font-size: 1rem;
       color: var(--text-light);
       line-height: 1.7;
     }
+    
     /* FAQ Styling */
     .faq-container {
       max-width: 800px;
       margin: 0 auto;
     }
+    
     .faq-item {
       text-align: left;
       margin-bottom: 1.5rem;
@@ -652,10 +694,12 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--text-light);
     }
+    
     .faq-item:hover {
       box-shadow: var(--shadow-md);
       background: rgba(255, 255, 255, 0.15);
     }
+    
     .faq-item strong {
       display: block;
       margin-bottom: 0.8rem;
@@ -663,30 +707,36 @@
       font-size: 1.1rem;
       font-weight: 600;
     }
+    
     .faq-item p {
       color: var(--text-light);
       font-size: 0.95rem;
       line-height: 1.6;
     }
+    
     /* Contact Form */
     .contact {
       background: rgba(75, 0, 130, 0.85);
       position: relative;
     }
+    
     .contact-container {
       position: relative;
       z-index: 1;
       max-width: 800px;
       margin: 0 auto;
     }
+    
     .contact-email {
       margin-bottom: 1rem;
       color: var(--text-light);
     }
+    
     .contact-cta {
       margin-bottom: 2rem;
       color: var(--text-light);
     }
+    
     .contact form {
       max-width: 600px;
       margin: 0 auto;
@@ -699,6 +749,7 @@
       box-shadow: var(--shadow-md);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
+    
     .contact input,
     .contact textarea {
       padding: 1rem;
@@ -710,6 +761,7 @@
       background: rgba(255, 255, 255, 0.05);
       color: var(--text-light);
     }
+    
     .contact input:focus,
     .contact textarea:focus {
       outline: none;
@@ -717,10 +769,12 @@
       box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.1);
       background: rgba(255, 255, 255, 0.1);
     }
+    
     .contact input::placeholder,
     .contact textarea::placeholder {
       color: rgba(255, 255, 255, 0.7);
     }
+    
     .contact button {
       background: var(--gradient-1);
       background-size: 200% 200%;
@@ -734,11 +788,13 @@
       transition: var(--transition);
       box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
     }
+    
     .contact button:hover {
       background-position: right center;
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
     }
+    
     /* Disclaimer Section */
     .disclaimer-container {
       max-width: 800px;
@@ -751,20 +807,24 @@
       color: var(--text-light);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
+    
     .disclaimer-container ul {
       list-style: disc;
       margin-left: 1.5rem;
       margin-top: 1rem;
     }
+    
     .disclaimer-container li {
       margin-bottom: 0.5rem;
     }
+    
     .disclaimer-warning {
       font-weight: bold;
       margin-top: 1.5rem;
       text-align: center;
       color: var(--primary-1);
     }
+    
     /* CTA Section */
     .cta {
       background: linear-gradient(135deg, #4B0082 0%, #800080 50%, #FF69B4 100%);
@@ -774,16 +834,19 @@
       overflow: hidden;
       padding: 4rem 0;
     }
+    
     .cta .section-header {
       margin-bottom: 2rem;
       position: relative;
       z-index: 2;
     }
+    
     .cta .section-header h2 {
       color: var(--text-light);
       text-shadow: 0 2px 4px rgba(0,0,0,0.3);
       font-size: 2.5rem;
     }
+    
     .cta .section-header p {
       color: var(--text-light);
       font-size: 1.2rem;
@@ -791,6 +854,7 @@
       margin: 0 auto;
       line-height: 1.6;
     }
+    
     .cta-buttons {
       display: flex;
       gap: 2rem;
@@ -799,6 +863,7 @@
       z-index: 2;
       flex-wrap: wrap;
     }
+    
     .btn-primary {
       background: linear-gradient(145deg, #FFD700, #DAA520);
       color: #4B0082;
@@ -813,10 +878,12 @@
       overflow: hidden;
       cursor: pointer;
     }
+    
     .btn-primary:hover {
       transform: translateY(-3px);
       box-shadow: 0 12px 30px rgba(255,215,0,0.6);
     }
+    
     .btn-secondary {
       background: linear-gradient(145deg, #DAA520, #FFD700);
       color: #4B0082;
@@ -831,13 +898,16 @@
       overflow: hidden;
       cursor: pointer;
     }
+    
     .btn-secondary:hover {
       transform: translateY(-3px);
       box-shadow: 0 12px 30px rgba(255,215,0,0.6);
     }
+    
     .btn-primary i, .btn-secondary i {
       margin-right: 1rem;
     }
+    
     /* Steps Section */
     .steps-container {
       display: flex;
@@ -847,6 +917,7 @@
       max-width: 1200px;
       margin: 0 auto;
     }
+    
     .step-card {
       flex: 1;
       min-width: 250px;
@@ -861,11 +932,13 @@
       text-align: left;
       color: var(--text-light);
     }
+    
     .step-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-lg);
       background: rgba(255, 255, 255, 0.15);
     }
+    
     .step-number {
       position: absolute;
       top: -20px;
@@ -882,6 +955,7 @@
       font-size: 1.2rem;
       box-shadow: var(--shadow-sm);
     }
+    
     .step-card h3 {
       margin-top: 1rem;
       margin-bottom: 1rem;
@@ -889,11 +963,13 @@
       font-weight: 600;
       color: var(--text-light);
     }
+    
     .step-card p {
       color: var(--text-light);
       font-size: 0.95rem;
       line-height: 1.6;
     }
+    
     /* Animated counter */
     .counter-container {
       display: flex;
@@ -903,6 +979,7 @@
       margin: 3rem auto;
       max-width: 1000px;
     }
+    
     .counter-item {
       text-align: center;
       flex: 1;
@@ -915,10 +992,12 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--text-light);
     }
+    
     .counter-item:hover {
       transform: translateY(-5px);
       background: rgba(255, 255, 255, 0.15);
     }
+    
     .counter-value {
       font-size: 3rem;
       font-weight: 700;
@@ -928,11 +1007,13 @@
       color: transparent;
       margin-bottom: 0.5rem;
     }
+    
     .counter-label {
       font-size: 1.1rem;
       color: var(--text-light);
       font-weight: 500;
     }
+    
     /* Footer */
     footer {
       background: #1a1a1a;
@@ -941,6 +1022,7 @@
       position: relative;
       width: 100%;
     }
+    
     footer::before {
       content: '';
       position: absolute;
@@ -950,6 +1032,7 @@
       height: 4px;
       background: var(--gradient-1);
     }
+    
     .footer-content {
       max-width: 1200px;
       margin: 0 auto;
@@ -958,10 +1041,12 @@
       flex-wrap: wrap;
       gap: 3rem;
     }
+    
     .footer-section {
       flex: 1;
       min-width: 200px;
     }
+    
     .footer-section h4 {
       margin-bottom: 1.5rem;
       font-size: 1.2rem;
@@ -969,6 +1054,7 @@
       position: relative;
       display: inline-block;
     }
+    
     .footer-section h4::after {
       content: '';
       position: absolute;
@@ -979,25 +1065,31 @@
       background: var(--gradient-1);
       border-radius: 2px;
     }
+    
     .footer-section ul {
       list-style: none;
     }
+    
     .footer-section ul li {
       margin-bottom: 0.8rem;
     }
+    
     .footer-section ul li a {
       color: #ccc;
       transition: var(--transition-fast);
       font-size: 0.95rem;
     }
+    
     .footer-section ul li a:hover {
       color: #fff;
       padding-left: 5px;
     }
+    
     .social-icons {
       display: flex;
       gap: 1rem;
     }
+    
     .social-icons a {
       color: #fff;
       font-size: 1.5rem;
@@ -1010,10 +1102,12 @@
       border-radius: 50%;
       transition: var(--transition);
     }
+    
     .social-icons a:hover {
       background: var(--gradient-1);
       transform: translateY(-3px);
     }
+    
     .copyright {
       text-align: center;
       margin-top: 3rem;
@@ -1022,6 +1116,7 @@
       font-size: 0.9rem;
       color: #aaa;
     }
+    
     /* Scroll to top button */
     .scroll-top {
       position: fixed;
@@ -1042,86 +1137,239 @@
       box-shadow: var(--shadow-md);
       z-index: 99;
     }
+    
     .scroll-top.visible {
       opacity: 1;
       visibility: visible;
     }
+    
     .scroll-top:hover {
       transform: translateY(-5px);
     }
+    
     /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+    
     @keyframes gradient-shift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+    
     /* Responsive Styles */
     @media (max-width: 992px) {
       .hero-content h1 { font-size: 3rem; }
       .forex-ticker-wrapper { height: 50px; }
       .section-header h2 { font-size: 2.4rem; }
+      .logo-text span { font-size: 1.2rem; }
+      .logo-text small { font-size: 0.8rem; }
     }
+    
     @media (max-width: 768px) {
+      :root {
+        --nav-height-desktop: var(--nav-height-mobile);
+      }
+      
+      .sticky-nav {
+        padding: 0 1rem;
+        height: var(--nav-height-mobile);
+      }
+      
+      .sticky-nav.scrolled {
+        height: var(--nav-height-mobile);
+      }
+      
+      .logo-wrapper {
+        width: 70%;
+      }
+      
+      .logo {
+        gap: 0.5rem;
+      }
+      
+      .logo-container {
+        height: 40px;
+        width: auto;
+      }
+      
+      .logo-text span {
+        font-size: 1rem;
+      }
+      
+      .logo-text small {
+        font-size: 0.7rem;
+      }
+      
       .nav-links {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: var(--nav-height-mobile);
         left: 0;
+        width: 100%;
         background: rgba(75,0,130,0.95);
         backdrop-filter: blur(10px);
-        width: 100%;
         padding: 1.5rem;
         box-shadow: var(--shadow-md);
         flex-direction: column;
         gap: 1rem;
         text-align: center;
         z-index: 100;
+        height: auto;
       }
-      .nav-links.active { display: flex; }
-      .menu-toggle { display: block; }
-      .sticky-nav { padding: 0.8rem 1.5rem; }
-      .hero-content h1 { font-size: 2.5rem; }
-      .hero-content ul { flex-direction: column; align-items: center; }
-      .hero-content ul li { width: 100%; max-width: 300px; }
-      .section-header h2 { font-size: 2rem; }
-      .services-grid, .content-grid { grid-template-columns: 1fr; }
-      .footer-content { flex-direction: column; text-align: center; }
-      .footer-section h4::after { left: 50%; transform: translateX(-50%); }
-      .social-icons { justify-content: center; }
-      .steps-container { flex-direction: column; align-items: center; }
-      .step-card { max-width: 100%; }
-      .logo { flex-direction: column; }
+      
+      .nav-links.active {
+        display: flex;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+      
+      .hero-content ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .hero-content ul li {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .section-header h2 {
+        font-size: 2rem;
+      }
+      
+      .services-grid, .content-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .social-icons {
+        justify-content: center;
+      }
+      
+      .steps-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .step-card {
+        max-width: 100%;
+      }
     }
+    
     @media (max-width: 480px) {
-      .hero-content h1 { font-size: 2rem; }
-      .section-header h2 { font-size: 1.8rem; }
-      section { padding: 4rem 1.5rem; }
-      .contact form { padding: 1.5rem; }
-      .counter-container { flex-direction: column; }
-      .forex-ticker-wrapper { height: 45px; }
-      .currency-flags .currency-flag { width: 18px; height: 18px; }
+      :root {
+        --nav-height-mobile: 60px;
+      }
+      
+      .sticky-nav {
+        padding: 0 0.8rem;
+      }
+      
+      .logo-wrapper {
+        width: 80%;
+      }
+      
+      .logo {
+        gap: 0.3rem;
+      }
+      
+      .logo-container {
+        height: 35px;
+      }
+      
+      .logo-text {
+        gap: 0;
+      }
+      
+      .logo-text span {
+        font-size: 0.9rem;
+      }
+      
+      .logo-text small {
+        font-size: 0.65rem;
+        letter-spacing: 0;
+      }
+      
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+      
+      .section-header h2 {
+        font-size: 1.8rem;
+      }
+      
+      section {
+        padding: 4rem 1rem;
+      }
+      
+      .contact form {
+        padding: 1.5rem;
+      }
+      
+      .counter-container {
+        flex-direction: column;
+      }
+      
+      .forex-ticker-wrapper {
+        height: 45px;
+      }
+      
+      .currency-flags .currency-flag {
+        width: 18px;
+        height: 18px;
+      }
+      
+      .cta-text {
+        font-size: 1.2rem;
+      }
+      
+      .btn-primary, .btn-secondary {
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
-    <div class="logo">
-      <div class="logo-container">
-        <img src="lib/logo/logo.png" alt="House of Algo's Logo" class="logo-img">
-      </div>
-      <div class="logo-text">
-        <span>House of Algo's</span>
-        <small>Trade with intelligence, earn with confidence.</small>
+    <div class="logo-wrapper">
+      <div class="logo">
+        <div class="logo-container">
+          <img src="lib/logo/logo.png" alt="House of Algo's Logo" class="logo-img">
+        </div>
+        <div class="logo-text">
+          <span>House of Algo's</span>
+          <small>Trade with intelligence, earn with confidence.</small>
+        </div>
       </div>
     </div>
     <button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" aria-haspopup="true">
@@ -1347,6 +1595,30 @@
         <strong>Q: What are the expected returns and risks?</strong>
         <p>A: Returns are 2% to 5% monthly (after a 30% company share). The highest drawdown so far is 30% (53% in extreme backtesting conditions).</p>
       </div>
+      <div class="faq-item">
+        <strong>Q: Is there a locking period?</strong>
+        <p>A: No, you can stop copy trading anytime and withdraw your funds immediately.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q: What is the account opening procedure?</strong>
+        <p>A: A link will be sent to you. By clicking it, you must fill in all the details (Aadhar Card, Driving License, Bank Statement, Email ID, Mobile Number). The account will be opened in 24 hours with support from our team through Anydesk.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q: Can I earn extra rewards?</strong>
+        <p>A: Yes! You can earn extra rewards by referring people. This is NOT MLM. You'll receive 50% of the company's profit from referred accounts.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q: What is the highest drawdown experienced?</strong>
+        <p>A: Based on backtesting, the highest drawdown has reached 53% under extreme conditions like market crashes or trade wars.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q: What if there's a server problem?</strong>
+        <p>A: Occasionally, VPS server issues may arise. However, our team is equipped to handle trades manually when needed.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q: Can tech issues be handled manually?</strong>
+        <p>A: Yes, our expert team can manually manage trades if technical issues arise.</p>
+      </div>
     </div>
   </section>
 
@@ -1453,106 +1725,105 @@
   <!-- Custom JavaScript -->
   <script>
     function setupForexTicker() {
-  const tickerElement = document.getElementById('forexTicker');
-  if (!tickerElement) return;
-  
-  // Clear existing content
-  tickerElement.innerHTML = '';
-  
-  // Currency pair data with symbols and flags
-  const currencyPairs = [
-    { name: "EUR/USD", value: "1.1234", change: "+0.0023", trend: "up", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
-    { name: "GBP/USD", value: "1.2345", change: "-0.0018", trend: "down", base: { symbol: "£", code: "GBP", flag: "https://flagcdn.com/w40/gb.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
-    { name: "USD/JPY", value: "110.12", change: "+0.25", trend: "up", base: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
-    { name: "AUD/USD", value: "0.7890", change: "-0.0032", trend: "down", base: { symbol: "A$", code: "AUD", flag: "https://flagcdn.com/w40/au.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
-    { name: "USD/CAD", value: "1.2765", change: "+0.0043", trend: "up", base: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" }, quote: { symbol: "C$", code: "CAD", flag: "https://flagcdn.com/w40/ca.png" } },
-    { name: "NZD/USD", value: "0.7123", change: "-0.0021", trend: "down", base: { symbol: "NZ$", code: "NZD", flag: "https://flagcdn.com/w40/nz.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
-    { name: "EUR/GBP", value: "0.8567", change: "+0.0012", trend: "up", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "£", code: "GBP", flag: "https://flagcdn.com/w40/gb.png" } },
-    { name: "EUR/JPY", value: "129.87", change: "-0.32", trend: "down", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
-    { name: "GBP/JPY", value: "151.65", change: "+0.45", trend: "up", base: { symbol: "£", code: "GBP", flag: "https://flagcdn.com/w40/gb.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
-    { name: "AUD/JPY", value: "86.92", change: "-0.18", trend: "down", base: { symbol: "A$", code: "AUD", flag: "https://flagcdn.com/w40/au.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
-    { name: "CHF/JPY", value: "118.45", change: "+0.27", trend: "up", base: { symbol: "Fr", code: "CHF", flag: "https://flagcdn.com/w40/ch.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
-    { name: "EUR/CHF", value: "1.0943", change: "-0.0015", trend: "down", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "Fr", code: "CHF", flag: "https://flagcdn.com/w40/ch.png" } }
-  ];
-  
-  // Create ticker items
-  currencyPairs.forEach(pair => {
-    const pairElement = document.createElement('div');
-    pairElement.className = 'currency-pair';
-    const flagsContainer = document.createElement('div');
-    flagsContainer.className = 'currency-flags';
-    const baseFlag = document.createElement('div');
-    baseFlag.className = 'currency-flag';
-    baseFlag.style.backgroundImage = `url(${pair.base.flag})`;
-    const quoteFlag = document.createElement('div');
-    quoteFlag.className = 'currency-flag';
-    quoteFlag.style.backgroundImage = `url(${pair.quote.flag})`;
-    flagsContainer.appendChild(baseFlag);
-    flagsContainer.appendChild(quoteFlag);
-    const infoContainer = document.createElement('div');
-    infoContainer.className = 'currency-info';
-    const nameElement = document.createElement('div');
-    nameElement.className = 'currency-name';
-    nameElement.textContent = pair.name;
-    const valueContainer = document.createElement('div');
-    valueContainer.className = `currency-value ${pair.trend}`;
-    const valueText = document.createElement('span');
-    valueText.textContent = pair.value;
-    const trendIcon = document.createElement('i');
-    trendIcon.className = pair.trend === 'up' ? 'fas fa-caret-up' : 'fas fa-caret-down';
-    const changeElement = document.createElement('span');
-    changeElement.className = 'currency-change';
-    changeElement.textContent = pair.change;
-    valueContainer.appendChild(valueText);
-    valueContainer.appendChild(trendIcon);
-    valueContainer.appendChild(changeElement);
-    infoContainer.appendChild(nameElement);
-    infoContainer.appendChild(valueContainer);
-    pairElement.appendChild(flagsContainer);
-    pairElement.appendChild(infoContainer);
-    tickerElement.appendChild(pairElement);
-  });
-  
-  // Clone all items to ensure continuous scrolling
-  const originalItems = Array.from(tickerElement.children);
-  originalItems.forEach(item => {
-    const clone = item.cloneNode(true);
-    tickerElement.appendChild(clone);
-  });
-  
-  // Force a reflow to ensure the animation starts properly
-  void tickerElement.offsetWidth;
-  
-  // Start updating currency values
-  updateCurrencyValues();
-}
+      const tickerElement = document.getElementById('forexTicker');
+      if (!tickerElement) return;
+      
+      // Clear existing content
+      tickerElement.innerHTML = '';
+      
+      // Currency pair data with symbols and flags
+      const currencyPairs = [
+        { name: "EUR/USD", value: "1.1234", change: "+0.0023", trend: "up", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
+        { name: "GBP/USD", value: "1.2345", change: "-0.0018", trend: "down", base: { symbol: "£", code: "GBP", flag: "https://flagcdn.com/w40/gb.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
+        { name: "USD/JPY", value: "110.12", change: "+0.25", trend: "up", base: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+        { name: "AUD/USD", value: "0.7890", change: "-0.0032", trend: "down", base: { symbol: "A$", code: "AUD", flag: "https://flagcdn.com/w40/au.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
+        { name: "USD/CAD", value: "1.2765", change: "+0.0043", trend: "up", base: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" }, quote: { symbol: "C$", code: "CAD", flag: "https://flagcdn.com/w40/ca.png" } },
+        { name: "NZD/USD", value: "0.7123", change: "-0.0021", trend: "down", base: { symbol: "NZ$", code: "NZD", flag: "https://flagcdn.com/w40/nz.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
+        { name: "EUR/GBP", value: "0.8567", change: "+0.0012", trend: "up", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "£", code: "GBP", flag: "https://flagcdn.com/w40/gb.png" } },
+        { name: "EUR/JPY", value: "129.87", change: "-0.32", trend: "down", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+        { name: "GBP/JPY", value: "151.65", change: "+0.45", trend: "up", base: { symbol: "£", code: "GBP", flag: "https://flagcdn.com/w40/gb.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+        { name: "AUD/JPY", value: "86.92", change: "-0.18", trend: "down", base: { symbol: "A$", code: "AUD", flag: "https://flagcdn.com/w40/au.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+        { name: "CHF/JPY", value: "118.45", change: "+0.27", trend: "up", base: { symbol: "Fr", code: "CHF", flag: "https://flagcdn.com/w40/ch.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+        { name: "EUR/CHF", value: "1.0943", change: "-0.0015", trend: "down", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "Fr", code: "CHF", flag: "https://flagcdn.com/w40/ch.png" } }
+      ];
+      
+      // Create ticker items
+      currencyPairs.forEach(pair => {
+        const pairElement = document.createElement('div');
+        pairElement.className = 'currency-pair';
+        const flagsContainer = document.createElement('div');
+        flagsContainer.className = 'currency-flags';
+        const baseFlag = document.createElement('div');
+        baseFlag.className = 'currency-flag';
+        baseFlag.style.backgroundImage = `url(${pair.base.flag})`;
+        const quoteFlag = document.createElement('div');
+        quoteFlag.className = 'currency-flag';
+        quoteFlag.style.backgroundImage = `url(${pair.quote.flag})`;
+        flagsContainer.appendChild(baseFlag);
+        flagsContainer.appendChild(quoteFlag);
+        const infoContainer = document.createElement('div');
+        infoContainer.className = 'currency-info';
+        const nameElement = document.createElement('div');
+        nameElement.className = 'currency-name';
+        nameElement.textContent = pair.name;
+        const valueContainer = document.createElement('div');
+        valueContainer.className = `currency-value ${pair.trend}`;
+        const valueText = document.createElement('span');
+        valueText.textContent = pair.value;
+        const trendIcon = document.createElement('i');
+        trendIcon.className = pair.trend === 'up' ? 'fas fa-caret-up' : 'fas fa-caret-down';
+        const changeElement = document.createElement('span');
+        changeElement.className = 'currency-change';
+        changeElement.textContent = pair.change;
+        valueContainer.appendChild(valueText);
+        valueContainer.appendChild(trendIcon);
+        valueContainer.appendChild(changeElement);
+        infoContainer.appendChild(nameElement);
+        infoContainer.appendChild(valueContainer);
+        pairElement.appendChild(flagsContainer);
+        pairElement.appendChild(infoContainer);
+        tickerElement.appendChild(pairElement);
+      });
+      
+      // Clone all items to ensure continuous scrolling
+      const originalItems = Array.from(tickerElement.children);
+      originalItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        tickerElement.appendChild(clone);
+      });
+      
+      // Force a reflow to ensure the animation starts properly
+      void tickerElement.offsetWidth;
+      
+      // Start updating currency values
+      updateCurrencyValues();
+    }
 
-function updateCurrencyValues() {
-  setInterval(() => {
-    const pairs = document.querySelectorAll('.currency-pair');
-    pairs.forEach(pair => {
-      const valueElement = pair.querySelector('.currency-value span:first-child');
-      if (!valueElement) return;
-      let currentValue = parseFloat(valueElement.textContent);
-      const fluctuation = (Math.random() - 0.5) * 0.01;
-      currentValue += fluctuation;
-      valueElement.textContent = currentValue.toFixed(4);
-      const valueContainer = pair.querySelector('.currency-value');
-      const trendIcon = pair.querySelector('.currency-value i');
-      const changeElement = pair.querySelector('.currency-change');
-      if (fluctuation > 0) {
-        valueContainer.className = 'currency-value up';
-        trendIcon.className = 'fas fa-caret-up';
-        changeElement.textContent = '+' + Math.abs(fluctuation).toFixed(4);
-      } else {
-        valueContainer.className = 'currency-value down';
-        trendIcon.className = 'fas fa-caret-down';
-        changeElement.textContent = '-' + Math.abs(fluctuation).toFixed(4);
-      }
-    });
-  }, 5000);
-}
-
+    function updateCurrencyValues() {
+      setInterval(() => {
+        const pairs = document.querySelectorAll('.currency-pair');
+        pairs.forEach(pair => {
+          const valueElement = pair.querySelector('.currency-value span:first-child');
+          if (!valueElement) return;
+          let currentValue = parseFloat(valueElement.textContent);
+          const fluctuation = (Math.random() - 0.5) * 0.01;
+          currentValue += fluctuation;
+          valueElement.textContent = currentValue.toFixed(4);
+          const valueContainer = pair.querySelector('.currency-value');
+          const trendIcon = pair.querySelector('.currency-value i');
+          const changeElement = pair.querySelector('.currency-change');
+          if (fluctuation > 0) {
+            valueContainer.className = 'currency-value up';
+            trendIcon.className = 'fas fa-caret-up';
+            changeElement.textContent = '+' + Math.abs(fluctuation).toFixed(4);
+          } else {
+            valueContainer.className = 'currency-value down';
+            trendIcon.className = 'fas fa-caret-down';
+            changeElement.textContent = '-' + Math.abs(fluctuation).toFixed(4);
+          }
+        });
+      }, 5000);
+    }
     
     /* ------------------------------
        Video Background Handling
