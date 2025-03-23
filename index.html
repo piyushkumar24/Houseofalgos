@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#8A2BE2" />
+  <title>House of Algo's | Algorithmic Forex Trading Solutions</title>
+  <!-- External CSS Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Root Variables & Global Styles */
+    :root {
+      --primary-1: #FFD700;
+      --primary-2: #DAA520;
+      --accent-1: #00c9ff;
+      --accent-2: #92fe9d;
+      --surface-1: #f8f9fa;
+      --surface-2: #e9ecef;
+      --surface-3: #f0f2f5;
+      --text-dark: #212529;
+      --text-medium: #495057;
+      --text-light: #ffffff;
+      --gradient-1: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
+      --gradient-2: linear-gradient(135deg, var(--primary-3) 0%, var(--accent-1) 100%);
+      --gradient-3: linear-gradient(to right, var(--accent-1), var(--accent-2));
+      --gradient-bg: linear-gradient(135deg, #4B0082 0%, #800080 25%, #9400D3 50%, #FF69B4 75%, #FFC0CB 100%);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+      --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --border-radius-sm: 6px;
+      --border-radius-md: 12px;
+      --border-radius-lg: 20px;
+      --up-color: #00c853;
+      --down-color: #ff3d00;
+      --ticker-height: 60px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      cursor: auto;
+    }
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.7;
+      color: var(--text-light);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #4B0082 0%, #800080 25%, #9400D3 50%, #FF69B4 75%, #FFC0CB 100%);
+      background-size: 400% 400%;
+      animation: gradient-shift 15s ease infinite;
+      width: 100vw;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition-fast);
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    button {
+      font-family: 'Poppins', sans-serif;
+    }
+    /* Navigation */
+    .sticky-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(75,0,130,0.95) 0%, rgba(128,0,128,0.95) 50%, rgba(148,0,211,0.95) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+    .sticky-nav.scrolled {
+      padding: 0.6rem 2rem;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .sticky-nav.scrolled .logo-container {
+      height: 60px;
+      width: 200px;
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: bold;
+      position: relative;
+    }
+    .logo-container {
+      position: relative;
+      height: 80px;
+      width: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .logo-img {
+      width: 100%;
+      height: auto;
+      max-height: 70px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.3rem;
+      text-align: center;
+    }
+    .logo-text span {
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+    .logo small {
+      display: block;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.8px;
+      margin-top: 0.2rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        height: calc(100vh - 80px);
+        width: 80%;
+        flex-direction: column;
+        background: rgba(75, 0, 130, 0.98);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+      }
+      
+      .nav-links.active {
+        left: 0;
+      }
+    }
+    .nav-links li a {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text-light);
+      position: relative;
+      padding: 0.3rem 0;
+    }
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: var(--gradient-1);
+      transition: var(--transition-fast);
+    }
+    .nav-links li a:hover {
+      color: var(--primary-1);
+    }
+    .nav-links li a:hover::after {
+      width: 100%;
+    }
+    /* Mobile Menu Toggle Styles */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      font-size: 1.5rem;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 1001;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+    }
+    .menu-toggle:hover {
+      color: var(--primary-1);
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    /* Hero Section with Video */
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 80px;
+      overflow: hidden;
+      color: var(--text-light);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.4);
+      z-index: 1;
+      mix-blend-mode: multiply;
+    }
+    /* Video Background */
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      background: #000;
+    }
+    .video-background video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: 100%;
+      height: 100%;
+      transform: translateX(-50%) translateY(-50%);
+      object-fit: cover;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+    /* Hero Content Overlay */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      width: 100%;
+      padding: 0 20px;
+      animation: fadeIn 1s ease-out;
+    }
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      color: var(--text-light);
+      line-height: 1.2;
+      position: relative;
+      display: inline-block;
+    }
+    .hero-content h1::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gradient-3);
+      border-radius: 2px;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+      color: var(--text-light);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+    .hero-content ul {
+      list-style: none;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .hero-content ul li {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--border-radius-sm);
+      font-weight: 500;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 0.5s ease-out forwards;
+      opacity: 0;
+      color: var(--text-light);
+    }
+    .hero-content ul li:nth-child(1) { animation-delay: 0.3s; }
+    .hero-content ul li:nth-child(2) { animation-delay: 0.6s; }
+    .hero-content ul li:nth-child(3) { animation-delay: 0.9s; }
+    .hero-content ul li:nth-child(4) { animation-delay: 1.2s; }
+    .hero-content ul li:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .cta-text {
+      font-weight: bold; 
+      margin-top: 1rem; 
+      color: var(--text-light);
+      font-size: 1.5rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      animation: pulse 2s infinite;
+    }
+/* Enhanced Live Forex Ticker with Currency Symbols */
+.forex-ticker-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--ticker-height);
+  background: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  z-index: 3;
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.forex-ticker-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.forex-ticker {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  left: 0;
+  top: 0;
+  animation: ticker-scroll 60s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.forex-ticker:hover {
+  animation-play-state: paused;
+}
+
+.currency-pair {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+  position: relative;
+  transition: var(--transition);
+  border-right: 1px solid rgba(255, 215, 0, 0.1);
+  min-width: 150px;
+}
+
+    .currency-pair:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .currency-pair:last-child {
+      border-right: none;
+    }
+    .currency-flags {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+    }
+    .currency-flag {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    .currency-flag:first-child { z-index: 2; }
+    .currency-flag:last-child { margin-left: -8px; z-index: 1; }
+    .currency-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .currency-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 2px;
+    }
+    .currency-value {
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    .currency-value.up { color: var(--up-color); }
+    .currency-value.down { color: var(--down-color); }
+    .currency-value i {
+      margin-left: 5px;
+      font-size: 0.8rem;
+    }
+    .currency-change {
+      font-size: 0.75rem;
+      margin-left: 5px;
+      opacity: 0.9;
+    }
+    /* Optional Currency Symbols */
+    .currency-symbol {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.8rem;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .symbol-usd { background: #4CAF50; color: white; }
+    .symbol-eur { background: #2196F3; color: white; }
+    .symbol-gbp { background: #9C27B0; color: white; }
+    .symbol-jpy { background: #F44336; color: white; }
+    .symbol-aud { background: #FF9800; color: white; }
+    .symbol-cad { background: #795548; color: white; }
+    .symbol-chf { background: #E91E63; color: white; }
+    .symbol-nzd { background: #607D8B; color: white; }
+    .symbol-cny { background: #FFC107; color: black; }
+    .symbol-hkd { background: #3F51B5; color: white; }
+    .symbol-sgd { background: #009688; color: white; }
+    .symbol-inr { background: #FF5722; color: white; }
+    .symbol-mxn { background: #8BC34A; color: white; }
+    .symbol-brl { background: #FFEB3B; color: black; }
+    .symbol-zar { background: #673AB7; color: white; }
+    .symbol-try { background: #03A9F4; color: white; }
+    .symbol-rub { background: #9E9E9E; color: white; }
+    .symbol-krw { background: #CDDC39; color: black; }
+    .symbol-pln { background: #E53935; color: white; }
+    .symbol-sek { background: #1E88E5; color: white; }
+    .symbol-nok { background: #D32F2F; color: white; }
+    /* Section Styles */
+    section {
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    section:nth-child(even) {
+      background: rgba(75, 0, 130, 0.85);
+      color: var(--text-light);
+    }
+    section:nth-child(odd) {
+      background: rgba(148, 0, 211, 0.85);
+      color: var(--text-light);
+    }
+    .section-header {
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    .section-header p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .section-divider {
+      height: 4px;
+      width: 80px;
+      background: var(--gradient-1);
+      margin: 1rem auto 2rem;
+      border-radius: 2px;
+    }
+    .section-content {
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+    /* Content Grids */
+    .services-grid,
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .service-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: var(--border-radius-md);
+      text-align: center;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: var(--text-light);
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .service-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-1);
+      background: rgba(156, 39, 176, 0.1);
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      transition: var(--transition);
+    }
+    .service-card:hover i {
+      transform: scale(1.1);
+      background: var(--gradient-1);
+      color: white;
+    }
+    .service-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+    .service-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    /* Vision Cards */
+    .vision-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+      text-align: left;
+      color: var(--text-light);
+    }
+    .vision-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .vision-card h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--primary-1);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    .vision-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--gradient-1);
+      border-radius: 2px;
+    }
+    .vision-card p {
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    /* FAQ Styling */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      text-align: left;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+    }
+    .faq-item:hover {
+      box-shadow: var(--shadow-md);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .faq-item strong {
+      display: block;
+      margin-bottom: 0.8rem;
+      color: var(--primary-1);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .faq-item p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    /* Contact Form */
+    .contact {
+      background: rgba(75, 0, 130, 0.85);
+      position: relative;
+    }
+    .contact-container {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .contact-email {
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+    .contact-cta {
+      margin-bottom: 2rem;
+      color: var(--text-light);
+    }
+    .contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2.5rem;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .contact input,
+    .contact textarea {
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--border-radius-sm);
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition-fast);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-light);
+    }
+    .contact input:focus,
+    .contact textarea:focus {
+      outline: none;
+      border-color: var(--primary-1);
+      box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.1);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .contact input::placeholder,
+    .contact textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .contact button {
+      background: var(--gradient-1);
+      background-size: 200% 200%;
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      border-radius: var(--border-radius-sm);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+    }
+    .contact button:hover {
+      background-position: right center;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
+    }
+    /* Disclaimer Section */
+    .disclaimer-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-sm);
+      color: var(--text-light);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .disclaimer-container ul {
+      list-style: disc;
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+    .disclaimer-container li {
+      margin-bottom: 0.5rem;
+    }
+    .disclaimer-warning {
+      font-weight: bold;
+      margin-top: 1.5rem;
+      text-align: center;
+      color: var(--primary-1);
+    }
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(135deg, #4B0082 0%, #800080 50%, #FF69B4 100%);
+      color: var(--text-light);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 0;
+    }
+    .cta .section-header {
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .cta .section-header h2 {
+      color: var(--text-light);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      font-size: 2.5rem;
+    }
+    .cta .section-header p {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(145deg, #FFD700, #DAA520);
+      color: #4B0082;
+      padding: 1.2rem 3rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(255,215,0,0.4);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(255,215,0,0.6);
+    }
+    .btn-secondary {
+      background: linear-gradient(145deg, #DAA520, #FFD700);
+      color: #4B0082;
+      padding: 1.2rem 3rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(255,215,0,0.4);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(255,215,0,0.6);
+    }
+    .btn-primary i, .btn-secondary i {
+      margin-right: 1rem;
+    }
+    /* Steps Section */
+    .steps-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .step-card {
+      flex: 1;
+      min-width: 250px;
+      max-width: 280px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius-md);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: left;
+      color: var(--text-light);
+    }
+    .step-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .step-number {
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-1);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .step-card h3 {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+    .step-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    /* Animated counter */
+    .counter-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 3rem auto;
+      max-width: 1000px;
+    }
+    .counter-item {
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+    }
+    .counter-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .counter-value {
+      font-size: 3rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .counter-label {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    /* Footer */
+    footer {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 4rem 2rem 2rem;
+      position: relative;
+      width: 100%;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-1);
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+    .footer-section {
+      flex: 1;
+      min-width: 200px;
+    }
+    .footer-section h4 {
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+    }
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 30px;
+      height: 3px;
+      background: var(--gradient-1);
+      border-radius: 2px;
+    }
+    .footer-section ul {
+      list-style: none;
+    }
+    .footer-section ul li {
+      margin-bottom: 0.8rem;
+    }
+    .footer-section ul li a {
+      color: #ccc;
+      transition: var(--transition-fast);
+      font-size: 0.95rem;
+    }
+    .footer-section ul li a:hover {
+      color: #fff;
+      padding-left: 5px;
+    }
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-icons a {
+      color: #fff;
+      font-size: 1.5rem;
+      background: rgba(255,255,255,0.1);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+    .social-icons a:hover {
+      background: var(--gradient-1);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--gradient-1);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      box-shadow: var(--shadow-md);
+      z-index: 99;
+    }
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      transform: translateY(-5px);
+    }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .hero-content h1 { font-size: 3rem; }
+      .forex-ticker-wrapper { height: 50px; }
+      .section-header h2 { font-size: 2.4rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: rgba(75,0,130,0.95);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        z-index: 100;
+      }
+      .nav-links.active { display: flex; }
+      .menu-toggle { display: block; }
+      .sticky-nav { padding: 0.8rem 1.5rem; }
+      .hero-content h1 { font-size: 2.5rem; }
+      .hero-content ul { flex-direction: column; align-items: center; }
+      .hero-content ul li { width: 100%; max-width: 300px; }
+      .section-header h2 { font-size: 2rem; }
+      .services-grid, .content-grid { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; text-align: center; }
+      .footer-section h4::after { left: 50%; transform: translateX(-50%); }
+      .social-icons { justify-content: center; }
+      .steps-container { flex-direction: column; align-items: center; }
+      .step-card { max-width: 100%; }
+      .logo { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .hero-content h1 { font-size: 2rem; }
+      .section-header h2 { font-size: 1.8rem; }
+      section { padding: 4rem 1.5rem; }
+      .contact form { padding: 1.5rem; }
+      .counter-container { flex-direction: column; }
+      .forex-ticker-wrapper { height: 45px; }
+      .currency-flags .currency-flag { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
+    <div class="logo">
+      <div class="logo-container">
+        <img src="lib/logo/logo.png" alt="House of Algo's Logo" class="logo-img">
+      </div>
+      <div class="logo-text">
+        <span>House of Algo's</span>
+        <small>Trade with intelligence, earn with confidence.</small>
+      </div>
+    </div>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" aria-haspopup="true">
+      <span class="sr-only">Menu</span>
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
+    <ul class="nav-links" id="main-menu" role="menubar">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#vision">Vision</a></li>
+      <li><a href="#income">Income</a></li>
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#disclaimer">Disclaimer</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section with Video and Enhanced Forex Ticker -->
+  <section class="hero" id="home">
+    <!-- Video Background (using preload="metadata" for a lighter initial load) -->
+    <div class="video-background">
+      <video autoplay muted loop playsinline id="heroVideo" preload="metadata">
+        <source src="./lib/vid/vid.mp4" type="video/mp4" />
+      </video>
+    </div>
+    
+    <div class="hero-content">
+      <h1>Welcome to House of Algo's</h1>
+      <p>
+        Your trusted partner in algorithmic trading for the Forex market. We provide cutting‑edge automated trading solutions powered by MT4, ensuring a seamless and profitable trading experience.
+      </p>
+      <ul>
+        <li>Advanced Algorithmic Trading</li>
+        <li>Multiple Income Streams</li>
+        <li>24/7 Automated Trading</li>
+        <li>User‑Friendly &amp; Beginner‑Friendly Solutions</li>
+      </ul>
+      <p class="cta-text">🚀 Start Trading Now!</p>
+    </div>
+    
+    <!-- Enhanced Live Forex Ticker with Currency Symbols -->
+    <div class="forex-ticker-wrapper">
+      <div class="forex-ticker-container">
+        <div class="forex-ticker" id="forexTicker">
+          <!-- Currency pairs will be dynamically inserted here by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section class="about" id="about">
+    <div class="section-header">
+      <h2>About Us</h2>
+      <div class="section-divider"></div>
+      <p>Revolutionizing Forex trading through advanced algorithms and technology</p>
+    </div>
+    <div class="section-content">
+      <p>
+        At House of Algo's, we are passionate about helping traders succeed in the Forex market through advanced algorithmic trading. Our team of experts has developed high‑performance trading strategies that operate automatically—removing emotional decision‑making and optimizing profitability.
+      </p>
+      <p>
+        We believe in financial freedom through technology and have created a platform where both beginners and experienced traders can benefit from automated trading solutions.
+      </p>
+    </div>
+    
+    <div class="counter-container">
+      <div class="counter-item">
+        <div class="counter-value" data-target="24">0</div>
+        <div class="counter-label">Hours Trading</div>
+      </div>
+      <div class="counter-item">
+        <div class="counter-value" data-target="5">0</div>
+        <div class="counter-label">Years Experience</div>
+      </div>
+      <div class="counter-item">
+        <div class="counter-value" data-target="1000">0</div>
+        <div class="counter-label">Happy Traders</div>
+      </div>
+    </div>
+    
+    <p class="highlight-text"><strong>What Sets Us Apart?</strong> Proven trading strategies, risk‑managed algo systems, 24/7 market analysis &amp; optimization, and multiple revenue streams. Join us and experience a smarter way to trade Forex!</p>
+  </section>
+
+  <!-- Vision & Mission Section -->
+  <section class="vision" id="vision">
+    <div class="section-header">
+      <h2>Vision &amp; Mission</h2>
+      <div class="section-divider"></div>
+      <p>Our guiding principles that drive everything we do</p>
+    </div>
+    <div class="content-grid">
+      <div class="vision-card">
+        <h3>Our Vision</h3>
+        <p>
+          To empower traders worldwide by providing seamless algorithmic trading solutions, making Forex trading accessible, profitable, and stress‑free for everyone.
+        </p>
+      </div>
+      <div class="vision-card">
+        <h3>Our Mission</h3>
+        <p>
+          To revolutionize the way people trade by offering automated strategies that minimize risk, maximize profits, and create multiple streams of income.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Income Opportunities Section -->
+  <section class="income" id="income">
+    <div class="section-header">
+      <h2>Earn with Us</h2>
+      <div class="section-divider"></div>
+      <p>Multiple ways to generate income with our platform</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-robot"></i>
+        <h3>Automated Trading Profits</h3>
+        <p>Our algo‑based strategies trade 24/7 on your behalf, optimizing returns while reducing risks.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-users"></i>
+        <h3>PAMM Services</h3>
+        <p>Participate in our PAMM services where experienced traders manage funds for investors with profit sharing.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-copy"></i>
+        <h3>Copy Trading</h3>
+        <p>Follow and copy top‑performing strategies easily—even beginners can trade like pros!</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-layer-group"></i>
+        <h3>Subscription Plans</h3>
+        <p>Access various levels of algorithmic trading strategies based on your goals and risk tolerance.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-handshake"></i>
+        <h3>Referral Program</h3>
+        <p>Earn passive income by referring others—receive commissions from every successful referral!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Section -->
+  <section class="platform" id="platform">
+    <div class="section-header">
+      <h2>Get Started in 4 Easy Steps</h2>
+      <div class="section-divider"></div>
+      <p>Begin your algorithmic trading journey with these simple steps</p>
+    </div>
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Sign Up</h3>
+        <p>Create your account on our platform in just a few minutes with a simple registration process.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Open Trading Account</h3>
+        <p>Open a trading account through our link with our trusted broker partners.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Deposit Funds</h3>
+        <p>Deposit funds and start following our PAMM or copy trading to our master account.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3>Watch Profits Grow</h3>
+        <p>Let the algo trade for you while you watch your profits grow!</p>
+      </div>
+    </div>
+    <p class="platform-note">📌 No prior experience required. Just sit back and let the algorithms work!</p>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <h2>Our Platform Features</h2>
+      <div class="section-divider"></div>
+      <p>Cutting-edge technology designed for optimal trading performance</p>
+    </div>
+    <div class="features-container">
+      <ul class="features-list">
+        <li><strong>Fully Automated Trading:</strong> Operates 24/7 with pre‑set strategies.</li>
+        <li><strong>User‑Friendly Interface:</strong> Seamless integration with MT4 for effortless trading.</li>
+        <li><strong>Real‑Time Market Analysis:</strong> Continuous analysis to base decisions on the latest trends.</li>
+        <li><strong>Risk Management Tools:</strong> Stop‑loss, take‑profit, and diversification techniques to minimize losses.</li>
+        <li><strong>Multiple Income Streams:</strong> Earn via trading, referrals, copy trading, and subscription plans.</li>
+        <li><strong>High‑Speed Execution:</strong> Rapid trade execution to reduce slippage.</li>
+        <li><strong>Secure &amp; Reliable:</strong> Encrypted connections and secure access ensure safe trading operations.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+      <div class="section-divider"></div>
+      <p>Get answers to common questions about our platform</p>
+    </div>
+    <div class="faq-container">
+      <div class="faq-item">
+        <strong>Q: What is algo trading?</strong>
+        <p>A: Algo trading uses automated systems to execute trades based on pre‑defined strategies, removing human emotions and enhancing efficiency.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q: How do I start using House of Algo's?</strong>
+        <p>A: Simply sign up, install MT4, and connect to our strategies. Our system will handle the trades automatically.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q: Do I need trading experience?</strong>
+        <p>A: No, our automated strategies are designed for both beginners and experienced traders.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q: What is the minimum investment required?</strong>
+        <p>A: You can invest a minimum of $100. For higher investments, multiples of $1000 apply (e.g., $2000, $4000, etc.).</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q: What are the expected returns and risks?</strong>
+        <p>A: Returns are 2% to 5% monthly (after a 30% company share). The highest drawdown so far is 30% (53% in extreme backtesting conditions).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="section-header">
+      <h2>Contact Us</h2>
+      <div class="section-divider"></div>
+      <p>Get in touch with our team for any questions or support</p>
+    </div>
+    <div class="contact-container">
+      <p class="contact-email">Email: <strong><a href="mailto:info@houseofalgo.com">info@houseofalgo.com</a></strong></p>
+      <p class="contact-cta">Join the Future of Trading – Get Started Today!</p>
+      <form id="contactForm">
+        <input type="text" placeholder="Your Name" required aria-label="Your Name" />
+        <input type="email" placeholder="Your Email" required aria-label="Your Email" />
+        <textarea rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Disclaimer Section -->
+  <section class="disclaimer" id="disclaimer">
+    <div class="section-header">
+      <h2>Disclaimer</h2>
+      <div class="section-divider"></div>
+      <p>Important information about trading risks</p>
+    </div>
+    <div class="disclaimer-container">
+      <p>
+        House of Algo's is not a financial advisor, investment firm, or brokerage. We do not provide any guarantees of profit or fixed returns. Trading in Forex and stock markets involves substantial risk, including the risk of losing all invested capital. Past performance does not guarantee future results.
+      </p>
+      <p>
+        By using our platform, you acknowledge and accept that:
+      </p>
+      <ul>
+        <li>Algorithmic trading involves market risks and unpredictable fluctuations.</li>
+        <li>We are not responsible for any financial losses incurred while using our strategies.</li>
+        <li>There is no assurance of consistent profits or returns.</li>
+        <li>You should conduct your own due diligence and consult with financial professionals before investing.</li>
+        <li>We do not hold liability for losses due to market conditions, software errors, or unexpected events.</li>
+        <li>Trading in Forex and other financial markets is speculative and may not suit all investors.</li>
+      </ul>
+      <p class="disclaimer-warning">Please trade responsibly and only with funds you can afford to lose.</p>
+    </div>
+  </section>
+
+  <!-- Final Call-to-Action Section -->
+  <section class="cta" id="cta">
+    <div class="section-header">
+      <h2>Ready to Transform Your Trading?</h2>
+      <div class="section-divider"></div>
+      <p>Join thousands of successful traders using our premium algorithmic solutions</p>
+    </div>
+    <div class="cta-buttons">
+      <button class="btn-primary" onclick="window.location.href='#contact'">
+        <i class="fas fa-rocket"></i> Launch Trading
+      </button>
+      <button class="btn-secondary" onclick="window.location.href='#contact'">
+        <i class="fas fa-user-plus"></i> Join Now
+      </button>
+    </div>
+  </section>
+
+  <!-- Scroll to top button -->
+  <div class="scroll-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#disclaimer">Disclaimer</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="#income">Automated Trading</a></li>
+          <li><a href="#income">PAMM Services</a></li>
+          <li><a href="#income">Copy Trading</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2024 House of Algo's. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Custom JavaScript -->
+  <script>
+    function setupForexTicker() {
+  const tickerElement = document.getElementById('forexTicker');
+  if (!tickerElement) return;
+  
+  // Clear existing content
+  tickerElement.innerHTML = '';
+  
+  // Currency pair data with symbols and flags
+  const currencyPairs = [
+    { name: "EUR/USD", value: "1.1234", change: "+0.0023", trend: "up", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
+    { name: "GBP/USD", value: "1.2345", change: "-0.0018", trend: "down", base: { symbol: "£", code: "GBP", flag: "https://flagcdn.com/w40/gb.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
+    { name: "USD/JPY", value: "110.12", change: "+0.25", trend: "up", base: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+    { name: "AUD/USD", value: "0.7890", change: "-0.0032", trend: "down", base: { symbol: "A$", code: "AUD", flag: "https://flagcdn.com/w40/au.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
+    { name: "USD/CAD", value: "1.2765", change: "+0.0043", trend: "up", base: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" }, quote: { symbol: "C$", code: "CAD", flag: "https://flagcdn.com/w40/ca.png" } },
+    { name: "NZD/USD", value: "0.7123", change: "-0.0021", trend: "down", base: { symbol: "NZ$", code: "NZD", flag: "https://flagcdn.com/w40/nz.png" }, quote: { symbol: "$", code: "USD", flag: "https://flagcdn.com/w40/us.png" } },
+    { name: "EUR/GBP", value: "0.8567", change: "+0.0012", trend: "up", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "£", code: "GBP", flag: "https://flagcdn.com/w40/gb.png" } },
+    { name: "EUR/JPY", value: "129.87", change: "-0.32", trend: "down", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+    { name: "GBP/JPY", value: "151.65", change: "+0.45", trend: "up", base: { symbol: "£", code: "GBP", flag: "https://flagcdn.com/w40/gb.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+    { name: "AUD/JPY", value: "86.92", change: "-0.18", trend: "down", base: { symbol: "A$", code: "AUD", flag: "https://flagcdn.com/w40/au.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+    { name: "CHF/JPY", value: "118.45", change: "+0.27", trend: "up", base: { symbol: "Fr", code: "CHF", flag: "https://flagcdn.com/w40/ch.png" }, quote: { symbol: "¥", code: "JPY", flag: "https://flagcdn.com/w40/jp.png" } },
+    { name: "EUR/CHF", value: "1.0943", change: "-0.0015", trend: "down", base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" }, quote: { symbol: "Fr", code: "CHF", flag: "https://flagcdn.com/w40/ch.png" } }
+  ];
+  
+  // Create ticker items
+  currencyPairs.forEach(pair => {
+    const pairElement = document.createElement('div');
+    pairElement.className = 'currency-pair';
+    const flagsContainer = document.createElement('div');
+    flagsContainer.className = 'currency-flags';
+    const baseFlag = document.createElement('div');
+    baseFlag.className = 'currency-flag';
+    baseFlag.style.backgroundImage = `url(${pair.base.flag})`;
+    const quoteFlag = document.createElement('div');
+    quoteFlag.className = 'currency-flag';
+    quoteFlag.style.backgroundImage = `url(${pair.quote.flag})`;
+    flagsContainer.appendChild(baseFlag);
+    flagsContainer.appendChild(quoteFlag);
+    const infoContainer = document.createElement('div');
+    infoContainer.className = 'currency-info';
+    const nameElement = document.createElement('div');
+    nameElement.className = 'currency-name';
+    nameElement.textContent = pair.name;
+    const valueContainer = document.createElement('div');
+    valueContainer.className = `currency-value ${pair.trend}`;
+    const valueText = document.createElement('span');
+    valueText.textContent = pair.value;
+    const trendIcon = document.createElement('i');
+    trendIcon.className = pair.trend === 'up' ? 'fas fa-caret-up' : 'fas fa-caret-down';
+    const changeElement = document.createElement('span');
+    changeElement.className = 'currency-change';
+    changeElement.textContent = pair.change;
+    valueContainer.appendChild(valueText);
+    valueContainer.appendChild(trendIcon);
+    valueContainer.appendChild(changeElement);
+    infoContainer.appendChild(nameElement);
+    infoContainer.appendChild(valueContainer);
+    pairElement.appendChild(flagsContainer);
+    pairElement.appendChild(infoContainer);
+    tickerElement.appendChild(pairElement);
+  });
+  
+  // Clone all items to ensure continuous scrolling
+  const originalItems = Array.from(tickerElement.children);
+  originalItems.forEach(item => {
+    const clone = item.cloneNode(true);
+    tickerElement.appendChild(clone);
+  });
+  
+  // Force a reflow to ensure the animation starts properly
+  void tickerElement.offsetWidth;
+  
+  // Start updating currency values
+  updateCurrencyValues();
+}
+
+function updateCurrencyValues() {
+  setInterval(() => {
+    const pairs = document.querySelectorAll('.currency-pair');
+    pairs.forEach(pair => {
+      const valueElement = pair.querySelector('.currency-value span:first-child');
+      if (!valueElement) return;
+      let currentValue = parseFloat(valueElement.textContent);
+      const fluctuation = (Math.random() - 0.5) * 0.01;
+      currentValue += fluctuation;
+      valueElement.textContent = currentValue.toFixed(4);
+      const valueContainer = pair.querySelector('.currency-value');
+      const trendIcon = pair.querySelector('.currency-value i');
+      const changeElement = pair.querySelector('.currency-change');
+      if (fluctuation > 0) {
+        valueContainer.className = 'currency-value up';
+        trendIcon.className = 'fas fa-caret-up';
+        changeElement.textContent = '+' + Math.abs(fluctuation).toFixed(4);
+      } else {
+        valueContainer.className = 'currency-value down';
+        trendIcon.className = 'fas fa-caret-down';
+        changeElement.textContent = '-' + Math.abs(fluctuation).toFixed(4);
+      }
+    });
+  }, 5000);
+}
+
+    
+    /* ------------------------------
+       Video Background Handling
+       ------------------------------ */
+    function setupVideoBackground() {
+      const video = document.getElementById('heroVideo');
+      if (!video) return;
+      video.addEventListener('error', () => console.log('Video error occurred'));
+      video.muted = true;
+      video.play().catch(error => console.log('Video autoplay failed:', error));
+    }
+    
+    /* ------------------------------
+       Mobile Menu Toggle
+       ------------------------------ */
+    function setupMobileMenu() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (!menuToggle || !navLinks) return;
+      menuToggle.addEventListener('click', () => {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', !isExpanded);
+        navLinks.classList.toggle('active');
+      });
+    }
+    
+    /* ------------------------------
+       Smooth Scroll for Anchor Links
+       ------------------------------ */
+    function setupSmoothScroll() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (!target) return;
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const navLinks = document.querySelector('.nav-links');
+          const menuToggle = document.querySelector('.menu-toggle');
+          if (navLinks && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
+    
+    /* ------------------------------
+       Sticky Navigation
+       ------------------------------ */
+    function setupStickyNav() {
+      const nav = document.querySelector('.sticky-nav');
+      if (!nav) return;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+    }
+    
+    /* ------------------------------
+       Scroll-to-Top Button
+       ------------------------------ */
+    function setupScrollToTop() {
+      const scrollTopBtn = document.querySelector('.scroll-top');
+      if (!scrollTopBtn) return;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) scrollTopBtn.classList.add('visible');
+        else scrollTopBtn.classList.remove('visible');
+      });
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+    
+    /* ------------------------------
+       Counters Animation
+       ------------------------------ */
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter-value');
+      const speed = 200;
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const increment = target / speed;
+        function updateCount() {
+          const count = +counter.innerText;
+          if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(updateCount, 1);
+          } else {
+            counter.innerText = target;
+          }
+        }
+        updateCount();
+      });
+    }
+    
+    /* ------------------------------
+       Contact Form (simulate submission)
+       ------------------------------ */
+    function setupContactForm() {
+      const contactForm = document.getElementById('contactForm');
+      if (!contactForm) return;
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        if (!submitBtn) return;
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'Sending...';
+        setTimeout(() => {
+          submitBtn.innerHTML = 'Message Sent!';
+          contactForm.reset();
+          setTimeout(() => { submitBtn.innerHTML = originalBtnText; }, 3000);
+        }, 1500);
+      });
+    }
+    
+    /* ------------------------------
+       Initialize functions after DOMContentLoaded
+       ------------------------------ */
+    window.addEventListener('DOMContentLoaded', () => {
+      setupVideoBackground();
+      setupMobileMenu();
+      setupSmoothScroll();
+      setupStickyNav();
+      setupScrollToTop();
+      setupContactForm();
+      setupForexTicker();
+    });
+    
+    /* Delay non-critical functions (like ticker setup) until after window load */
+    window.addEventListener('load', () => {
+      animateCounters();
+      // Delay ticker initialization by 1 second
+      setTimeout(setupForexTicker, 1000);
+    });
+  </script>
+</body>
+</html>
