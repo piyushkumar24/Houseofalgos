@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#4B0082" />
-  <meta name="theme-color" content="#8A2BE2" />
   <title>House of Algo's | Algorithmic Forex Trading Solutions</title>
   <!-- External CSS Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r162/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
   <style>
     /* Root Variables & Global Styles */
     :root {
@@ -29,6 +31,11 @@
       --gradient-2: linear-gradient(135deg, var(--primary-3) 0%, var(--accent-1) 100%);
       --gradient-3: linear-gradient(to right, var(--accent-1), var(--accent-2));
       --gradient-bg: linear-gradient(135deg, #4B0082 0%, #800080 25%, #9400D3 50%, #FF69B4 75%, #FFC0CB 100%);
+      --3d-perspective: 1000px;
+      --holographic-effect: linear-gradient(45deg,
+        var(--primary-1) 0%,
+        var(--accent-1) 50%,
+        var(--primary-1) 100%);
       --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
       --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
       --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
@@ -43,6 +50,428 @@
       --nav-height-desktop: 90px;
       --nav-height-mobile: 70px;
     }
+    
+    /* Enhanced 3D Effects */
+    .three-d-layer {
+      transform-style: preserve-3d;
+      perspective: var(--3d-perspective);
+    }
+
+    /* Floating Animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotateZ(0deg); }
+      50% { transform: translateY(-20px) rotateZ(3deg); }
+    }
+
+    /* Holographic Effect */
+    .holographic {
+      position: relative;
+      overflow: hidden;
+    }
+    .holographic::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: linear-gradient(45deg,
+        transparent 25%,
+        rgba(255,215,0,0.2) 50%,
+        transparent 75%);
+      animation: hologram 6s infinite linear;
+      mix-blend-mode: overlay;
+    }
+    @keyframes hologram {
+      0% { transform: rotate(0deg) translateX(-50%); }
+      100% { transform: rotate(360deg) translateX(50%); }
+    }
+    
+    /* Particle Effect */
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(255, 215, 0, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      animation: particle-float 15s infinite linear;
+    }
+    
+    @keyframes particle-float {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+      }
+    }
+    
+    /* Glowing Effect */
+    .glow {
+      position: relative;
+    }
+    
+    .glow::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, rgba(255,215,0,0) 70%);
+      z-index: -1;
+      opacity: 0;
+      animation: glow-pulse 3s infinite;
+    }
+    
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.2; transform: scale(0.95); }
+      50% { opacity: 0.5; transform: scale(1.05); }
+    }
+    
+    /* Digital Rain Effect */
+    .digital-rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.15;
+    }
+    
+    /* Neon Text Effect */
+    .neon-text {
+      color: #fff;
+      text-shadow: 
+        0 0 5px rgba(255,215,0,0.7),
+        0 0 10px rgba(255,215,0,0.5),
+        0 0 20px rgba(255,215,0,0.3),
+        0 0 40px rgba(255,215,0,0.1);
+      animation: neon-flicker 2s infinite alternate;
+    }
+    
+    @keyframes neon-flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 
+          0 0 5px rgba(255,215,0,0.7),
+          0 0 10px rgba(255,215,0,0.5),
+          0 0 20px rgba(255,215,0,0.3),
+          0 0 40px rgba(255,215,0,0.1);
+      }
+      20%, 24%, 55% {
+        text-shadow: none;
+      }
+    }
+    
+    /* Data Visualization Animation */
+    .data-line {
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-1), transparent);
+      width: 0;
+      position: absolute;
+      animation: data-line-grow 3s infinite;
+    }
+    
+    @keyframes data-line-grow {
+      0% { width: 0; opacity: 1; }
+      50% { width: 100%; opacity: 1; }
+      100% { width: 100%; opacity: 0; }
+    }
+    
+    /* Animated Background Gradient */
+    .animated-gradient {
+      background: linear-gradient(270deg, #4B0082, #800080, #9400D3, #FF69B4);
+      background-size: 800% 800%;
+      animation: gradient-shift 15s ease infinite;
+    }
+    
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Typing Animation */
+    .typing-text {
+      overflow: hidden;
+      border-right: 2px solid var(--primary-1);
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: 
+        typing 3.5s steps(40, end),
+        blink-caret 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--primary-1) }
+    }
+    
+    /* Animated Card Flip */
+    .flip-card {
+      perspective: 1000px;
+      height: 300px;
+      position: relative;
+    }
+    
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+      border-radius: var(--border-radius-md);
+    }
+    
+    .flip-card-front {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .flip-card-back {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      transform: rotateY(180deg);
+    }
+    
+    /* Animated Progress Bar */
+    .progress-bar {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0;
+      background: var(--gradient-1);
+      animation: progress-fill 3s ease-in-out forwards;
+    }
+    
+    @keyframes progress-fill {
+      0% { width: 0; }
+      100% { width: 80%; }
+    }
+    
+    /* Animated Number Counter */
+    .animated-number {
+      display: inline-block;
+      animation: number-count 2s ease-out forwards;
+    }
+    
+    @keyframes number-count {
+      from { content: "0"; }
+      to { content: attr(data-count); }
+    }
+    
+    /* Pulse Animation */
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Shimmer Effect */
+    .shimmer {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .shimmer::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(30deg);
+      animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) rotate(30deg); }
+    }
+    
+    /* Animated Chart */
+    .chart-line {
+      fill: none;
+      stroke: var(--primary-1);
+      stroke-width: 2;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: dash 3s ease-in-out forwards;
+    }
+    
+    @keyframes dash {
+      to { stroke-dashoffset: 0; }
+    }
+    
+    /* Animated Icons */
+    .animated-icon {
+      transition: transform 0.3s ease;
+    }
+    
+    .animated-icon:hover {
+      transform: scale(1.2) rotate(10deg);
+    }
+    
+    /* Floating Elements */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    /* Animated Border */
+    .animated-border {
+      position: relative;
+    }
+    
+    .animated-border::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid transparent;
+      border-radius: inherit;
+      animation: border-pulse 2s infinite;
+    }
+    
+    @keyframes border-pulse {
+      0%, 100% { border-color: rgba(255, 215, 0, 0.3); }
+      50% { border-color: rgba(255, 215, 0, 0.8); }
+    }
+    
+    /* 3D Button Effect */
+    .btn-3d {
+      transform: perspective(1px) translateZ(0);
+      position: relative;
+      transition: transform 0.3s;
+    }
+    
+    .btn-3d:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.2);
+      transform: translateY(4px);
+      transition: transform 0.3s;
+    }
+    
+    .btn-3d:hover {
+      transform: translateY(-4px);
+    }
+    
+    .btn-3d:hover:before {
+      transform: translateY(8px);
+    }
+    
+    /* Animated Underline */
+    .animated-underline {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .animated-underline::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--primary-1);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease-out;
+    }
+    
+    .animated-underline:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+    
+    /* Animated Gradient Text */
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary-1), var(--accent-1), var(--primary-1));
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: gradient-text 3s linear infinite;
+    }
+    
+    @keyframes gradient-text {
+      to { background-position: 200% center; }
+    }
+    
+    /* Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -74,6 +503,7 @@
     button {
       font-family: 'Poppins', sans-serif;
     }
+    
     /* Navigation */
     .sticky-nav {
       position: fixed;
@@ -116,37 +546,66 @@
     }
     
     .logo-container {
-      height: 60px;
+      height: 75px;
       width: auto;
       display: flex;
       align-items: center;
       transition: var(--transition);
+      position: relative;
+      padding: 5px;
+      border-radius: var(--border-radius-sm);
+    }
+    
+    .logo-container:hover {
+      transform: translateY(-2px);
     }
     
     .logo-img {
       height: 100%;
       width: auto;
-      max-width: 180px;
+      max-width: 200px;
       object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+      transition: var(--transition);
     }
     
     .logo-text {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 0.2rem;
+      gap: 0.1rem;
+      margin-left: 0.1rem;
     }
     
     .logo-text span {
-      font-size: 1.4rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      background: var(--gradient-1);
+      background: linear-gradient(45deg, #FFD700 30%, #DAA520 70%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      line-height: 1.2;
+      line-height: 1.1;
       white-space: nowrap;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      background-size: 200% auto;
+    }
+    
+    .logo-container:hover .logo-text span {
+      background-position: right center;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    @keyframes logo-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .logo-container:hover {
+      animation: logo-pulse 0.8s ease;
+      transform: translateY(-2px) scale(1.05);
     }
     
     .logo-text small {
@@ -173,26 +632,43 @@
       font-size: 0.95rem;
       color: var(--text-light);
       position: relative;
-      padding: 0.3rem 0;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+      background: transparent;
+      border: none;
+      border-radius: var(--border-radius-sm);
+      overflow: hidden;
+    }
+    
+    .nav-links li a:hover {
+      color: var(--text-light);
+      background: linear-gradient(145deg,
+        rgba(255,215,0,0.2) 0%,
+        rgba(218,165,32,0.1) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 12px rgba(255,215,0,0.2);
+      border: 1px solid rgba(255,215,0,0.3);
     }
     
     .nav-links li a::after {
       content: '';
       position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background: var(--gradient-1);
-      transition: var(--transition-fast);
-    }
-    
-    .nav-links li a:hover {
-      color: var(--primary-1);
+      top: -120%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        rgba(255,255,255,0) 35%,
+        rgba(255,255,255,0.15) 50%,
+        rgba(255,255,255,0) 65%
+      );
+      transform: translateX(-100%) rotate(45deg);
+      transition: 0.6s;
     }
     
     .nav-links li a:hover::after {
-      width: 100%;
+      transform: translateX(100%) rotate(45deg);
     }
     
     /* Mobile Menu Toggle Styles */
@@ -281,6 +757,8 @@
       width: 100%;
       padding: 0 20px;
       animation: fadeIn 1s ease-out;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
     
     .hero-content h1 {
@@ -292,6 +770,7 @@
       line-height: 1.2;
       position: relative;
       display: inline-block;
+      animation: float 6s ease-in-out infinite;
     }
     
     .hero-content h1::after {
@@ -306,15 +785,97 @@
       border-radius: 2px;
     }
     
-    .hero-content p {
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-      color: var(--text-light);
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    .hero-tagline {
+      font-size: 2.8rem;
+      margin: 3rem auto;
+      max-width: 900px;
+      line-height: 1.2;
+      font-weight: 700;
+      color: var(--primary-1);
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      position: relative;
+      padding: 0;
+      animation: neon-flicker 3s infinite alternate;
+    }
+
+    .hero-tagline::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 3px;
+      background: var(--primary-1);
+      border-radius: 2px;
+      animation: underline-pulse 2s ease infinite;
+    }
+
+    @keyframes underline-pulse {
+      0%, 100% { width: 200px; opacity: 0.8; }
+      50% { width: 240px; opacity: 1; }
+    }
+
+    @keyframes border-glow {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes laser-scan {
+      0% { transform: translateX(-50%) scaleX(0); }
+      50% { transform: translateX(-50%) scaleX(1); }
+      100% { transform: translateX(-50%) scaleX(0); }
+    }
+
+    @keyframes line-pulse {
+      0% { width: 120px; opacity: 1; }
+      50% { width: 150px; opacity: 0.8; }
+      100% { width: 120px; opacity: 1; }
+    }
+
+    .cta-link {
+      display: inline-block;
+      transform-style: preserve-3d;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      margin: 2rem 0;
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      background: var(--gradient-3);
+      color: var(--text-dark);
+      border-radius: var(--border-radius-lg);
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      animation: pulse 2s infinite;
+    }
+
+    .cta-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .cta-link:hover::before {
+      left: 100%;
     }
     
     .hero-content ul {
@@ -415,6 +976,7 @@
     
     .currency-pair:hover {
       background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
     }
     
     .currency-pair:last-child {
@@ -435,6 +997,11 @@
       background-position: center;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       position: relative;
+      transition: transform 0.3s ease;
+    }
+    
+    .currency-pair:hover .currency-flag {
+      transform: scale(1.1);
     }
     
     .currency-flag:first-child { z-index: 2; }
@@ -543,6 +1110,7 @@
       background-clip: text;
       color: transparent;
       display: inline-block;
+      animation: gradient-text 3s linear infinite;
     }
     
     .section-header p {
@@ -558,6 +1126,19 @@
       background: var(--gradient-1);
       margin: 1rem auto 2rem;
       border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .section-divider::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shimmer 2s infinite;
     }
     
     .section-content {
@@ -591,12 +1172,31 @@
       flex-direction: column;
       justify-content: space-between;
       color: var(--text-light);
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
     
     .service-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px) rotateX(5deg);
       box-shadow: var(--shadow-lg);
       background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+      transform: rotate(30deg);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .service-card:hover::before {
+      opacity: 1;
     }
     
     .service-card i {
@@ -612,10 +1212,11 @@
       border-radius: 50%;
       margin: 0 auto 1.5rem;
       transition: var(--transition);
+      position: relative;
     }
     
     .service-card:hover i {
-      transform: scale(1.1);
+      transform: scale(1.1) rotateY(180deg);
       background: var(--gradient-1);
       color: white;
     }
@@ -625,6 +1226,24 @@
       font-size: 1.4rem;
       font-weight: 600;
       color: var(--text-light);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .service-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--primary-1);
+      transition: width 0.3s ease;
+    }
+    
+    .service-card:hover h3::after {
+      width: 80%;
     }
     
     .service-card p {
@@ -643,12 +1262,33 @@
       transition: var(--transition);
       text-align: left;
       color: var(--text-light);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
     
     .vision-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px) rotateX(5deg);
       box-shadow: var(--shadow-md);
       background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .vision-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient-1);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+    
+    .vision-card:hover::after {
+      transform: scaleX(1);
     }
     
     .vision-card h3 {
@@ -693,11 +1333,29 @@
       transition: var(--transition);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--text-light);
+      position: relative;
+      overflow: hidden;
     }
     
     .faq-item:hover {
       box-shadow: var(--shadow-md);
       background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-3px);
+    }
+    
+    .faq-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background: var(--gradient-1);
+      transition: height 0.3s ease;
+    }
+    
+    .faq-item:hover::before {
+      height: 100%;
     }
     
     .faq-item strong {
@@ -706,12 +1364,14 @@
       color: var(--primary-1);
       font-size: 1.1rem;
       font-weight: 600;
+      padding-left: 1rem;
     }
     
     .faq-item p {
       color: var(--text-light);
       font-size: 0.95rem;
       line-height: 1.6;
+      padding-left: 1rem;
     }
     
     /* Contact Form */
@@ -748,6 +1408,30 @@
       border-radius: var(--border-radius-md);
       box-shadow: var(--shadow-md);
       border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .contact form:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .contact form::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .contact form:hover::before {
+      opacity: 1;
     }
     
     .contact input,
@@ -787,12 +1471,36 @@
       font-weight: 600;
       transition: var(--transition);
       box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+      position: relative;
+      overflow: hidden;
     }
     
     .contact button:hover {
       background-position: right center;
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
+    }
+    
+    .contact button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+      );
+      transform: rotate(45deg);
+      transition: 0.5s;
+    }
+    
+    .contact button:hover::after {
+      left: 100%;
+      top: 100%;
     }
     
     /* Disclaimer Section */
@@ -806,6 +1514,24 @@
       box-shadow: var(--shadow-sm);
       color: var(--text-light);
       border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .disclaimer-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(255,215,0,0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .disclaimer-container:hover::before {
+      opacity: 1;
     }
     
     .disclaimer-container ul {
@@ -816,6 +1542,11 @@
     
     .disclaimer-container li {
       margin-bottom: 0.5rem;
+      position: relative;
+    }
+    
+    .disclaimer-container li::marker {
+      color: var(--primary-1);
     }
     
     .disclaimer-warning {
@@ -823,6 +1554,7 @@
       margin-top: 1.5rem;
       text-align: center;
       color: var(--primary-1);
+      animation: pulse 2s infinite;
     }
     
     /* CTA Section */
@@ -835,6 +1567,18 @@
       padding: 4rem 0;
     }
     
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      z-index: 0;
+    }
+    
     .cta .section-header {
       margin-bottom: 2rem;
       position: relative;
@@ -845,6 +1589,7 @@
       color: var(--text-light);
       text-shadow: 0 2px 4px rgba(0,0,0,0.3);
       font-size: 2.5rem;
+      animation: float 6s ease-in-out infinite;
     }
     
     .cta .section-header p {
@@ -877,11 +1622,33 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
     
     .btn-primary:hover {
-      transform: translateY(-3px);
+      transform: translateY(-3px) rotateX(5deg);
       box-shadow: 0 12px 30px rgba(255,215,0,0.6);
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.2),
+        transparent
+      );
+      transition: 0.5s;
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
     }
     
     .btn-secondary {
@@ -897,11 +1664,33 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
     
     .btn-secondary:hover {
-      transform: translateY(-3px);
+      transform: translateY(-3px) rotateX(5deg);
       box-shadow: 0 12px 30px rgba(255,215,0,0.6);
+    }
+    
+    .btn-secondary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.2),
+        transparent
+      );
+      transition: 0.5s;
+    }
+    
+    .btn-secondary:hover::before {
+      left: 100%;
     }
     
     .btn-primary i, .btn-secondary i {
@@ -931,12 +1720,30 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       text-align: left;
       color: var(--text-light);
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
     
     .step-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px) rotateX(5deg);
       box-shadow: var(--shadow-lg);
       background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(255,215,0,0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .step-card:hover::before {
+      opacity: 1;
     }
     
     .step-number {
@@ -954,6 +1761,13 @@
       font-weight: 700;
       font-size: 1.2rem;
       box-shadow: var(--shadow-sm);
+      z-index: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .step-card:hover .step-number {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255,215,0,0.5);
     }
     
     .step-card h3 {
@@ -962,6 +1776,23 @@
       font-size: 1.3rem;
       font-weight: 600;
       color: var(--text-light);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .step-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--primary-1);
+      transition: width 0.3s ease;
+    }
+    
+    .step-card:hover h3::after {
+      width: 100%;
     }
     
     .step-card p {
@@ -991,11 +1822,30 @@
       transition: var(--transition);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--text-light);
+      position: relative;
+      overflow: hidden;
     }
     
     .counter-item:hover {
       transform: translateY(-5px);
       background: rgba(255, 255, 255, 0.15);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .counter-item::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,215,0,0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .counter-item:hover::before {
+      opacity: 1;
     }
     
     .counter-value {
@@ -1006,6 +1856,25 @@
       background-clip: text;
       color: transparent;
       margin-bottom: 0.5rem;
+      display: inline-block;
+      position: relative;
+    }
+    
+    .counter-value::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 3px;
+      background: var(--gradient-1);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    
+    .counter-item:hover .counter-value::after {
+      width: 60px;
     }
     
     .counter-label {
@@ -1064,6 +1933,11 @@
       height: 3px;
       background: var(--gradient-1);
       border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    
+    .footer-section:hover h4::after {
+      width: 50px;
     }
     
     .footer-section ul {
@@ -1072,17 +1946,35 @@
     
     .footer-section ul li {
       margin-bottom: 0.8rem;
+      position: relative;
     }
     
     .footer-section ul li a {
       color: #ccc;
       transition: var(--transition-fast);
       font-size: 0.95rem;
+      padding-left: 0;
+      display: inline-block;
     }
     
     .footer-section ul li a:hover {
       color: #fff;
       padding-left: 5px;
+    }
+    
+    .footer-section ul li a::before {
+      content: '→';
+      position: absolute;
+      left: -15px;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateX(-10px);
+      color: var(--primary-1);
+    }
+    
+    .footer-section ul li a:hover::before {
+      opacity: 1;
+      transform: translateX(0);
     }
     
     .social-icons {
@@ -1101,11 +1993,30 @@
       justify-content: center;
       border-radius: 50%;
       transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .social-icons a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
     }
     
     .social-icons a:hover {
-      background: var(--gradient-1);
       transform: translateY(-3px);
+      color: #fff;
+    }
+    
+    .social-icons a:hover::before {
+      opacity: 1;
     }
     
     .copyright {
@@ -1115,6 +2026,18 @@
       border-top: 1px solid rgba(255,255,255,0.1);
       font-size: 0.9rem;
       color: #aaa;
+      position: relative;
+    }
+    
+    .copyright::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background: var(--gradient-1);
     }
     
     /* Scroll to top button */
@@ -1144,7 +2067,19 @@
     }
     
     .scroll-top:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+    }
+    
+    .scroll-top::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      opacity: 0.7;
+      z-index: -1;
+      animation: pulse 2s infinite;
     }
     
     /* Animations */
@@ -1154,9 +2089,9 @@
     }
     
     @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+      0% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.2); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 0.7; }
     }
     
     @keyframes gradient-shift {
@@ -1368,7 +2303,6 @@
         </div>
         <div class="logo-text">
           <span>House of Algo's</span>
-          <small>Trade with intelligence, earn with confidence.</small>
         </div>
       </div>
     </div>
@@ -1377,20 +2311,22 @@
       <i class="fas fa-bars" aria-hidden="true"></i>
     </button>
     <ul class="nav-links" id="main-menu" role="menubar">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#vision">Vision</a></li>
-      <li><a href="#income">Income</a></li>
-      <li><a href="#platform">Platform</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#disclaimer">Disclaimer</a></li>
+      <li><a href="#home" class="animated-underline">Home</a></li>
+      <li><a href="#about" class="animated-underline">About</a></li>
+      <li><a href="#vision" class="animated-underline">Vision</a></li>
+      <li><a href="#income" class="animated-underline">Income</a></li>
+      <li><a href="#platform" class="animated-underline">Platform</a></li>
+      <li><a href="#features" class="animated-underline">Features</a></li>
+      <li><a href="#faq" class="animated-underline">FAQ</a></li>
+      <li><a href="#contact" class="animated-underline">Contact</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section with Video and Enhanced Forex Ticker -->
   <section class="hero" id="home">
+    <!-- Particle Effect -->
+    <div class="particles-container" id="particles"></div>
+    
     <!-- Video Background (using preload="metadata" for a lighter initial load) -->
     <div class="video-background">
       <video autoplay muted loop playsinline id="heroVideo" preload="metadata">
@@ -1399,17 +2335,20 @@
     </div>
     
     <div class="hero-content">
-      <h1>Welcome to House of Algo's</h1>
-      <p>
+      <h1 class="glow">Welcome to House of Algo's</h1>
+      <p class="typing-text">
         Your trusted partner in algorithmic trading for the Forex market. We provide cutting‑edge automated trading solutions powered by MT4, ensuring a seamless and profitable trading experience.
       </p>
+      <a href="#signup" class="cta-link btn-3d">
+        <span>Trade with intelligence, earn with confidence</span>
+      </a>
+      
       <ul>
-        <li>Advanced Algorithmic Trading</li>
-        <li>Multiple Income Streams</li>
-        <li>24/7 Automated Trading</li>
-        <li>User‑Friendly &amp; Beginner‑Friendly Solutions</li>
+        <li><i class="fas fa-robot animated-icon"></i> Automated Trading</li>
+        <li><i class="fas fa-chart-line animated-icon"></i> Advanced Algorithms</li>
+        <li><i class="fas fa-shield-alt animated-icon"></i> Risk Management</li>
+        <li><i class="fas fa-globe animated-icon"></i> 24/7 Market Access</li>
       </ul>
-      <p class="cta-text">🚀 Start Trading Now!</p>
     </div>
     
     <!-- Enhanced Live Forex Ticker with Currency Symbols -->
@@ -1425,7 +2364,7 @@
   <!-- About Us Section -->
   <section class="about" id="about">
     <div class="section-header">
-      <h2>About Us</h2>
+      <h2 class="gradient-text">About Us</h2>
       <div class="section-divider"></div>
       <p>Revolutionizing Forex trading through advanced algorithms and technology</p>
     </div>
@@ -1438,39 +2377,25 @@
       </p>
     </div>
     
-    <div class="counter-container">
-      <div class="counter-item">
-        <div class="counter-value" data-target="24">0</div>
-        <div class="counter-label">Hours Trading</div>
-      </div>
-      <div class="counter-item">
-        <div class="counter-value" data-target="5">0</div>
-        <div class="counter-label">Years Experience</div>
-      </div>
-      <div class="counter-item">
-        <div class="counter-value" data-target="1000">0</div>
-        <div class="counter-label">Happy Traders</div>
-      </div>
-    </div>
-    
-    <p class="highlight-text"><strong>What Sets Us Apart?</strong> Proven trading strategies, risk‑managed algo systems, 24/7 market analysis &amp; optimization, and multiple revenue streams. Join us and experience a smarter way to trade Forex!</p>
+    <!-- Digital Rain Effect Canvas -->
+    <canvas class="digital-rain" id="digitalRain"></canvas>
   </section>
 
   <!-- Vision & Mission Section -->
   <section class="vision" id="vision">
     <div class="section-header">
-      <h2>Vision &amp; Mission</h2>
+      <h2 class="gradient-text">Vision &amp; Mission</h2>
       <div class="section-divider"></div>
       <p>Our guiding principles that drive everything we do</p>
     </div>
     <div class="content-grid">
-      <div class="vision-card">
+      <div class="vision-card holographic">
         <h3>Our Vision</h3>
         <p>
           To empower traders worldwide by providing seamless algorithmic trading solutions, making Forex trading accessible, profitable, and stress‑free for everyone.
         </p>
       </div>
-      <div class="vision-card">
+      <div class="vision-card holographic">
         <h3>Our Mission</h3>
         <p>
           To revolutionize the way people trade by offering automated strategies that minimize risk, maximize profits, and create multiple streams of income.
@@ -1482,7 +2407,7 @@
   <!-- Income Opportunities Section -->
   <section class="income" id="income">
     <div class="section-header">
-      <h2>Earn with Us</h2>
+      <h2 class="gradient-text">Earn with Us</h2>
       <div class="section-divider"></div>
       <p>Multiple ways to generate income with our platform</p>
     </div>
@@ -1518,7 +2443,7 @@
   <!-- Platform Section -->
   <section class="platform" id="platform">
     <div class="section-header">
-      <h2>Get Started in 4 Easy Steps</h2>
+      <h2 class="gradient-text">Get Started in 4 Easy Steps</h2>
       <div class="section-divider"></div>
       <p>Begin your algorithmic trading journey with these simple steps</p>
     </div>
@@ -1544,33 +2469,40 @@
         <p>Let the algo trade for you while you watch your profits grow!</p>
       </div>
     </div>
-    <p class="platform-note">📌 No prior experience required. Just sit back and let the algorithms work!</p>
+    <p class="platform-note neon-text">📌 No prior experience required. Just sit back and let the algorithms work!</p>
   </section>
 
   <!-- Features Section -->
   <section class="features" id="features">
     <div class="section-header">
-      <h2>Our Platform Features</h2>
+      <h2 class="gradient-text">Our Platform Features</h2>
       <div class="section-divider"></div>
       <p>Cutting-edge technology designed for optimal trading performance</p>
     </div>
     <div class="features-container">
       <ul class="features-list">
-        <li><strong>Fully Automated Trading:</strong> Operates 24/7 with pre‑set strategies.</li>
-        <li><strong>User‑Friendly Interface:</strong> Seamless integration with MT4 for effortless trading.</li>
-        <li><strong>Real‑Time Market Analysis:</strong> Continuous analysis to base decisions on the latest trends.</li>
-        <li><strong>Risk Management Tools:</strong> Stop‑loss, take‑profit, and diversification techniques to minimize losses.</li>
-        <li><strong>Multiple Income Streams:</strong> Earn via trading, referrals, copy trading, and subscription plans.</li>
-        <li><strong>High‑Speed Execution:</strong> Rapid trade execution to reduce slippage.</li>
-        <li><strong>Secure &amp; Reliable:</strong> Encrypted connections and secure access ensure safe trading operations.</li>
+        <li class="shimmer"><strong>Fully Automated Trading:</strong> Operates 24/7 with pre‑set strategies.</li>
+        <li class="shimmer"><strong>User‑Friendly Interface:</strong> Seamless integration with MT4 for effortless trading.</li>
+        <li class="shimmer"><strong>Real‑Time Market Analysis:</strong> Continuous analysis to base decisions on the latest trends.</li>
+        <li class="shimmer"><strong>Risk Management Tools:</strong> Stop‑loss, take‑profit, and diversification techniques to minimize losses.</li>
+        <li class="shimmer"><strong>Multiple Income Streams:</strong> Earn via trading, referrals, copy trading, and subscription plans.</li>
+        <li class="shimmer"><strong>High‑Speed Execution:</strong> Rapid trade execution to reduce slippage.</li>
+        <li class="shimmer"><strong>Secure &amp; Reliable:</strong> Encrypted connections and secure access ensure safe trading operations.</li>
       </ul>
+    </div>
+    
+    <!-- Animated Chart -->
+    <div class="chart-container">
+      <svg width="800" height="200" viewBox="0 0 800 200" class="chart">
+        <path class="chart-line" d="M0,150 C50,120 100,180 150,120 C200,60 250,80 300,40 C350,0 400,20 450,60 C500,100 550,70 600,90 C650,110 700,150 750,100 L750,200 L0,200 Z" fill="rgba(255,215,0,0.1)"></path>
+      </svg>
     </div>
   </section>
 
   <!-- FAQ Section -->
   <section class="faq" id="faq">
     <div class="section-header">
-      <h2>Frequently Asked Questions</h2>
+      <h2 class="gradient-text">Frequently Asked Questions</h2>
       <div class="section-divider"></div>
       <p>Get answers to common questions about our platform</p>
     </div>
@@ -1604,10 +2536,6 @@
         <p>A: A link will be sent to you. By clicking it, you must fill in all the details (Aadhar Card, Driving License, Bank Statement, Email ID, Mobile Number). The account will be opened in 24 hours with support from our team through Anydesk.</p>
       </div>
       <div class="faq-item">
-        <strong>Q: Can I earn extra rewards?</strong>
-        <p>A: Yes! You can earn extra rewards by referring people. This is NOT MLM. You'll receive 50% of the company's profit from referred accounts.</p>
-      </div>
-      <div class="faq-item">
         <strong>Q: What is the highest drawdown experienced?</strong>
         <p>A: Based on backtesting, the highest drawdown has reached 53% under extreme conditions like market crashes or trade wars.</p>
       </div>
@@ -1625,12 +2553,12 @@
   <!-- Contact Section -->
   <section class="contact" id="contact">
     <div class="section-header">
-      <h2>Contact Us</h2>
+      <h2 class="gradient-text">Contact Us</h2>
       <div class="section-divider"></div>
       <p>Get in touch with our team for any questions or support</p>
     </div>
     <div class="contact-container">
-      <p class="contact-email">Email: <strong><a href="mailto:info@houseofalgo.com">info@houseofalgo.com</a></strong></p>
+      <p class="contact-email">Email: <strong><a href="mailto:info@houseofalgo.com" class="animated-underline">info@houseofalgo.com</a></strong></p>
       <p class="contact-cta">Join the Future of Trading – Get Started Today!</p>
       <form id="contactForm">
         <input type="text" placeholder="Your Name" required aria-label="Your Name" />
@@ -1644,7 +2572,7 @@
   <!-- Disclaimer Section -->
   <section class="disclaimer" id="disclaimer">
     <div class="section-header">
-      <h2>Disclaimer</h2>
+      <h2 class="gradient-text">Disclaimer</h2>
       <div class="section-divider"></div>
       <p>Important information about trading risks</p>
     </div>
@@ -1670,7 +2598,7 @@
   <!-- Final Call-to-Action Section -->
   <section class="cta" id="cta">
     <div class="section-header">
-      <h2>Ready to Transform Your Trading?</h2>
+      <h2 class="floating">Ready to Transform Your Trading?</h2>
       <div class="section-divider"></div>
       <p>Join thousands of successful traders using our premium algorithmic solutions</p>
     </div>
@@ -1711,9 +2639,14 @@
       <div class="footer-section">
         <h4>Connect</h4>
         <div class="social-icons">
-          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="contact-email">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:info@houseofalgo.com">info@houseofalgo.com</a>
         </div>
       </div>
     </div>
@@ -1724,6 +2657,93 @@
 
   <!-- Custom JavaScript -->
   <script>
+    // Particle Effect
+    function setupParticles() {
+      const container = document.getElementById('particles');
+      if (!container) return;
+      
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random position
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        particle.style.left = `${posX}%`;
+        particle.style.bottom = `${posY}%`;
+        
+        // Random size
+        const size = Math.random() * 6 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Random animation duration and delay
+        const duration = Math.random() * 10 + 5;
+        const delay = Math.random() * 5;
+        particle.style.animation = `particle-float ${duration}s ${delay}s infinite linear`;
+        
+        // Random opacity
+        particle.style.opacity = Math.random() * 0.5 + 0.2;
+        
+        // Random color variations (gold to blue)
+        const hue = Math.random() > 0.7 ? '210' : '45';
+        const saturation = Math.floor(Math.random() * 30 + 70);
+        const lightness = Math.floor(Math.random() * 20 + 60);
+        particle.style.background = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.8)`;
+        
+        container.appendChild(particle);
+      }
+    }
+
+    // Digital Rain Effect
+    function setupDigitalRain() {
+      const canvas = document.getElementById('digitalRain');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+      
+      // Array to store the y position of each column
+      const drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = 1;
+      }
+      
+      // Characters to display
+      const chars = '01010101010101';
+      
+      function draw() {
+        // Semi-transparent black background to create trail effect
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#FFD700'; // Gold color
+        ctx.font = `${fontSize}px monospace`;
+        
+        for (let i = 0; i < drops.length; i++) {
+          // Random character
+          const text = chars[Math.floor(Math.random() * chars.length)];
+          
+          // x = i * fontSize, y = drops[i] * fontSize
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          
+          // Randomly reset some drops to the top
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          
+          // Increment y coordinate
+          drops[i]++;
+        }
+      }
+      
+      setInterval(draw, 33);
+    }
+
     function setupForexTicker() {
       const tickerElement = document.getElementById('forexTicker');
       if (!tickerElement) return;
@@ -1950,6 +2970,8 @@
       setupScrollToTop();
       setupContactForm();
       setupForexTicker();
+      setupParticles();
+      setupDigitalRain();
     });
     
     /* Delay non-critical functions (like ticker setup) until after window load */
