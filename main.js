@@ -24,6 +24,47 @@ function initAnimations() {
       start: "top center"
     }
   });
+  
+  // Animate step cards with staggered entrance
+  gsap.from(".step-card", {
+    duration: 1.2,
+    y: 50,
+    opacity: 0,
+    stagger: 0.2,
+    ease: "back.out(1.7)",
+    scrollTrigger: {
+      trigger: ".platform",
+      start: "top center+=100",
+      toggleActions: "play none none reverse"
+    }
+  });
+  
+  // Animate step numbers with bounce effect
+  gsap.from(".step-number", {
+    duration: 1.5,
+    scale: 0,
+    rotation: -180,
+    ease: "elastic.out(1, 0.3)",
+    stagger: 0.2,
+    scrollTrigger: {
+      trigger: ".platform",
+      start: "top center+=100",
+      toggleActions: "play none none reverse"
+    }
+  });
+  
+  // Animate the connecting line
+  gsap.from(".steps-container::before", {
+    duration: 1.5,
+    scaleX: 0,
+    transformOrigin: "left center",
+    ease: "power3.inOut",
+    scrollTrigger: {
+      trigger: ".platform",
+      start: "top center+=100",
+      toggleActions: "play none none reverse"
+    }
+  });
 }
 
 function setupParticles() {
@@ -368,24 +409,213 @@ function animateCounters() {
 }
 
 /* ------------------------------
-   Contact Form (simulate submission)
+   Enhanced Contact Form with Validation
    ------------------------------ */
 function setupContactForm() {
   const contactForm = document.getElementById("contactForm");
   if (!contactForm) return;
+  
+  // Form elements
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const subjectInput = document.getElementById("subject");
+  const messageInput = document.getElementById("message");
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+  const formMessage = contactForm.querySelector('.form-message');
+  const loadingSpinner = contactForm.querySelector('.loading-spinner');
+  const successCheckmark = contactForm.querySelector('.success-checkmark');
+  
+  // Add floating animation to form on scroll
+  if (typeof gsap !== 'undefined') {
+    gsap.from(contactForm, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: contactForm,
+        start: "top bottom-=100",
+        toggleActions: "play none none reverse"
+      }
+    });
+  }
+  
+  // Validate email format
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  
+  // Show error for a specific input
+  function showError(input, message) {
+    const formGroup = input.closest('.form-group');
+    formGroup.classList.add('error');
+    formGroup.classList.remove('success');
+    const errorMessage = formGroup.querySelector('.error-message');
+    if (errorMessage) {
+      errorMessage.textContent = message;
+    }
+  }
+  
+  // Show success for a specific input
+  function showSuccess(input) {
+    const formGroup = input.closest('.form-group');
+    formGroup.classList.remove('error');
+    formGroup.classList.add('success');
+  }
+  
+  // Validate a single input field
+  function validateInput(input, validationFn, errorMessage) {
+    if (!validationFn(input.value.trim())) {
+      showError(input, errorMessage);
+      return false;
+    } else {
+      showSuccess(input);
+      return true;
+    }
+  }
+  
+  // Add input event listeners for real-time validation
+  nameInput.addEventListener('input', () => {
+    validateInput(nameInput, value => value.length >= 2, 'Name must be at least 2 characters');
+  });
+  
+  emailInput.addEventListener('input', () => {
+    validateInput(emailInput, isValidEmail, 'Please enter a valid email address');
+  });
+  
+  subjectInput.addEventListener('input', () => {
+    validateInput(subjectInput, value => value.length >= 3, 'Subject must be at least 3 characters');
+  });
+  
+  messageInput.addEventListener('input', () => {
+    validateInput(messageInput, value => value.length >= 10, 'Message must be at least 10 characters');
+  });
+  
+  // Add focus/blur effects for form fields
+  const formInputs = contactForm.querySelectorAll('input, textarea');
+  formInputs.forEach(input => {
+    // Add focus effect
+    input.addEventListener('focus', () => {
+      const formGroup = input.closest('.form-group');
+      formGroup.style.transform = 'translateY(-5px)';
+      formGroup.style.transition = 'transform 0.3s ease';
+    });
+    
+    // Remove focus effect
+    input.addEventListener('blur', () => {
+      const formGroup = input.closest('.form-group');
+      formGroup.style.transform = 'translateY(0)';
+    });
+  });
+  
+  // Form submission handler
   contactForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const submitBtn = contactForm.querySelector('button[type="submit"]');
-    if (!submitBtn) return;
-    const originalBtnText = submitBtn.innerHTML;
-    submitBtn.innerHTML = "Sending...";
-    setTimeout(() => {
-      submitBtn.innerHTML = "Message Sent!";
-      contactForm.reset();
+    
+    // Validate all fields
+    const isNameValid = validateInput(nameInput, value => value.length >= 2, 'Name must be at least 2 characters');
+    const isEmailValid = validateInput(emailInput, isValidEmail, 'Please enter a valid email address');
+    const isSubjectValid = validateInput(subjectInput, value => value.length >= 3, 'Subject must be at least 3 characters');
+    const isMessageValid = validateInput(messageInput, value => value.length >= 10, 'Message must be at least 10 characters');
+    
+    // If all fields are valid, submit the form
+    if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
+      // Show loading state
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      loadingSpinner.style.display = 'inline-block';
+      submitBtn.querySelector('i').style.display = 'none';
+      
+      // Simulate form submission (replace with actual AJAX call in production)
       setTimeout(() => {
-        submitBtn.innerHTML = originalBtnText;
+        // Hide loading spinner, show success checkmark
+        loadingSpinner.style.display = 'none';
+        successCheckmark.style.display = 'inline-block';
+        
+        // Show success message
+        formMessage.textContent = 'Your message has been sent successfully!';
+        formMessage.classList.add('visible', 'success');
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Reset form validation styles
+        document.querySelectorAll('.form-group').forEach(group => {
+          group.classList.remove('success', 'error');
+        });
+        
+        // Reset button after delay
+        setTimeout(() => {
+          successCheckmark.style.display = 'none';
+          submitBtn.querySelector('i').style.display = 'inline-block';
+          submitBtn.disabled = false;
+          formMessage.classList.remove('visible');
+          
+          // Add a thank you animation
+          if (typeof gsap !== 'undefined') {
+            gsap.to(contactForm, {
+              scale: 1.03,
+              duration: 0.3,
+              ease: "back.out(1.7)",
+              onComplete: () => {
+                gsap.to(contactForm, {
+                  scale: 1,
+                  duration: 0.3,
+                  ease: "power2.out"
+                });
+              }
+            });
+          }
+        }, 3000);
+      }, 1500);
+    } else {
+      // Show error message if validation fails
+      formMessage.textContent = 'Please fix the errors in the form.';
+      formMessage.classList.add('visible', 'error');
+      
+      // Shake the form to indicate error
+      if (typeof gsap !== 'undefined') {
+        gsap.to(contactForm, {
+          x: 10,
+          duration: 0.1,
+          repeat: 5,
+          yoyo: true,
+          ease: "power2.inOut",
+          onComplete: () => {
+            gsap.set(contactForm, { x: 0 });
+          }
+        });
+      }
+      
+      // Hide error message after delay
+      setTimeout(() => {
+        formMessage.classList.remove('visible');
       }, 3000);
-    }, 1500);
+    }
+  });
+  
+  // Add hover effect to contact info items
+  const contactDetails = document.querySelectorAll('.contact-detail');
+  contactDetails.forEach(detail => {
+    detail.addEventListener('mouseenter', () => {
+      if (typeof gsap !== 'undefined') {
+        gsap.to(detail, {
+          x: 10,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      }
+    });
+    
+    detail.addEventListener('mouseleave', () => {
+      if (typeof gsap !== 'undefined') {
+        gsap.to(detail, {
+          x: 0,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      }
+    });
   });
 }
 
@@ -401,9 +631,79 @@ window.addEventListener("DOMContentLoaded", () => {
   setupContactForm();
   setupForexTicker();
   setupParticles();
+  setupStepCards();
+  // Initialize GSAP animations if ScrollTrigger is available
+  if (typeof gsap !== 'undefined' && gsap.ScrollTrigger) {
+    initAnimations();
+  }
   // Commented out since setupDigitalRain is not defined:
   // setupDigitalRain();
 });
+
+/* ------------------------------
+   Setup Step Cards Interactivity
+   ------------------------------ */
+function setupStepCards() {
+  const stepCards = document.querySelectorAll('.step-card');
+  if (!stepCards.length) return;
+  
+  // Add interactive hover effects
+  stepCards.forEach((card, index) => {
+    // Add sequential hover effect
+    card.addEventListener('mouseenter', () => {
+      // Highlight the current card
+      card.classList.add('active');
+      
+      // Highlight all previous steps to show progress
+      for (let i = 0; i < index; i++) {
+        stepCards[i].classList.add('completed');
+      }
+      
+      // Add pulsing effect to the step number
+      const stepNumber = card.querySelector('.step-number');
+      if (stepNumber) {
+        stepNumber.classList.add('pulse');
+      }
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      // Remove all special classes
+      stepCards.forEach(c => {
+        c.classList.remove('active', 'completed');
+        const num = c.querySelector('.step-number');
+        if (num) num.classList.remove('pulse');
+      });
+    });
+    
+    // Add click effect for mobile users
+    card.addEventListener('click', () => {
+      card.classList.toggle('clicked');
+      setTimeout(() => {
+        card.classList.remove('clicked');
+      }, 1000);
+    });
+  });
+  
+  // Create a sequential highlight effect on page load
+  setTimeout(() => {
+    const highlightSequence = () => {
+      stepCards.forEach((card, i) => {
+        setTimeout(() => {
+          card.classList.add('highlight');
+          setTimeout(() => {
+            card.classList.remove('highlight');
+          }, 800);
+        }, i * 600);
+      });
+    };
+    
+    // Run the highlight sequence once on load
+    highlightSequence();
+    
+    // Then run it periodically
+    setInterval(highlightSequence, 10000);
+  }, 2000);
+}
 
 /* Delay non-critical functions (like ticker setup) until after window load */
 window.addEventListener("load", () => {

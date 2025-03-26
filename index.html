@@ -17,6 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
     <!-- Custom CSS and JS -->
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="disclaimer-styles.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -142,27 +143,6 @@
       </div>
     </section>
 
-    <!-- About Us Section -->
-    <section class="about" id="about">
-      <div class="section-header">
-        <h2 class="gradient-text">
-          <img src="https://img.icons8.com/fluency/96/about-us-male.png" alt="About Us Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
-          About Us
-        </h2>
-        <div class="section-divider"></div>
-        <p>Revolutionizing Forex trading through advanced algorithms and technology</p>
-      </div>
-      <div class="section-content">
-        <p>
-          At House of Algo's, we are passionate about helping traders succeed in the Forex market through advanced algorithmic trading. Our team of experts has developed high‑performance trading strategies that operate automatically—removing emotional decision‑making and optimizing profitability.
-        </p>
-        <p>
-          We believe in financial freedom through technology and have created a platform where both beginners and experienced traders can benefit from automated trading solutions.
-        </p>
-      </div>
-      <!-- Digital Rain Effect Canvas -->
-      <canvas class="digital-rain" id="digitalRain"></canvas>
-    </section>
 
     <!-- Vision & Mission Section -->
     <section class="vision" id="vision">
@@ -244,21 +224,25 @@
           <div class="step-number">1</div>
           <h3>Sign Up</h3>
           <p>Create your account on our platform in just a few minutes with a simple registration process.</p>
+          <div class="step-icon"></div>
         </div>
         <div class="step-card">
           <div class="step-number">2</div>
           <h3>Open Trading Account</h3>
           <p>Open a trading account through our link with our trusted broker partners.</p>
+          <div class="step-icon"></div>
         </div>
         <div class="step-card">
           <div class="step-number">3</div>
           <h3>Deposit Funds</h3>
           <p>Deposit funds and start following our PAMM or copy trading to our master account.</p>
+          <div class="step-icon"></div>
         </div>
         <div class="step-card">
           <div class="step-number">4</div>
           <h3>Watch Profits Grow</h3>
           <p>Let the algo trade for you while you watch your profits grow!</p>
+          <div class="step-icon"></div>
         </div>
       </div>
       <p class="platform-note neon-text">📌 No prior experience required. Just sit back and let the algorithms work!</p>
@@ -349,6 +333,14 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
+      <!-- Floating elements for visual interest -->
+      <div class="floating-elements">
+        <i class="floating-element fas fa-envelope"></i>
+        <i class="floating-element fas fa-phone"></i>
+        <i class="floating-element fas fa-comment"></i>
+        <i class="floating-element fas fa-headset"></i>
+      </div>
+      
       <div class="section-header">
         <h2 class="gradient-text">
           <img src="https://img.icons8.com/fluency/96/contact-card.png" alt="Contact Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
@@ -357,47 +349,159 @@
         <div class="section-divider"></div>
         <p>Get in touch with our team for any questions or support</p>
       </div>
+      
       <div class="contact-container">
-        <p class="contact-email">Email: <strong><a href="mailto:info@houseofalgo.com" class="animated-underline">info@houseofalgo.com</a></strong></p>
-        <p class="contact-cta">Join the Future of Trading – Get Started Today!</p>
+        <!-- Contact Form -->
         <form id="contactForm" action="#" method="POST">
-          <label for="name">Your Name:</label>
-          <input type="text" id="name" name="name" required />
-          <label for="email">Your Email:</label>
-          <input type="email" id="email" name="email" required />
-          <label for="message">Your Message:</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-          <button type="submit">Send Message</button>
+          <div class="form-group">
+            <input type="text" id="name" name="name" placeholder=" " required />
+            <label for="name" class="form-label">Your Name</label>
+            <div class="error-message">Please enter your name</div>
+          </div>
+          
+          <div class="form-group">
+            <input type="email" id="email" name="email" placeholder=" " required />
+            <label for="email" class="form-label">Your Email</label>
+            <div class="error-message">Please enter a valid email address</div>
+          </div>
+          
+          <div class="form-group">
+            <input type="text" id="subject" name="subject" placeholder=" " required />
+            <label for="subject" class="form-label">Subject</label>
+            <div class="error-message">Please enter a subject</div>
+          </div>
+          
+          <div class="form-group">
+            <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+            <label for="message" class="form-label">Your Message</label>
+            <div class="error-message">Please enter your message</div>
+          </div>
+          
+          <div class="form-footer">
+            <button type="submit">
+              <span class="loading-spinner"></span>
+              <span class="success-checkmark"><span class="check-icon"></span></span>
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+            <div class="form-message">Your message has been sent successfully!</div>
+          </div>
         </form>
       </div>
     </section>
 
-    <!-- Disclaimer Section -->
+    <!-- Enhanced Interactive Disclaimer Section -->
     <section class="disclaimer" id="disclaimer">
+      <div class="disclaimer-bg-animation">
+        <div class="market-line"></div>
+        <div class="market-line"></div>
+        <div class="market-line"></div>
+        <div class="market-line"></div>
+        <div class="market-line"></div>
+      </div>
+      
       <div class="section-header">
         <h2 class="gradient-text">
           <img src="https://img.icons8.com/fluency/96/shield.png" alt="Disclaimer Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
-          Disclaimer
+          Risk Disclosure
         </h2>
         <div class="section-divider"></div>
-        <p>Important information about trading risks</p>
+        <p>Understanding the risks is essential for responsible trading</p>
       </div>
+      
       <div class="disclaimer-container">
-        <p>
-          House of Algo's is not a financial advisor, investment firm, or brokerage. We do not provide any guarantees of profit or fixed returns. Trading in Forex and stock markets involves substantial risk, including the risk of losing all invested capital. Past performance does not guarantee future results.
-        </p>
-        <p>
-          By using our platform, you acknowledge and accept that:
-        </p>
-        <ul>
-          <li>Algorithmic trading involves market risks and unpredictable fluctuations.</li>
-          <li>We are not responsible for any financial losses incurred while using our strategies.</li>
-          <li>There is no assurance of consistent profits or returns.</li>
-          <li>You should conduct your own due diligence and consult with financial professionals before investing.</li>
-          <li>We do not hold liability for losses due to market conditions, software errors, or unexpected events.</li>
-          <li>Trading in Forex and other financial markets is speculative and may not suit all investors.</li>
-        </ul>
-        <p class="disclaimer-warning">Please trade responsibly and only with funds you can afford to lose.</p>
+        <div class="disclaimer-card main-card">
+          <div class="card-header">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Trading Involves Risk</h3>
+          </div>
+          <div class="card-content">
+            <p>
+              House of Algo's is not a financial advisor, investment firm, or brokerage. We do not provide any guarantees of profit or fixed returns. Trading in Forex and stock markets involves substantial risk, including the risk of losing all invested capital. <span class="highlight">Past performance does not guarantee future results.</span>
+            </p>
+          </div>
+        </div>
+        
+        <div class="disclaimer-cards-grid">
+          <div class="disclaimer-card interactive-card" data-risk="market">
+            <div class="risk-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h4>Market Risk</h4>
+            <div class="risk-meter">
+              <div class="risk-level high"></div>
+            </div>
+            <div class="card-hover-content">
+              <p>Markets can be volatile and unpredictable. Prices can change rapidly due to economic events, news, or other factors beyond our control.</p>
+            </div>
+          </div>
+          
+          <div class="disclaimer-card interactive-card" data-risk="technical">
+            <div class="risk-icon">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h4>Technical Risk</h4>
+            <div class="risk-meter">
+              <div class="risk-level medium"></div>
+            </div>
+            <div class="card-hover-content">
+              <p>Algorithmic systems may experience technical issues, connectivity problems, or execution delays that could affect trading performance.</p>
+            </div>
+          </div>
+          
+          <div class="disclaimer-card interactive-card" data-risk="leverage">
+            <div class="risk-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <h4>Leverage Risk</h4>
+            <div class="risk-meter">
+              <div class="risk-level very-high"></div>
+            </div>
+            <div class="card-hover-content">
+              <p>Trading with leverage can significantly increase both potential profits and losses. Small market movements can have proportionally larger impacts on your capital.</p>
+            </div>
+          </div>
+          
+          <div class="disclaimer-card interactive-card" data-risk="liquidity">
+            <div class="risk-icon">
+              <i class="fas fa-tint"></i>
+            </div>
+            <h4>Liquidity Risk</h4>
+            <div class="risk-meter">
+              <div class="risk-level medium"></div>
+            </div>
+            <div class="card-hover-content">
+              <p>During certain market conditions, it may be difficult to execute trades at desired prices, potentially resulting in larger slippage or inability to exit positions.</p>
+            </div>
+          </div>
+        </div> 
+        <div class="risk-management-tips">
+          <h3><i class="fas fa-shield-alt"></i> Risk Management Tips</h3>
+          <div class="tips-container">
+            <div class="tip">
+              <i class="fas fa-percentage"></i>
+              <p>Only invest what you can afford to lose</p>
+            </div>
+            <div class="tip">
+              <i class="fas fa-chart-pie"></i>
+              <p>Diversify your investment portfolio</p>
+            </div>
+            <div class="tip">
+              <i class="fas fa-hand-paper"></i>
+              <p>Use stop-loss orders to limit potential losses</p>
+            </div>
+            <div class="tip">
+              <i class="fas fa-book"></i>
+              <p>Educate yourself about trading strategies</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="disclaimer-footer">
+          <div class="pulse-warning">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>Please trade responsibly and only with funds you can afford to lose.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -458,5 +562,6 @@
     <!-- Custom JavaScript -->
     <script src="animations.js"></script>
     <script src="main.js"></script>
+    <script src="disclaimer.js"></script>
   </body>
 </html>
