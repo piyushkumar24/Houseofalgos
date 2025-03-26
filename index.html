@@ -1,411 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="theme-color" content="#4B0082" />
-  <title>House of Algo's | Algorithmic Forex Trading Solutions</title>
-  <!-- External CSS Libraries -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <!-- External JS Libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r162/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
-  <!-- Custom CSS and JS -->
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Navigation -->
-  <nav class="sticky-nav" aria-label="Main navigation">
-    <div class="logo-wrapper">
-      <div class="logo">
-        <div class="logo-container">
-          <img src="lib/logo/logo.png" alt="House of Algo's Logo" class="logo-img">
-        </div>
-        <div class="logo-text">
-          <span>House of Algo's</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#4B0082" />
+    <title>House of Algo's | Algorithmic Forex Trading Solutions</title>
+    <!-- External CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- External JS Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r162/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+    <!-- Custom CSS and JS -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="sticky-nav" aria-label="Main navigation">
+      <div class="logo-wrapper">
+        <div class="logo">
+          <div class="logo-container">
+            <img src="lib/logo/logo.png" alt="House of Algo's Logo" class="logo-img" />
+          </div>
+          <div class="logo-text">
+            <span>House of Algo's</span>
+          </div>
         </div>
       </div>
-    </div>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" aria-haspopup="true">
-      <span class="sr-only">Menu</span>
-      <i class="fas fa-bars" aria-hidden="true"></i>
-    </button>
-    <ul class="nav-links" id="main-menu" role="menubar">
-      <li><a href="#home" class="animated-underline">Home</a></li>
-      <li><a href="#about" class="animated-underline">About</a></li>
-      <li><a href="#vision" class="animated-underline">Vision</a></li>
-      <li><a href="#income" class="animated-underline">Income</a></li>
-      <li><a href="#platform" class="animated-underline">Platform</a></li>
-      <li><a href="#features" class="animated-underline">Features</a></li>
-      <li><a href="#faq" class="animated-underline">FAQ</a></li>
-      <li><a href="#contact" class="animated-underline">Contact</a></li>
-    </ul>
-  </nav>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" aria-haspopup="true">
+        <span class="sr-only">Menu</span>
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-links" id="main-menu" role="menubar">
+        <li><a href="#home" class="animated-underline">Home</a></li>
+        <li><a href="#about" class="animated-underline">About</a></li>
+        <li><a href="#vision" class="animated-underline">Vision</a></li>
+        <li><a href="#income" class="animated-underline">Income</a></li>
+        <li><a href="#platform" class="animated-underline">Platform</a></li>
+        <li><a href="#platform-features" class="animated-underline">Features</a></li>
+        <li><a href="#faq" class="animated-underline">FAQ</a></li>
+        <li><a href="#contact" class="animated-underline">Contact</a></li>
+      </ul>
+    </nav>
 
-  <!-- Hero Section with Video and Enhanced Forex Ticker -->
-  <section class="hero" id="home">
-    <!-- Particle Effect -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- Video Background (using preload="metadata" for a lighter initial load) -->
-    <div class="video-background">
-      <video autoplay muted loop playsinline id="heroVideo" preload="metadata">
-        <source src="./lib/vid/vid.mp4" type="video/mp4" />
-      </video>
-    </div>
-    
-    <div class="hero-content">
-      <h1 class="glow">Trade with intelligence, earn with confidence</h1>
-      <p class="typing-text">
-        Your trusted partner in algorithmic trading for the Forex market. We provide cutting‑edge automated trading solutions powered by MT4, ensuring a seamless and profitable trading experience.
-      </p>
-      <p class="tagline">Algorithmic Precision for Consistent Returns</p>
+    <!-- Hero Section with Video and Enhanced Forex Ticker -->
+    <section class="hero" id="home">
+      <!-- Particle Effect -->
+      <div class="particles-container" id="particles"></div>
       
-      <ul>
-      </ul>
-
-    </div>
-    
-    <!-- Enhanced Live Forex Ticker with Currency Symbols -->
-    <div class="forex-ticker-wrapper">
-      <div class="forex-ticker-container">
-        <div class="forex-ticker" id="forexTicker">
-          <!-- Currency pairs will be dynamically inserted here by JavaScript -->
+      <!-- Video Background (using preload="metadata" for a lighter initial load) -->
+      <div class="video-background">
+        <video autoplay muted loop playsinline id="heroVideo" preload="metadata">
+          <source src="./lib/vid/vid.mp4" type="video/mp4" />
+        </video>
+      </div>
+      
+      <div class="hero-content">
+        <h1 class="glow">Trade with intelligence, earn with confidence</h1>
+        <p class="typing-text">
+          Your trusted partner in algorithmic trading for the Forex market. We provide cutting‑edge automated trading solutions powered by MT4, ensuring a seamless and profitable trading experience.
+        </p>
+        <p class="tagline">Algorithmic Precision for Consistent Returns</p>
+      </div>
+      
+      <!-- Enhanced Live Forex Ticker with Currency Symbols -->
+      <div class="forex-ticker-wrapper">
+        <div class="forex-ticker-container">
+          <div class="forex-ticker" id="forexTicker">
+            <!-- Currency pairs will be dynamically inserted here by JavaScript -->
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Features Section -->
-  <section class="features" aria-labelledby="core-capabilities-heading">
-    <div class="features-content">
-      <h2 class="section-title" id="core-capabilities-heading">Core Capabilities</h2>
-      <div class="features-grid">
-        <div class="feature-card holographic">
-          <h3>Automated Trading</h3>
-          <p>Algorithmic execution powered by real-time market analysis</p>
-        </div>
-        <div class="feature-card holographic">
-          <h3>Advanced Algorithms</h3>
-          <p>Proprietary quantitative models driving market insights</p>
-        </div>
-        <div class="feature-card holographic">
-          <h3>Risk Management</h3>
-          <p>Multi-layered protection protocols and exposure controls</p>
-        </div>
-        <div class="feature-card holographic">
-          <h3>24/7 Market Access</h3>
-          <p>Continuous global market coverage across all timezones</p>
+    <!-- Core Capabilities Section -->
+    <section class="features" aria-labelledby="core-capabilities-heading">
+      <div class="features-content">
+        <h2 class="section-title" id="core-capabilities-heading">Core Capabilities</h2>
+        <div class="features-grid">
+          <div class="feature-card holographic">
+            <h3>Automated Trading</h3>
+            <p>Algorithmic execution powered by real-time market analysis</p>
+          </div>
+          <div class="feature-card holographic">
+            <h3>Advanced Algorithms</h3>
+            <p>Proprietary quantitative models driving market insights</p>
+          </div>
+          <div class="feature-card holographic">
+            <h3>Risk Management</h3>
+            <p>Multi-layered protection protocols and exposure controls</p>
+          </div>
+          <div class="feature-card holographic">
+            <h3>24/7 Market Access</h3>
+            <p>Continuous global market coverage across all timezones</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About Us Section -->
-  <section class="about" id="about">
-    <div class="section-header">
-      <h2 class="gradient-text"><img src="https://img.icons8.com/fluency/96/about-us-male.png" alt="About Us Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> About Us</h2>
-      <div class="section-divider"></div>
-      <p>Revolutionizing Forex trading through advanced algorithms and technology</p>
-    </div>
-    <div class="section-content">
-      <p>
-        At House of Algo's, we are passionate about helping traders succeed in the Forex market through advanced algorithmic trading. Our team of experts has developed high‑performance trading strategies that operate automatically—removing emotional decision‑making and optimizing profitability.
-      </p>
-      <p>
-        We believe in financial freedom through technology and have created a platform where both beginners and experienced traders can benefit from automated trading solutions.
-      </p>
-    </div>
-    
-    <!-- Digital Rain Effect Canvas -->
-    <canvas class="digital-rain" id="digitalRain"></canvas>
-  </section>
-
-  <!-- Vision & Mission Section -->
-  <section class="vision" id="vision">
-    <div class="section-header">
-      <h2 class="gradient-text"><img src="https://img.icons8.com/fluency/96/binoculars.png" alt="Vision Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> Vision &amp; Mission</h2>
-      <div class="section-divider"></div>
-      <p>Our guiding principles that drive everything we do</p>
-    </div>
-    <div class="content-grid">
-      <div class="vision-card holographic">
-        <h3>Our Vision</h3>
+    <!-- About Us Section -->
+    <section class="about" id="about">
+      <div class="section-header">
+        <h2 class="gradient-text">
+          <img src="https://img.icons8.com/fluency/96/about-us-male.png" alt="About Us Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
+          About Us
+        </h2>
+        <div class="section-divider"></div>
+        <p>Revolutionizing Forex trading through advanced algorithms and technology</p>
+      </div>
+      <div class="section-content">
         <p>
-          To empower traders worldwide by providing seamless algorithmic trading solutions, making Forex trading accessible, profitable, and stress‑free for everyone.
+          At House of Algo's, we are passionate about helping traders succeed in the Forex market through advanced algorithmic trading. Our team of experts has developed high‑performance trading strategies that operate automatically—removing emotional decision‑making and optimizing profitability.
+        </p>
+        <p>
+          We believe in financial freedom through technology and have created a platform where both beginners and experienced traders can benefit from automated trading solutions.
         </p>
       </div>
-      <div class="vision-card holographic">
-        <h3>Our Mission</h3>
+      <!-- Digital Rain Effect Canvas -->
+      <canvas class="digital-rain" id="digitalRain"></canvas>
+    </section>
+
+    <!-- Vision & Mission Section -->
+    <section class="vision" id="vision">
+      <div class="section-header">
+        <h2 class="gradient-text">
+          <img src="https://img.icons8.com/fluency/96/binoculars.png" alt="Vision Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
+          Vision &amp; Mission
+        </h2>
+        <div class="section-divider"></div>
+        <p>Our guiding principles that drive everything we do</p>
+      </div>
+      <div class="content-grid">
+        <div class="vision-card holographic">
+          <h3>Our Vision</h3>
+          <p>
+            To empower traders worldwide by providing seamless algorithmic trading solutions, making Forex trading accessible, profitable, and stress‑free for everyone.
+          </p>
+        </div>
+        <div class="vision-card holographic">
+          <h3>Our Mission</h3>
+          <p>
+            To revolutionize the way people trade by offering automated strategies that minimize risk, maximize profits, and create multiple streams of income.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Income Opportunities Section -->
+    <section class="income" id="income">
+      <div class="section-header">
+        <h2 class="gradient-text">
+          <img src="https://img.icons8.com/fluency/96/money-bag.png" alt="Earn Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
+          Earn with Us
+        </h2>
+        <div class="section-divider"></div>
+        <p>Multiple ways to generate income with our platform</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <i class="fas fa-robot"></i>
+          <h3>Automated Trading Profits</h3>
+          <p>Our algo‑based strategies trade 24/7 on your behalf, optimizing returns while reducing risks.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-users"></i>
+          <h3>PAMM Services</h3>
+          <p>Participate in our PAMM services where experienced traders manage funds for investors with profit sharing.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-copy"></i>
+          <h3>Copy Trading</h3>
+          <p>Follow and copy top‑performing strategies easily—even beginners can trade like pros!</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-layer-group"></i>
+          <h3>Subscription Plans</h3>
+          <p>Access various levels of algorithmic trading strategies based on your goals and risk tolerance.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-handshake"></i>
+          <h3>Referral Program</h3>
+          <p>Earn passive income by referring others—receive commissions from every successful referral!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Section -->
+    <section class="platform" id="platform">
+      <div class="section-header">
+        <h2 class="gradient-text">
+          <img src="https://img.icons8.com/fluency/96/stairs.png" alt="Platform Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
+          Get Started in 4 Easy Steps
+        </h2>
+        <div class="section-divider"></div>
+        <p>Begin your algorithmic trading journey with these simple steps</p>
+      </div>
+      <div class="steps-container">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Sign Up</h3>
+          <p>Create your account on our platform in just a few minutes with a simple registration process.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Open Trading Account</h3>
+          <p>Open a trading account through our link with our trusted broker partners.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Deposit Funds</h3>
+          <p>Deposit funds and start following our PAMM or copy trading to our master account.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Watch Profits Grow</h3>
+          <p>Let the algo trade for you while you watch your profits grow!</p>
+        </div>
+      </div>
+      <p class="platform-note neon-text">📌 No prior experience required. Just sit back and let the algorithms work!</p>
+    </section>
+
+    <!-- Platform Features Section (renamed to avoid conflicts) -->
+    <section class="platform-features" id="platform-features" aria-labelledby="platform-features-heading">
+      <div class="section-header">
+        <h2 class="gradient-text" id="platform-features-heading">
+          <img src="https://img.icons8.com/fluency/96/features-list.png" alt="Features Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
+          Platform Features
+        </h2>
+        <div class="section-divider"></div>
+        <p>Cutting-edge technology designed for optimal trading performance</p>
+      </div>
+      <div class="features-container">
+        <ul class="features-list">
+          <li class="shimmer"><strong>Fully Automated Trading:</strong> Operates 24/7 with pre‑set strategies.</li>
+          <li class="shimmer"><strong>User‑Friendly Interface:</strong> Seamless integration with MT4 for effortless trading.</li>
+          <li class="shimmer"><strong>Real‑Time Market Analysis:</strong> Continuous analysis to base decisions on the latest trends.</li>
+          <li class="shimmer"><strong>Risk Management Tools:</strong> Stop‑loss, take‑profit, and diversification techniques to minimize losses.</li>
+          <li class="shimmer"><strong>Multiple Income Streams:</strong> Earn via trading, referrals, copy trading, and subscription plans.</li>
+          <li class="shimmer"><strong>High‑Speed Execution:</strong> Rapid trade execution to reduce slippage.</li>
+          <li class="shimmer"><strong>Secure &amp; Reliable:</strong> Encrypted connections and secure access ensure safe trading operations.</li>
+        </ul>
+      </div>
+      <!-- Animated Chart -->
+      <div class="chart-container">
+        <svg width="800" height="200" viewBox="0 0 800 200" class="chart">
+          <path class="chart-line" d="M0,150 C50,120 100,180 150,120 C200,60 250,80 300,40 C350,0 400,20 450,60 C500,100 550,70 600,90 C650,110 700,150 750,100 L750,200 L0,200 Z" fill="rgba(255,215,0,0.1)"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+      <div class="section-header">
+        <h2 class="gradient-text">
+          <img src="https://img.icons8.com/fluency/96/question-mark.png" alt="FAQ Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
+          Frequently Asked Questions
+        </h2>
+        <div class="section-divider"></div>
+        <p>Get answers to common questions about our platform</p>
+      </div>
+      <div class="faq-container">
+        <div class="faq-item">
+          <h3>What is algo trading?</h3>
+          <p>A: Algo trading uses automated systems to execute trades based on pre‑defined strategies, removing human emotions and enhancing efficiency.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: How do I start using House of Algo's?</strong>
+          <p>A: Simply sign up, install MT4, and connect to our strategies. Our system will handle the trades automatically.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: Do I need trading experience?</strong>
+          <p>A: No, our automated strategies are designed for both beginners and experienced traders.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: What is the minimum investment required?</strong>
+          <p>A: You can invest a minimum of $100. For higher investments, multiples of $1000 apply (e.g., $2000, $4000, etc.).</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: What are the expected returns and risks?</strong>
+          <p>A: Returns are 2% to 5% monthly (after a 30% company share). The highest drawdown so far is 30% (53% in extreme backtesting conditions).</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: Is there a locking period?</strong>
+          <p>A: No, you can stop copy trading anytime and withdraw your funds immediately.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: What is the account opening procedure?</strong>
+          <p>A: A link will be sent to you. By clicking it, you must fill in all the details (Aadhar Card, Driving License, Bank Statement, Email ID, Mobile Number). The account will be opened in 24 hours with support from our team through Anydesk.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: What is the highest drawdown experienced?</strong>
+          <p>A: Based on backtesting, the highest drawdown has reached 53% under extreme conditions like market crashes or trade wars.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: What if there's a server problem?</strong>
+          <p>A: Occasionally, VPS server issues may arise. However, our team is equipped to handle trades manually when needed.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Q: Can tech issues be handled manually?</strong>
+          <p>A: Yes, our expert team can manually manage trades if technical issues arise.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="section-header">
+        <h2 class="gradient-text">
+          <img src="https://img.icons8.com/fluency/96/contact-card.png" alt="Contact Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
+          Contact Us
+        </h2>
+        <div class="section-divider"></div>
+        <p>Get in touch with our team for any questions or support</p>
+      </div>
+      <div class="contact-container">
+        <p class="contact-email">Email: <strong><a href="mailto:info@houseofalgo.com" class="animated-underline">info@houseofalgo.com</a></strong></p>
+        <p class="contact-cta">Join the Future of Trading – Get Started Today!</p>
+        <form id="contactForm" action="#" method="POST">
+          <label for="name">Your Name:</label>
+          <input type="text" id="name" name="name" required />
+          <label for="email">Your Email:</label>
+          <input type="email" id="email" name="email" required />
+          <label for="message">Your Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Disclaimer Section -->
+    <section class="disclaimer" id="disclaimer">
+      <div class="section-header">
+        <h2 class="gradient-text">
+          <img src="https://img.icons8.com/fluency/96/shield.png" alt="Disclaimer Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;" />
+          Disclaimer
+        </h2>
+        <div class="section-divider"></div>
+        <p>Important information about trading risks</p>
+      </div>
+      <div class="disclaimer-container">
         <p>
-          To revolutionize the way people trade by offering automated strategies that minimize risk, maximize profits, and create multiple streams of income.
+          House of Algo's is not a financial advisor, investment firm, or brokerage. We do not provide any guarantees of profit or fixed returns. Trading in Forex and stock markets involves substantial risk, including the risk of losing all invested capital. Past performance does not guarantee future results.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Income Opportunities Section -->
-  <section class="income" id="income">
-    <div class="section-header">
-      <h2 class="gradient-text"><img src="https://img.icons8.com/fluency/96/money-bag.png" alt="Earn Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> Earn with Us</h2>
-      <div class="section-divider"></div>
-      <p>Multiple ways to generate income with our platform</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <i class="fas fa-robot"></i>
-        <h3>Automated Trading Profits</h3>
-        <p>Our algo‑based strategies trade 24/7 on your behalf, optimizing returns while reducing risks.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-users"></i>
-        <h3>PAMM Services</h3>
-        <p>Participate in our PAMM services where experienced traders manage funds for investors with profit sharing.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-copy"></i>
-        <h3>Copy Trading</h3>
-        <p>Follow and copy top‑performing strategies easily—even beginners can trade like pros!</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-layer-group"></i>
-        <h3>Subscription Plans</h3>
-        <p>Access various levels of algorithmic trading strategies based on your goals and risk tolerance.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-handshake"></i>
-        <h3>Referral Program</h3>
-        <p>Earn passive income by referring others—receive commissions from every successful referral!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Platform Section -->
-  <section class="platform" id="platform">
-    <div class="section-header">
-      <h2 class="gradient-text"><img src="https://img.icons8.com/fluency/96/stairs.png" alt="Platform Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> Get Started in 4 Easy Steps</h2>
-      <div class="section-divider"></div>
-      <p>Begin your algorithmic trading journey with these simple steps</p>
-    </div>
-    <div class="steps-container">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h3>Sign Up</h3>
-        <p>Create your account on our platform in just a few minutes with a simple registration process.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <h3>Open Trading Account</h3>
-        <p>Open a trading account through our link with our trusted broker partners.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h3>Deposit Funds</h3>
-        <p>Deposit funds and start following our PAMM or copy trading to our master account.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">4</div>
-        <h3>Watch Profits Grow</h3>
-        <p>Let the algo trade for you while you watch your profits grow!</p>
-      </div>
-    </div>
-    <p class="platform-note neon-text">📌 No prior experience required. Just sit back and let the algorithms work!</p>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features" id="features" aria-labelledby="platform-features-heading">
-    <div class="section-header">
-      <h2 class="gradient-text" id="platform-features-heading"><img src="https://img.icons8.com/fluency/96/features-list.png" alt="Features Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> Platform Features</h2>
-      <div class="section-divider"></div>
-      <p>Cutting-edge technology designed for optimal trading performance</p>
-    </div>
-    <div class="features-container">
-      <ul class="features-list">
-        <li class="shimmer"><strong>Fully Automated Trading:</strong> Operates 24/7 with pre‑set strategies.</li>
-        <li class="shimmer"><strong>User‑Friendly Interface:</strong> Seamless integration with MT4 for effortless trading.</li>
-        <li class="shimmer"><strong>Real‑Time Market Analysis:</strong> Continuous analysis to base decisions on the latest trends.</li>
-        <li class="shimmer"><strong>Risk Management Tools:</strong> Stop‑loss, take‑profit, and diversification techniques to minimize losses.</li>
-        <li class="shimmer"><strong>Multiple Income Streams:</strong> Earn via trading, referrals, copy trading, and subscription plans.</li>
-        <li class="shimmer"><strong>High‑Speed Execution:</strong> Rapid trade execution to reduce slippage.</li>
-        <li class="shimmer"><strong>Secure &amp; Reliable:</strong> Encrypted connections and secure access ensure safe trading operations.</li>
-      </ul>
-    </div>
-    
-    <!-- Animated Chart -->
-    <div class="chart-container">
-      <svg width="800" height="200" viewBox="0 0 800 200" class="chart">
-        <path class="chart-line" d="M0,150 C50,120 100,180 150,120 C200,60 250,80 300,40 C350,0 400,20 450,60 C500,100 550,70 600,90 C650,110 700,150 750,100 L750,200 L0,200 Z" fill="rgba(255,215,0,0.1)"></path>
-      </svg>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section class="faq" id="faq">
-    <div class="section-header">
-      <h2 class="gradient-text"><img src="https://img.icons8.com/fluency/96/question-mark.png" alt="FAQ Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> Frequently Asked Questions</h2>
-      <div class="section-divider"></div>
-      <p>Get answers to common questions about our platform</p>
-    </div>
-    <div class="faq-container">
-      <div class="faq-item">
-        <h3>What is algo trading?</h3>
-        <p>A: Algo trading uses automated systems to execute trades based on pre‑defined strategies, removing human emotions and enhancing efficiency.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Q: How do I start using House of Algo's?</strong>
-        <p>A: Simply sign up, install MT4, and connect to our strategies. Our system will handle the trades automatically.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Q: Do I need trading experience?</strong>
-        <p>A: No, our automated strategies are designed for both beginners and experienced traders.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Q: What is the minimum investment required?</strong>
-        <p>A: You can invest a minimum of $100. For higher investments, multiples of $1000 apply (e.g., $2000, $4000, etc.).</p>
-      </div>
-      <div class="faq-item">
-        <strong>Q: What are the expected returns and risks?</strong>
-        <p>A: Returns are 2% to 5% monthly (after a 30% company share). The highest drawdown so far is 30% (53% in extreme backtesting conditions).</p>
-      </div>
-      <div class="faq-item">
-        <strong>Q: Is there a locking period?</strong>
-        <p>A: No, you can stop copy trading anytime and withdraw your funds immediately.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Q: What is the account opening procedure?</strong>
-        <p>A: A link will be sent to you. By clicking it, you must fill in all the details (Aadhar Card, Driving License, Bank Statement, Email ID, Mobile Number). The account will be opened in 24 hours with support from our team through Anydesk.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Q: What is the highest drawdown experienced?</strong>
-        <p>A: Based on backtesting, the highest drawdown has reached 53% under extreme conditions like market crashes or trade wars.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Q: What if there's a server problem?</strong>
-        <p>A: Occasionally, VPS server issues may arise. However, our team is equipped to handle trades manually when needed.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Q: Can tech issues be handled manually?</strong>
-        <p>A: Yes, our expert team can manually manage trades if technical issues arise.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <div class="section-header">
-      <h2 class="gradient-text"><img src="https://img.icons8.com/fluency/96/contact-card.png" alt="Contact Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> Contact Us</h2>
-      <div class="section-divider"></div>
-      <p>Get in touch with our team for any questions or support</p>
-    </div>
-    <div class="contact-container">
-      <p class="contact-email">Email: <strong><a href="mailto:info@houseofalgo.com" class="animated-underline">info@houseofalgo.com</a></strong></p>
-      <p class="contact-cta">Join the Future of Trading – Get Started Today!</p>
-      <form id="contactForm" action="#" method="POST">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Your Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="message">Your Message:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Disclaimer Section -->
-  <section class="disclaimer" id="disclaimer">
-    <div class="section-header">
-      <h2 class="gradient-text"><img src="https://img.icons8.com/fluency/96/shield.png" alt="Disclaimer Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> Disclaimer</h2>
-      <div class="section-divider"></div>
-      <p>Important information about trading risks</p>
-    </div>
-    <div class="disclaimer-container">
-      <p>
-        House of Algo's is not a financial advisor, investment firm, or brokerage. We do not provide any guarantees of profit or fixed returns. Trading in Forex and stock markets involves substantial risk, including the risk of losing all invested capital. Past performance does not guarantee future results.
-      </p>
-      <p>
-        By using our platform, you acknowledge and accept that:
-      </p>
-      <ul>
-        <li>Algorithmic trading involves market risks and unpredictable fluctuations.</li>
-        <li>We are not responsible for any financial losses incurred while using our strategies.</li>
-        <li>There is no assurance of consistent profits or returns.</li>
-        <li>You should conduct your own due diligence and consult with financial professionals before investing.</li>
-        <li>We do not hold liability for losses due to market conditions, software errors, or unexpected events.</li>
-        <li>Trading in Forex and other financial markets is speculative and may not suit all investors.</li>
-      </ul>
-      <p class="disclaimer-warning">Please trade responsibly and only with funds you can afford to lose.</p>
-    </div>
-  </section>
-
-  <!-- Final Call-to-Action Section -->
-  <section class="cta" id="cta">
-    <div class="section-header">
-      <h2 class="floating">Ready to Transform Your Trading?</h2>
-      <div class="section-divider"></div>
-      <p>Join thousands of successful traders using our premium algorithmic solutions</p>
-    </div>
-    <div class="cta-buttons">
-      <button class="btn-primary" onclick="window.location.href='#contact'">
-        <i class="fas fa-rocket"></i> Launch Trading
-      </button>
-      <button class="btn-secondary" onclick="window.location.href='#contact'">
-        <i class="fas fa-user-plus"></i> Join Now
-      </button>
-    </div>
-  </section>
-
-  <!-- Scroll to top button -->
-  <div class="scroll-top">
-    <i class="fas fa-arrow-up"></i>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>Quick Links</h4>
+        <p>
+          By using our platform, you acknowledge and accept that:
+        </p>
         <ul>
-          <li><a href="#disclaimer">Disclaimer</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li>Algorithmic trading involves market risks and unpredictable fluctuations.</li>
+          <li>We are not responsible for any financial losses incurred while using our strategies.</li>
+          <li>There is no assurance of consistent profits or returns.</li>
+          <li>You should conduct your own due diligence and consult with financial professionals before investing.</li>
+          <li>We do not hold liability for losses due to market conditions, software errors, or unexpected events.</li>
+          <li>Trading in Forex and other financial markets is speculative and may not suit all investors.</li>
         </ul>
+        <p class="disclaimer-warning">Please trade responsibly and only with funds you can afford to lose.</p>
       </div>
-      <div class="footer-section">
-        <h4>Our Services</h4>
-        <ul>
-          <li><a href="#income">Automated Trading</a></li>
-          <li><a href="#income">PAMM Services</a></li>
-          <li><a href="#income">Copy Trading</a></li>
-        </ul>
+    </section>
+
+    <!-- Final Call-to-Action Section -->
+    <section class="cta" id="cta">
+      <div class="section-header">
+        <h2 class="floating">Ready to Transform Your Trading?</h2>
+        <div class="section-divider"></div>
+        <p>Join thousands of successful traders using our premium algorithmic solutions</p>
       </div>
-      <div class="footer-section">
-        <h4>Connect</h4>
-        <div class="social-icons">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <div class="cta-buttons">
+        <button class="btn-primary" onclick="window.location.href='#contact'">
+          <i class="fas fa-rocket"></i> Launch Trading
+        </button>
+        <button class="btn-secondary" onclick="window.location.href='#contact'">
+          <i class="fas fa-user-plus"></i> Join Now
+        </button>
+      </div>
+    </section>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-top">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#disclaimer">Disclaimer</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
         </div>
-        <div class="contact-email">
-          <i class="fas fa-envelope"></i>
-          <a href="mailto:info@houseofalgo.com">info@houseofalgo.com</a>
+        <div class="footer-section">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#income">Automated Trading</a></li>
+            <li><a href="#income">PAMM Services</a></li>
+            <li><a href="#income">Copy Trading</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+          <div class="contact-email">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:info@houseofalgo.com">info@houseofalgo.com</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="copyright">
-      © 2025 House of Algo's. All rights reserved.
-    </div>
-  </footer>
+      <div class="copyright">
+        © 2025 House of Algo's. All rights reserved.
+      </div>
+    </footer>
 
-  <!-- Custom JavaScript -->
-  <script src="animations.js"></script>
-  <script src="main.js"></script>
-</body>
+    <!-- Custom JavaScript -->
+    <script src="animations.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
-

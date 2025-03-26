@@ -228,6 +228,7 @@ async function updateCurrencyValues() {
   const fetchForexData = async () => {
     try {
       const response = await fetch('https://api.exchangerate.host/latest?access_key=620ee230bc7f499487568fe384a8568d&base=USD');
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       if (!response.ok) throw new Error('Network response was not ok');
       const rates = await response.json();
     
