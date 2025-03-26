@@ -1,105 +1,74 @@
-// Particle Effect
-function setupParticles() {
-  const container = document.getElementById("particles")
-  \
-  if (!container) return
-  \
-  \
-  for (let i = 0; i &lt; 50;
-  i++
-  )
-  {
-    const particle = document.createElement("div")
-    particle.className = "particle"
+// Initialize GSAP animations
+function initAnimations() {
+  gsap.utils.toArray('.section').forEach(section => {
+    gsap.from(section, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      scrollTrigger: {
+        trigger: section,
+        start: 'top center+=200',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  });
 
-    // Random position
-    const posX = Math.random() * 100
-    const posY = Math.random() * 100
-    particle.style.left = `${posX}%`
-    particle.style.bottom = `${posY}%`
-
-    // Random size
-    const size = Math.random() * 6 + 2
-    particle.style.width = `${size}px`
-    particle.style.height = `${size}px`
-
-    // Random animation duration and delay
-    const duration = Math.random() * 10 + 5
-    const delay = Math.random() * 5
-    particle.style.animation = `particle-float ${duration}s ${delay}s infinite linear`
-
-    // Random opacity
-    particle.style.opacity = Math.random() * 0.5 + 0.2
-
-    // Random color variations (gold to blue)
-    const hue = Math.random() > 0.7 ? "210" : "45"
-    const saturation = Math.floor(Math.random() * 30 + 70)
-    const lightness = Math.floor(Math.random() * 20 + 60)
-    particle.style.background = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.8)`
-
-    container.appendChild(particle)
-  }
+  // Animate feature cards
+  gsap.from(".feature-card", {
+    duration: 1,
+    scale: 0.8,
+    opacity: 0,
+    stagger: 0.1,
+    scrollTrigger: {
+      trigger: ".features",
+      start: "top center"
+    }
+  });
 }
 
-// Digital Rain Effect
-function setupDigitalRain() {
-  const canvas = document.getElementById("digitalRain")
-  if (!canvas) return
+function setupParticles() {
+  const container = document.getElementById("particles");
+  if (!container) return;
+  
+  for (let i = 0; i < 50; i++) {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    
+    // Random position
+    const posX = Math.random() * 100;
+    const posY = Math.random() * 100;
+    particle.style.left = `${posX}%`;
+    particle.style.bottom = `${posY}%`;
 
-  const ctx = canvas.getContext("2d")
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
+    // Random size
+    const size = Math.random() * 6 + 2;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
 
-  const fontSize = 14
-  const columns = canvas.width / fontSize
+    // Random animation duration and delay
+    const duration = Math.random() * 10 + 5;
+    const delay = Math.random() * 5;
+    particle.style.animation = `particle-float ${duration}s ${delay}s infinite linear`;
 
-  // Array to store the y position of each column
-  const drops = []
-  for (let i = 0; i &lt; columns;
-  i++
-  )
-  drops[i] = 1
+    // Random opacity
+    particle.style.opacity = Math.random() * 0.5 + 0.2;
 
-  // Characters to display
-  const chars = "01010101010101"
+    // Random color variations (gold to blue)
+    const hue = Math.random() > 0.7 ? "210" : "45";
+    const saturation = Math.floor(Math.random() * 30 + 70);
+    const lightness = Math.floor(Math.random() * 20 + 60);
+    particle.style.background = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.8)`;
 
-  function draw() {
-    // Semi-transparent black background to create trail effect
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)"
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    ctx.fillStyle = "#FFD700" // Gold color
-    ctx.font = `${fontSize}px monospace`
-
-    for (let i = 0; i &lt; drops.length;
-    i++
-    )
-    {
-      // Random character
-      const text = chars[Math.floor(Math.random() * chars.length)]
-
-      // x = i * fontSize, y = drops[i] * fontSize
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize)
-
-      // Randomly reset some drops to the top
-      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0
-      }
-
-      // Increment y coordinate
-      drops[i]++
-    }
+    container.appendChild(particle);
   }
-
-  setInterval(draw, 33)
 }
 
 function setupForexTicker() {
-  const tickerElement = document.getElementById("forexTicker")
-  if (!tickerElement) return
+  const tickerElement = document.getElementById("forexTicker");
+  if (!tickerElement) return;
 
   // Clear existing content
-  tickerElement.innerHTML = ""
+  tickerElement.innerHTML = "";
 
   // Currency pair data with symbols and flags
   const currencyPairs = [
@@ -199,109 +168,133 @@ function setupForexTicker() {
       base: { symbol: "€", code: "EUR", flag: "https://flagcdn.com/w40/eu.png" },
       quote: { symbol: "Fr", code: "CHF", flag: "https://flagcdn.com/w40/ch.png" },
     },
-  ]
+  ];
 
   // Create ticker items
   currencyPairs.forEach((pair) => {
-    const pairElement = document.createElement("div")
-    pairElement.className = "currency-pair"
-    const flagsContainer = document.createElement("div")
-    flagsContainer.className = "currency-flags"
-    const baseFlag = document.createElement("div")
-    baseFlag.className = "currency-flag"
-    baseFlag.style.backgroundImage = `url(${pair.base.flag})`
-    const quoteFlag = document.createElement("div")
-    quoteFlag.className = "currency-flag"
-    quoteFlag.style.backgroundImage = `url(${pair.quote.flag})`
-    flagsContainer.appendChild(baseFlag)
-    flagsContainer.appendChild(quoteFlag)
-    const infoContainer = document.createElement("div")
-    infoContainer.className = "currency-info"
-    const nameElement = document.createElement("div")
-    nameElement.className = "currency-name"
-    nameElement.textContent = pair.name
-    const valueContainer = document.createElement("div")
-    valueContainer.className = `currency-value ${pair.trend}`
-    const valueText = document.createElement("span")
-    valueText.textContent = pair.value
-    const trendIcon = document.createElement("i")
-    trendIcon.className = pair.trend === "up" ? "fas fa-caret-up" : "fas fa-caret-down"
-    const changeElement = document.createElement("span")
-    changeElement.className = "currency-change"
-    changeElement.textContent = pair.change
-    valueContainer.appendChild(valueText)
-    valueContainer.appendChild(trendIcon)
-    valueContainer.appendChild(changeElement)
-    infoContainer.appendChild(nameElement)
-    infoContainer.appendChild(valueContainer)
-    pairElement.appendChild(flagsContainer)
-    pairElement.appendChild(infoContainer)
-    tickerElement.appendChild(pairElement)
-  })
+    const pairElement = document.createElement("div");
+    pairElement.className = "currency-pair";
+    const flagsContainer = document.createElement("div");
+    flagsContainer.className = "currency-flags";
+    const baseFlag = document.createElement("div");
+    baseFlag.className = "currency-flag";
+    baseFlag.style.backgroundImage = `url(${pair.base.flag})`;
+    const quoteFlag = document.createElement("div");
+    quoteFlag.className = "currency-flag";
+    quoteFlag.style.backgroundImage = `url(${pair.quote.flag})`;
+    flagsContainer.appendChild(baseFlag);
+    flagsContainer.appendChild(quoteFlag);
+    const infoContainer = document.createElement("div");
+    infoContainer.className = "currency-info";
+    const nameElement = document.createElement("div");
+    nameElement.className = "currency-name";
+    nameElement.textContent = pair.name;
+    const valueContainer = document.createElement("div");
+    valueContainer.className = `currency-value ${pair.trend}`;
+    const valueText = document.createElement("span");
+    valueText.textContent = pair.value;
+    const trendIcon = document.createElement("i");
+    trendIcon.className = pair.trend === "up" ? "fas fa-caret-up" : "fas fa-caret-down";
+    const changeElement = document.createElement("span");
+    changeElement.className = "currency-change";
+    changeElement.textContent = pair.change;
+    valueContainer.appendChild(valueText);
+    valueContainer.appendChild(trendIcon);
+    valueContainer.appendChild(changeElement);
+    infoContainer.appendChild(nameElement);
+    infoContainer.appendChild(valueContainer);
+    pairElement.appendChild(flagsContainer);
+    pairElement.appendChild(infoContainer);
+    tickerElement.appendChild(pairElement);
+  });
 
   // Clone all items to ensure continuous scrolling
-  const originalItems = Array.from(tickerElement.children)
+  const originalItems = Array.from(tickerElement.children);
   originalItems.forEach((item) => {
-    const clone = item.cloneNode(true)
-    tickerElement.appendChild(clone)
-  })
+    const clone = item.cloneNode(true);
+    tickerElement.appendChild(clone);
+  });
 
   // Force a reflow to ensure the animation starts properly
-  void tickerElement.offsetWidth
+  void tickerElement.offsetWidth;
 
-  // Start updating currency values
-  updateCurrencyValues()
+  // Start updating currency values immediately
+  updateCurrencyValues();
 }
 
-function updateCurrencyValues() {
-  setInterval(() => {
-    const pairs = document.querySelectorAll(".currency-pair")
-    pairs.forEach((pair) => {
-      const valueElement = pair.querySelector(".currency-value span:first-child")
-      if (!valueElement) return
-      let currentValue = Number.parseFloat(valueElement.textContent)
-      const fluctuation = (Math.random() - 0.5) * 0.01
-      currentValue += fluctuation
-      valueElement.textContent = currentValue.toFixed(4)
-      const valueContainer = pair.querySelector(".currency-value")
-      const trendIcon = pair.querySelector(".currency-value i")
-      const changeElement = pair.querySelector(".currency-change")
-      if (fluctuation > 0) {
-        valueContainer.className = "currency-value up"
-        trendIcon.className = "fas fa-caret-up"
-        changeElement.textContent = "+" + Math.abs(fluctuation).toFixed(4)
-      } else {
-        valueContainer.className = "currency-value down"
-        trendIcon.className = "fas fa-caret-down"
-        changeElement.textContent = "-" + Math.abs(fluctuation).toFixed(4)
+async function updateCurrencyValues() {
+  let retryCount = 0;
+  const maxRetries = 3;
+  const fetchForexData = async () => {
+    try {
+      const response = await fetch('https://api.exchangerate.host/latest?access_key=620ee230bc7f499487568fe384a8568d&base=USD');
+      if (!response.ok) throw new Error('Network response was not ok');
+      const rates = await response.json();
+    
+      const pairs = document.querySelectorAll(".currency-pair");
+
+      pairs.forEach((pair) => {
+        const pairName = pair.querySelector(".currency-name")?.textContent;
+        if (!pairName) return;
+        
+        const [baseCurr, quoteCurr] = pairName.split('/');
+        const rate = rates.rates[quoteCurr] / rates.rates[baseCurr];
+        const fluctuation = (Math.random() - 0.5) * 0.1; // Increased fluctuation
+        const currentValue = Number(rate + fluctuation).toFixed(4);
+        
+        const valueElement = pair.querySelector(".currency-value span:first-child");
+        const valueContainer = pair.querySelector(".currency-value");
+        const trendIcon = pair.querySelector(".currency-value i");
+        const changeElement = pair.querySelector(".currency-change");
+        
+        if (valueElement && valueContainer && trendIcon && changeElement) {
+          valueElement.textContent = currentValue;
+          const isUp = fluctuation >= 0;
+          valueContainer.className = `currency-value ${isUp ? 'up' : 'down'}`;
+          trendIcon.className = isUp ? 'fas fa-caret-up' : 'fas fa-caret-down';
+          changeElement.textContent = `${isUp ? '+' : '-'}${Math.abs(fluctuation).toFixed(4)}`;
+        }
+      });
+    } catch (error) {
+      console.error('Failed to fetch forex data:', error);
+      if (retryCount < maxRetries) {
+        retryCount++;
+        console.log(`Retrying... (${retryCount})`);
+        await new Promise(res => setTimeout(res, 2000));
+        return fetchForexData();
       }
-    })
-  }, 5000)
+    }
+  };
+  
+  await fetchForexData();
 }
+
+// Update forex data every 5 seconds
+setInterval(updateCurrencyValues, 5000);
 
 /* ------------------------------
    Video Background Handling
    ------------------------------ */
 function setupVideoBackground() {
-  const video = document.getElementById("heroVideo")
-  if (!video) return
-  video.addEventListener("error", () => console.log("Video error occurred"))
-  video.muted = true
-  video.play().catch((error) => console.log("Video autoplay failed:", error))
+  const video = document.getElementById("heroVideo");
+  if (!video) return;
+  video.addEventListener("error", () => console.log("Video error occurred"));
+  video.muted = true;
+  video.play().catch((error) => console.log("Video autoplay failed:", error));
 }
 
 /* ------------------------------
    Mobile Menu Toggle
    ------------------------------ */
 function setupMobileMenu() {
-  const menuToggle = document.querySelector(".menu-toggle")
-  const navLinks = document.querySelector(".nav-links")
-  if (!menuToggle || !navLinks) return
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  if (!menuToggle || !navLinks) return;
   menuToggle.addEventListener("click", () => {
-    const isExpanded = menuToggle.getAttribute("aria-expanded") === "true"
-    menuToggle.setAttribute("aria-expanded", !isExpanded)
-    navLinks.classList.toggle("active")
-  })
+    const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+    menuToggle.setAttribute("aria-expanded", !isExpanded);
+    navLinks.classList.toggle("active");
+  });
 }
 
 /* ------------------------------
@@ -310,113 +303,110 @@ function setupMobileMenu() {
 function setupSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
-      e.preventDefault()
-      const target = document.querySelector(this.getAttribute("href"))
-      if (!target) return
-      target.scrollIntoView({ behavior: "smooth", block: "start" })
-      const navLinks = document.querySelector(".nav-links")
-      const menuToggle = document.querySelector(".menu-toggle")
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const navLinks = document.querySelector(".nav-links");
+      const menuToggle = document.querySelector(".menu-toggle");
       if (navLinks && navLinks.classList.contains("active")) {
-        navLinks.classList.remove("active")
-        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false")
+        navLinks.classList.remove("active");
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
       }
-    })
-  })
+    });
+  });
 }
 
 /* ------------------------------
    Sticky Navigation
    ------------------------------ */
 function setupStickyNav() {
-  const nav = document.querySelector(".sticky-nav")
-  if (!nav) return
+  const nav = document.querySelector(".sticky-nav");
+  if (!nav) return;
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) nav.classList.add("scrolled")
-    else nav.classList.remove("scrolled")
-  })
+    if (window.scrollY > 50) nav.classList.add("scrolled");
+    else nav.classList.remove("scrolled");
+  });
 }
 
 /* ------------------------------
    Scroll-to-Top Button
    ------------------------------ */
 function setupScrollToTop() {
-  const scrollTopBtn = document.querySelector(".scroll-top")
-  if (!scrollTopBtn) return
+  const scrollTopBtn = document.querySelector(".scroll-top");
+  if (!scrollTopBtn) return;
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) scrollTopBtn.classList.add("visible")
-    else scrollTopBtn.classList.remove("visible")
-  })
+    if (window.scrollY > 300) scrollTopBtn.classList.add("visible");
+    else scrollTopBtn.classList.remove("visible");
+  });
   scrollTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  })
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
 
 /* ------------------------------
    Counters Animation
    ------------------------------ */
 function animateCounters() {
-  const counters = document.querySelectorAll(".counter-value")
-  const speed = 200
+  const counters = document.querySelectorAll(".counter-value");
+  const speed = 200;
   counters.forEach((counter) => {
-    const target = +counter.getAttribute("data-target")
-    const increment = target / speed
-    let i = 0 // Declare i here
+    const target = +counter.getAttribute("data-target");
+    const increment = target / speed;
     function updateCount() {
-      const count = +counter.innerText
-      if (count &lt;
-      target
-      )
-      i++ // Use i here
-      counter.innerText = Math.ceil(count + increment)
-      setTimeout(updateCount, 1)
-      else
-      counter.innerText = target
+      const count = +counter.innerText;
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 1);
+      } else {
+        counter.innerText = target;
+      }
     }
-    updateCount()
-  })
+    updateCount();
+  });
 }
 
 /* ------------------------------
    Contact Form (simulate submission)
    ------------------------------ */
 function setupContactForm() {
-  const contactForm = document.getElementById("contactForm")
-  if (!contactForm) return
+  const contactForm = document.getElementById("contactForm");
+  if (!contactForm) return;
   contactForm.addEventListener("submit", (e) => {
-    e.preventDefault()
-    const submitBtn = contactForm.querySelector('button[type="submit"]')
-    if (!submitBtn) return
-    const originalBtnText = submitBtn.innerHTML
-    submitBtn.innerHTML = "Sending..."
+    e.preventDefault();
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    if (!submitBtn) return;
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = "Sending...";
     setTimeout(() => {
-      submitBtn.innerHTML = "Message Sent!"
-      contactForm.reset()
+      submitBtn.innerHTML = "Message Sent!";
+      contactForm.reset();
       setTimeout(() => {
-        submitBtn.innerHTML = originalBtnText
-      }, 3000)
-    }, 1500)
-  })
+        submitBtn.innerHTML = originalBtnText;
+      }, 3000);
+    }, 1500);
+  });
 }
 
 /* ------------------------------
    Initialize functions after DOMContentLoaded
    ------------------------------ */
 window.addEventListener("DOMContentLoaded", () => {
-  setupVideoBackground()
-  setupMobileMenu()
-  setupSmoothScroll()
-  setupStickyNav()
-  setupScrollToTop()
-  setupContactForm()
-  setupForexTicker()
-  setupParticles()
-  setupDigitalRain()
-})
+  setupVideoBackground();
+  setupMobileMenu();
+  setupSmoothScroll();
+  setupStickyNav();
+  setupScrollToTop();
+  setupContactForm();
+  setupForexTicker();
+  setupParticles();
+  // Commented out since setupDigitalRain is not defined:
+  // setupDigitalRain();
+});
 
 /* Delay non-critical functions (like ticker setup) until after window load */
 window.addEventListener("load", () => {
-  animateCounters()
+  animateCounters();
   // Delay ticker initialization by 1 second
-  setTimeout(setupForexTicker, 1000)
-})
-
+  setTimeout(setupForexTicker, 1000);
+});

@@ -20,7 +20,7 @@
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
+  <nav class="sticky-nav" aria-label="Main navigation">
     <div class="logo-wrapper">
       <div class="logo">
         <div class="logo-container">
@@ -60,11 +60,11 @@
     </div>
     
     <div class="hero-content">
-      <h1 class="glow">Welcome to House of Algo's</h1>
+      <h1 class="glow">Trade with intelligence, earn with confidence</h1>
       <p class="typing-text">
         Your trusted partner in algorithmic trading for the Forex market. We provide cutting‑edge automated trading solutions powered by MT4, ensuring a seamless and profitable trading experience.
       </p>
-      <p class="tagline">Trade with intelligence, earn with confidence</p>
+      <p class="tagline">Algorithmic Precision for Consistent Returns</p>
       
       <ul>
       </ul>
@@ -82,9 +82,9 @@
   </section>
 
   <!-- Features Section -->
-  <section class="features">
+  <section class="features" aria-labelledby="core-capabilities-heading">
     <div class="features-content">
-      <h2 class="section-title">Core Capabilities</h2>
+      <h2 class="section-title" id="core-capabilities-heading">Core Capabilities</h2>
       <div class="features-grid">
         <div class="feature-card holographic">
           <h3>Automated Trading</h3>
@@ -218,9 +218,9 @@
   </section>
 
   <!-- Features Section -->
-  <section class="features" id="features">
+  <section class="features" id="features" aria-labelledby="platform-features-heading">
     <div class="section-header">
-      <h2 class="gradient-text"><img src="https://img.icons8.com/fluency/96/features-list.png" alt="Features Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> Our Platform Features</h2>
+      <h2 class="gradient-text" id="platform-features-heading"><img src="https://img.icons8.com/fluency/96/features-list.png" alt="Features Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 15px; display: inline-block;"> Platform Features</h2>
       <div class="section-divider"></div>
       <p>Cutting-edge technology designed for optimal trading performance</p>
     </div>
@@ -253,7 +253,7 @@
     </div>
     <div class="faq-container">
       <div class="faq-item">
-        <strong>Q: What is algo trading?</strong>
+        <h3>What is algo trading?</h3>
         <p>A: Algo trading uses automated systems to execute trades based on pre‑defined strategies, removing human emotions and enhancing efficiency.</p>
       </div>
       <div class="faq-item">
@@ -305,10 +305,13 @@
     <div class="contact-container">
       <p class="contact-email">Email: <strong><a href="mailto:info@houseofalgo.com" class="animated-underline">info@houseofalgo.com</a></strong></p>
       <p class="contact-cta">Join the Future of Trading – Get Started Today!</p>
-      <form id="contactForm">
-        <input type="text" placeholder="Your Name" required aria-label="Your Name" />
-        <input type="email" placeholder="Your Email" required aria-label="Your Email" />
-        <textarea rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
+      <form id="contactForm" action="#" method="POST">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
         <button type="submit">Send Message</button>
       </form>
     </div>
@@ -396,7 +399,7 @@
       </div>
     </div>
     <div class="copyright">
-      © 2024 House of Algo's. All rights reserved.
+      © 2025 House of Algo's. All rights reserved.
     </div>
   </footer>
 
