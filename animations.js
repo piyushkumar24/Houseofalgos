@@ -8,7 +8,12 @@
 import * as THREE from "three";
 import { gsap } from "gsap";
 
-// Initialize all animations with proper error handling
+/**
+ * House of Algo's - Enhanced Section Background Animations
+ * This file contains all the animations for the different sections of the website
+ * with enhanced trading-themed visual effects
+ */
+
 function initAllAnimations() {
   try {
     initAboutAnimation();
@@ -19,9 +24,70 @@ function initAllAnimations() {
     initFaqAnimation();
     initContactAnimation();
     initDisclaimerAnimation();
+    initForexTickerAnimation(); // New function for forex ticker animations
   } catch (error) {
     console.error("Animation initialization error:", error);
   }
+}
+
+// Initialize with DOMContentLoaded and retry logic
+document.addEventListener("DOMContentLoaded", () => {
+  initAllAnimations();
+
+  // Retry initialization if WebGL context is lost
+  document.addEventListener(
+    "webglcontextlost",
+    (event) => {
+      console.warn("WebGL context lost. Attempting recovery...");
+      event.preventDefault();
+      setTimeout(initAllAnimations, 1000);
+    },
+    false
+  );
+});
+
+// New function to handle forex ticker animations
+function initForexTickerAnimation() {
+  const tickerItems = document.querySelectorAll(".currency-pair");
+  tickerItems.forEach((item) => {
+    const valueElement = item.querySelector(".currency-value span:first-child");
+    const changeElement = item.querySelector(".currency-change");
+    
+    if (valueElement && changeElement) {
+      const originalValue = parseFloat(valueElement.textContent);
+      const originalChange = parseFloat(changeElement.textContent);
+      
+      // Animate value changes
+      gsap.fromTo(valueElement, 
+        { y: 0 }, 
+        { 
+          y: -10, 
+          duration: 0.5, 
+          ease: "bounce.out", 
+          onComplete: () => {
+            valueElement.textContent = originalValue.toFixed(4);
+          }
+        }
+      );
+
+      // Animate change indicators
+      if (originalChange > 0) {
+        gsap.to(changeElement, { 
+          color: "#00c853", 
+          duration: 0.5, 
+          repeat: 1, 
+          yoyo: true 
+        });
+      } else {
+        gsap.to(changeElement, { 
+          color: "#ff3d00", 
+          duration: 0.5, 
+          repeat: 1, 
+          yoyo: true 
+        });
+      }
+    }
+  });
 }
 
 // Initialize with DOMContentLoaded and retry logic
