@@ -110,16 +110,16 @@ button {
   background: linear-gradient(90deg, transparent, var(--primary-1), transparent);
   animation: flowLine 8s linear infinite;
   opacity: 0.7;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 @keyframes flowLine {
   0% {
-    left: -100%;
-    width: 100%;
+    transform: translateX(-100%);
   }
   100% {
-    left: 100%;
-    width: 100%;
+    transform: translateX(100%);
   }
 }
 
@@ -165,10 +165,7 @@ button {
     transform: translateY(100vh) rotate(0deg);
     opacity: 0;
   }
-  10% {
-    opacity: 0.3;
-  }
-  90% {
+  10%, 90% {
     opacity: 0.3;
   }
   100% {
@@ -288,7 +285,11 @@ button {
   background: rgba(255, 255, 255, 0.15);
   border-radius: var(--border-radius-md);
   padding: 2rem;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition:
+    transform 0.25s linear,
+    box-shadow 0.2s ease-out,
+    background 0.3s ease-out;
+  backface-visibility: hidden;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -301,6 +302,8 @@ button {
   transform-style: preserve-3d;
   perspective: 1000px;
   animation: card-entrance 0.8s ease-out backwards;
+  will-change: transform;
+  transform: translateZ(0); /* GPU acceleration */
 }
 
 @keyframes card-entrance {
@@ -358,9 +361,10 @@ button {
 
 .feature-card:hover {
   transform: translateY(-15px) scale(1.03) rotateX(5deg);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 20px rgba(255, 215, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 12px rgba(255, 215, 0, 0.15);
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 215, 0, 0.5);
+  backdrop-filter: blur(2px);
   z-index: 2;
 }
 
@@ -381,7 +385,9 @@ button {
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   z-index: 2;
-  animation: icon-pulse 3s infinite alternate;
+  animation: icon-pulse 4s ease-in-out infinite;
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
 }
 
 @keyframes icon-pulse {
@@ -483,6 +489,32 @@ button {
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(3px);
+}
+
+/* Get Started in 4 Easy Steps Section */
+.steps-section {
+  position: relative;
+  padding: 6rem 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  transform: translateZ(0);
+}
+
+.step-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  padding: 2rem;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease-out;
+  margin: 1.5rem 0;
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+}
+
+.step-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .feature-visual::before {
@@ -4700,3 +4732,4 @@ footer::before {
     font-size: 0.9rem;
   }
 }
+
