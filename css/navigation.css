@@ -230,8 +230,8 @@
 
 @media (max-width: 480px) {
     .logo-icon {
-        width: 60px; /* Adjusted for mobile */
-        height: 60px; /* Adjusted for mobile */
+        width: 80px; /* Adjusted for mobile */
+        height: 80px; /* Adjusted for mobile */
     }
 
     .logo-text .brand-name {
