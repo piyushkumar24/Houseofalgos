@@ -7,10 +7,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 40px; /* Further reduced padding for better mobile compatibility */
-
-
-
+    padding-top: 20px; /* Adjusted padding for better mobile compatibility */
 
     overflow: hidden;
     margin-top: 0;
@@ -44,7 +41,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-background: linear-gradient(135deg, 
+    background: linear-gradient(135deg, 
         rgba(10, 30, 50, 0.92) 0%, 
         rgba(10, 30, 50, 0.85) 50%,
         rgba(10, 30, 50, 0.75) 100%
@@ -76,14 +73,11 @@ background: linear-gradient(135deg,
     animation: heroContentFadeIn 1s ease-out forwards;
 }
 
-    .hero-title {
-        font-size: 2rem; /* Further adjusted for better mobile visibility */
-
-
-
+.hero-title {
+    font-size: 2rem; /* Further adjusted for better mobile visibility */
     font-weight: 700;
     color: var(--white);
-    margin-bottom: 30px;
+    margin-bottom: 15px; /* Adjusted margin for better mobile visibility */
     line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     animation: fadeIn 1s ease-out forwards;
@@ -91,15 +85,12 @@ background: linear-gradient(135deg,
 
 .hero-description {
     max-width: 800px;
-    margin: 0 auto 40px;
+    margin: 0 auto 30px; /* Adjusted margin for better mobile visibility */
     animation: fadeIn 1s ease-out 0.5s both;
 }
 
-    .hero-description p {
-        font-size: 0.9rem; /* Further adjusted for better mobile visibility */
-
-
-
+.hero-description p {
+    font-size: 0.9rem; /* Further adjusted for better mobile visibility */
     color: var(--white);
     line-height: 1.6;
     margin-bottom: 20px;
@@ -116,13 +107,12 @@ background: linear-gradient(135deg,
     display: flex;
     justify-content: center;
     gap: 25px;
-    margin-bottom: 60px;
+    margin-bottom: 30px; /* Adjusted margin for better mobile visibility */
     animation: fadeIn 1s ease-out 2.2s both;
 }
 
 .hero-cta a {
     padding: 12px 30px; /* Adjusted for better touch targets on mobile */
-
     border-radius: 50px;
     font-weight: 600;
     letter-spacing: 1.2px;
