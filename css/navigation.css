@@ -143,6 +143,11 @@
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        min-height: 40px;
+        padding: 8px 0;
+    }
+    
     .menu-toggle {
         display: block;
     }
@@ -154,16 +159,20 @@
 
     .logo a {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
     }
 
     .logo-icon {
-        width: 50px; /* Increased for better visibility */
-        height: 50px; /* Increased for better visibility */
+        width: 60px;
+        height: 60px;
     }
 
     .logo-text .brand-name {
-        font-size: 1.4rem; /* Increased for better visibility */
+        font-size: 1.3rem;
+    }
+    
+    .logo-text small {
+        font-size: 0.75rem;
     }
 
     .nav-links {
