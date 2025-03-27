@@ -153,13 +153,21 @@
     }
 
     .logo {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 8px;
+        margin-left: 10px;
     }
 
     .logo a {
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
         gap: 8px;
+    }
+    
+    .logo-text {
+        margin-left: 5px;
     }
 
     .logo-icon {
@@ -173,6 +181,9 @@
     
     .logo-text small {
         font-size: 0.75rem;
+        margin-top: 2px;
+        display: block;
+        line-height: 1.2;
     }
 
     .nav-links {
