@@ -1,6 +1,7 @@
 .features {
     background: linear-gradient(135deg, var(--secondary) 0%, rgba(8, 28, 53, 0.98) 100%);
-    padding: 60px 0;
+    padding: 40px 0; /* Adjusted for better mobile compatibility */
+
     position: relative;
     overflow: hidden;
 }
