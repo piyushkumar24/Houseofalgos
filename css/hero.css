@@ -13,6 +13,12 @@
     margin-top: 0;
 }
 
+@media (max-width: 768px) {
+    .hero {
+        margin-top: 60px;
+    }
+}
+
 .video-background {
     position: absolute;
     top: 0;
@@ -77,7 +83,8 @@
     font-size: 2rem; /* Further adjusted for better mobile visibility */
     font-weight: 700;
     color: var(--white);
-    margin-bottom: 15px; /* Adjusted margin for better mobile visibility */
+    margin-bottom: 5vh; /* Applied formula for responsive margin */
+
     line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     animation: fadeIn 1s ease-out forwards;
@@ -107,7 +114,9 @@
     display: flex;
     justify-content: center;
     gap: 25px;
-    margin-bottom: 30px; /* Adjusted margin for better mobile visibility */
+    margin-bottom: 10vh; /* Applied formula for responsive margin */
+    margin-bottom: 5vh; /* Applied formula for responsive margin */
+
     animation: fadeIn 1s ease-out 2.2s both;
 }
 
@@ -165,53 +174,6 @@
     color: var(--gold);
 }
 
-/* Scroll Indicator */
-.scroll-indicator {
-    position: absolute;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    animation: fadeIn 1s ease-out 3s both, bounce 2s ease-in-out 3s infinite;
-}
-
-.mouse {
-    width: 30px;
-    height: 50px;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    position: relative;
-    margin: 0 auto 10px;
-}
-
-.wheel {
-    width: 4px;
-    height: 8px;
-    background: var(--gold);
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-    animation: wheel 1.5s ease infinite;
-}
-
-.arrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.arrow span {
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-bottom: 2px solid var(--gold);
-    border-right: 2px solid var(--gold);
-    transform: rotate(45deg);
-    animation: arrow 1.5s ease-in-out infinite;
-}
 
 /* Forex Ticker */
 .forex-ticker-wrapper {
