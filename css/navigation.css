@@ -1,0 +1,251 @@
+/* Navigation Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #6E22B5; /* Darker violet header background */
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    padding: 10px 0; /* Adjusted padding for better mobile compatibility */
+
+
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* More visible border */
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px; /* Adjusted padding for better spacing */
+
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 50px; /* Increased for better touch targets */
+}
+
+/* Logo Styles */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 0px;
+}
+
+.logo-icon {
+    position: relative;
+    width: 77px; /* Increased for better visibility */
+    height: 77px; /* Increased for better visibility */
+}
+
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); /* Enhanced shadow for better visibility */
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text .brand-name {
+    color: var(--gold);
+    font-size: 1.4rem; /* Increased for better visibility */
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5); /* Enhanced shadow for better visibility */
+}
+
+.logo-text small {
+    color: rgba(255, 255, 255, 0.8); /* Slightly lighter for better contrast */
+    font-size: 0.9rem; /* Increased for better readability */
+    margin: 5px 0 0;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 10px; /* Adjusted gap for better mobile spacing */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #ffffff; /* Ensured text is fully white for better visibility */
+    text-decoration: none;
+    padding: 8px 12px; /* Increased padding for better touch targets */
+    font-size: 1rem; /* Increased for better readability */
+    font-weight: 400;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0.9; /* Slightly more opaque for better visibility */
+}
+
+.nav-links a i {
+    display: none; /* Remove icon elements */
+}
+
+.nav-links a {
+    background-image: none !important; /* Remove any default button images */
+    padding: 8px 12px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: rgba(255, 255, 255, 0.1); /* More visible hover effect */
+    color: var(--gold);
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 100;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 30px; /* Increased for better visibility */
+    height: 3px; /* Increased for better visibility */
+    background: var(--white);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Responsive Navigation */
+
+/* Hide elements with the mobile-hide class on mobile */
+.mobile-hide {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: 10px; /* Adjusted for better spacing */
+    }
+
+    .nav-links a {
+        padding: 8px 12px; /* Adjusted for better touch targets */
+        font-size: 1rem; /* Increased for better readability */
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        min-height: 40px;
+        padding: 8px 0;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+
+    .logo {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 8px;
+        margin-left: 10px;
+    }
+
+    .logo a {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .logo-text {
+        margin-left: 5px;
+    }
+
+    .logo-icon {
+        width: 120px;  /* 150% larger mobile logo */
+        height: 120px;  /* 150% larger mobile logo */
+        margin-right: 12px;  /* Increased spacing */
+    }
+
+    .logo-text .brand-name {
+        font-size: 1rem;  /* Reduced text size */
+        line-height: 1;
+        letter-spacing: 0.3px;
+    }
+    
+    .logo-text small {
+        font-size: 0.6rem;  /* Smaller tagline */
+        margin-top: 2px;
+        display: block;
+        line-height: 1;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 250px;
+        background: rgba(8, 24, 47, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 80px 20px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        padding: 10px; /* Increased for better touch targets */
+        font-size: 1rem; /* Increased for better readability */
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-icon {
+        width: 80px; /* Adjusted for mobile */
+        height: 80px; /* Adjusted for mobile */
+    }
+    .logo, .logo a {
+        gap: 2px; /* Adjust this value as needed */
+    }
+
+    .logo-text .brand-name {
+        font-size: 1.2rem; /* Reduced for mobile */
+    }
+
+    .logo-text small {
+        font-size: 0.85rem; /* Reduced for mobile */
+    }
+}
