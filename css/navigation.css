@@ -171,19 +171,21 @@
     }
 
     .logo-icon {
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
+        margin-right: 5px;
     }
 
     .logo-text .brand-name {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        line-height: 1.1;
     }
     
     .logo-text small {
-        font-size: 0.75rem;
-        margin-top: 2px;
+        font-size: 0.7rem;
+        margin-top: 1px;
         display: block;
-        line-height: 1.2;
+        line-height: 1.1;
     }
 
     .nav-links {
