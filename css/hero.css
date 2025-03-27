@@ -38,7 +38,7 @@
     top: 0;
     z-index: 0;
     transform: scale(1.1);
-    filter: brightness(0.9) contrast(1.1); /* Enhanced video quality */
+    filter: brightness(1.0) contrast(1.0);
 }
 
 .video-background .overlay {
@@ -47,14 +47,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(10, 30, 50, 0.92) 0%, 
-        rgba(10, 30, 50, 0.85) 50%,
-        rgba(10, 30, 50, 0.75) 100%
-    ); /* Darker overlay for better contrast */
-
+    background: linear-gradient(135deg,
+        rgba(10, 30, 50, 0.6) 0%,
+        rgba(10, 30, 50, 0.5) 50%,
+        rgba(10, 30, 50, 0.4) 100%
+    ); /* Increased transparency overlay */
     z-index: 1;
-    backdrop-filter: blur(2px); /* Subtle blur for depth */
+    backdrop-filter: blur(2px);
 }
 
 .particles-container {
