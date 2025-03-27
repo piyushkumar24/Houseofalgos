@@ -171,22 +171,22 @@
     }
 
     .logo-icon {
-        width: 80px;  /* Increased mobile logo size */
-        height: 80px;  /* Increased mobile logo size */
-        margin-right: 8px;  /* Added spacing between logo and text */
+        width: 120px;  /* 150% larger mobile logo */
+        height: 120px;  /* 150% larger mobile logo */
+        margin-right: 12px;  /* Increased spacing */
     }
 
     .logo-text .brand-name {
-        font-size: 1.1rem;  /* Slightly reduced text size */
-        line-height: 1.1;
-        letter-spacing: 0.5px;
+        font-size: 1rem;  /* Reduced text size */
+        line-height: 1;
+        letter-spacing: 0.3px;
     }
     
     .logo-text small {
-        font-size: 0.65rem;  /* Reduced tagline size */
-        margin-top: 1px;
+        font-size: 0.6rem;  /* Smaller tagline */
+        margin-top: 2px;
         display: block;
-        line-height: 1.1;
+        line-height: 1;
     }
 
     .nav-links {
