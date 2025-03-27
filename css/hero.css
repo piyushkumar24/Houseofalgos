@@ -7,7 +7,11 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 40px; /* Further reduced padding for better mobile compatibility */
+
+
+
+
     overflow: hidden;
     margin-top: 0;
 }
@@ -40,11 +44,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(8, 28, 53, 0.92) 0%, 
-        rgba(8, 28, 53, 0.85) 50%,
-        rgba(8, 28, 53, 0.75) 100%
-    );
+background: linear-gradient(135deg, 
+        rgba(10, 30, 50, 0.92) 0%, 
+        rgba(10, 30, 50, 0.85) 50%,
+        rgba(10, 30, 50, 0.75) 100%
+    ); /* Darker overlay for better contrast */
+
     z-index: 1;
     backdrop-filter: blur(2px); /* Subtle blur for depth */
 }
@@ -71,8 +76,11 @@
     animation: heroContentFadeIn 1s ease-out forwards;
 }
 
-.hero-title {
-    font-size: 3.5rem;
+    .hero-title {
+        font-size: 2rem; /* Further adjusted for better mobile visibility */
+
+
+
     font-weight: 700;
     color: var(--white);
     margin-bottom: 30px;
@@ -87,8 +95,11 @@
     animation: fadeIn 1s ease-out 0.5s both;
 }
 
-.hero-description p {
-    font-size: 1.4rem;
+    .hero-description p {
+        font-size: 0.9rem; /* Further adjusted for better mobile visibility */
+
+
+
     color: var(--white);
     line-height: 1.6;
     margin-bottom: 20px;
@@ -110,7 +121,8 @@
 }
 
 .hero-cta a {
-    padding: 16px 35px;
+    padding: 12px 30px; /* Adjusted for better touch targets on mobile */
+
     border-radius: 50px;
     font-weight: 600;
     letter-spacing: 1.2px;
@@ -211,14 +223,6 @@
     animation: arrow 1.5s ease-in-out infinite;
 }
 
-.arrow span:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.arrow span:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
 /* Forex Ticker */
 .forex-ticker-wrapper {
     position: absolute;
@@ -247,15 +251,15 @@
 .ticker-label {
     background: var(--gold);
     color: var(--primary);
-    padding: 0 35px;
+    padding: 0 20px; /* Adjusted padding for mobile */
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
+    font-size: 0.8rem; /* Reduced font size for mobile */
+    letter-spacing: 1px; /* Adjusted letter spacing for mobile */
     text-transform: uppercase;
-    min-width: 150px;
+    min-width: 120px; /* Adjusted min-width for mobile */
     position: relative;
     clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
