@@ -171,18 +171,19 @@
     }
 
     .logo-icon {
-        width: 70px;
-        height: 70px;
-        margin-right: 5px;
+        width: 80px;  /* Increased mobile logo size */
+        height: 80px;  /* Increased mobile logo size */
+        margin-right: 8px;  /* Added spacing between logo and text */
     }
 
     .logo-text .brand-name {
-        font-size: 1.2rem;
+        font-size: 1.1rem;  /* Slightly reduced text size */
         line-height: 1.1;
+        letter-spacing: 0.5px;
     }
     
     .logo-text small {
-        font-size: 0.7rem;
+        font-size: 0.65rem;  /* Reduced tagline size */
         margin-top: 1px;
         display: block;
         line-height: 1.1;
