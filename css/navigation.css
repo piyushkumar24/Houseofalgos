@@ -232,7 +232,9 @@
     .logo-icon {
         width: 80px; /* Adjusted for mobile */
         height: 80px; /* Adjusted for mobile */
-        margin-right: 3px;
+    }
+    .logo, .logo a {
+        gap: 2px; /* Adjust this value as needed */
     }
 
     .logo-text .brand-name {
