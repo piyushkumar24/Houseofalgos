@@ -1,7 +1,7 @@
 /* Footer Styles */
 .footer {
     background: #000000;
-    padding: 40px 0 20px;
+    padding: 40px 0 20px; /* Mobile padding */
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -102,6 +102,10 @@
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    .footer {
+        padding: 30px 0 15px; /* Mobile padding */
+    }
+
     .footer-content {
         flex-direction: column;
         text-align: center;
@@ -127,21 +131,17 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 769px) {
     .footer {
-        padding: 30px 0 15px;
+        padding: 40px 0 20px; /* Desktop padding */
+    }
+
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     .footer-links {
-        gap: 15px;
-    }
-
-    .footer-links a {
-        font-size: 0.85rem;
-    }
-
-    .footer-brand img {
-        width: 90px;
-        height: 90px;
+        gap: 20px;
     }
 }
