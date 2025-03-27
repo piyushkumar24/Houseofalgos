@@ -232,6 +232,7 @@
     .logo-icon {
         width: 80px; /* Adjusted for mobile */
         height: 80px; /* Adjusted for mobile */
+        margin-right: 3px;
     }
 
     .logo-text .brand-name {
