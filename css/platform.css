@@ -1,0 +1,140 @@
+/* Platform Section Styles */
+.platform {
+    /* Updated purplish background */
+    background: linear-gradient(135deg, #6a0572, #9a0d91);
+    padding: 60px 20px;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .platform .section-header h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-align: center;
+    color: #e7d749;
+  }
+  
+  .platform .section-divider {
+    margin: 20px auto;
+    width: 60px;
+    height: 4px;
+    background-color: #e7d749;
+  }
+  
+  .platform .section-header p {
+    text-align: center;
+    color: #f0f0f0;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Steps Container */
+  .steps-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+  }
+  
+  /* Each Step */
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .step:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Step Icon */
+  .step-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #e7d749, #d1b337);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .step:hover .step-icon {
+    transform: scale(1.1);
+  }
+  
+  .step-icon img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+  }
+  
+  /* Step Content */
+  .step-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  
+  .step-content p {
+    font-size: 1rem;
+    color: #f0f0f0;
+    margin: 0 auto;
+    max-width: 250px;
+  }
+  
+  /* Platform Note */
+  .platform-note {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #f0f0f0;
+  }
+  
+  .note-icon {
+    font-size: 2rem;
+    color: #e7d749;
+    margin-bottom: 10px;
+  }
+  
+  /* Call-to-Action (if needed) */
+  .platform-cta {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .platform-cta .btn-primary {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    background-color: #e7d749;
+    color: #fff;
+    border-radius: 30px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .platform-cta .btn-primary:hover {
+    background-color: #d1b337;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .steps-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .steps-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  

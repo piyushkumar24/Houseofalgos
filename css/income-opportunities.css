@@ -1,0 +1,170 @@
+/* Income Opportunities Section */
+.income {
+  background: linear-gradient(135deg, var(--secondary, #5a3f9e) 0%, rgba(75, 0, 130, 0.95) 100%);
+  padding: 60px 20px;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+
+/* Section Header */
+.income .section-header h2 {
+  font-size: 2.4rem;
+  margin: 0;
+  color: var(--gold, #FFD700);
+}
+.income .section-divider {
+  margin: 20px auto;
+  width: 60px;
+  height: 4px;
+  background: var(--gold, #FFD700);
+  border-radius: 2px;
+}
+.income .section-header p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 10px auto 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Unified Grid for Income Cards and Features */
+.income-cards,
+.income-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+/* Income Card Styles */
+.income-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  background: transparent;
+  text-align: center;
+}
+.income-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Icon Container for Income Cards */
+.income-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Income Details */
+.income-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.income-details p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  /* On mobile, center the text; will be overridden on desktop */
+  margin: 0 auto;
+  max-width: 300px;
+  text-align: center;
+}
+
+/* Income Feature Styles */
+.income-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  background: transparent;
+  text-align: center;
+}
+.income-feature:hover {
+  transform: translateY(-5px);
+}
+
+/* Icon Container for Income Features */
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Feature Details */
+.feature-details h4 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.feature-details p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 auto;
+  max-width: 300px;
+  text-align: center;
+}
+
+/* Unified Icon Styling */
+.income-icon img,
+.feature-icon img,
+.icon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Responsive Layout for Larger Screens */
+@media (min-width: 768px) {
+  /* Income Cards: Grid layout with three columns */
+  .income-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* Income Card: Side-by-side icon and text */
+  .income-card {
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+  }
+  .income-icon {
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
+  .income-details p {
+    text-align: left;
+    margin: 0; /* Remove auto centering */
+  }
+  
+  /* Income Features: Grid layout with three columns */
+  .income-features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* Income Feature: Side-by-side icon and text */
+  .income-feature {
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+  }
+  .feature-icon {
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
+  .feature-details p {
+    text-align: left;
+    margin: 0; /* Remove auto centering */
+  }
+}
