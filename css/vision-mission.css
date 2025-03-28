@@ -53,7 +53,6 @@
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    object-fit: cover;
 }
 .vision-card h3 {
     font-size: 1.8rem;

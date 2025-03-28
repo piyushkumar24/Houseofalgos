@@ -1,16 +1,16 @@
 /* Base Styles */
 :root {
     /* Primary Color Scheme */
-    --primary: #800080; /* Changed to purple */
-    --primary-rgb: 128, 0, 128;
-    --primary-light: #6a1b9a;
-    --primary-dark: #38006b;
+    --primary: #4E1A3D; /* Velvet bloom dark */
+    --primary-rgb: 78, 26, 61;
+    --primary-light: #6A2352;
+    --primary-dark: #3A1330;
     
     /* Secondary Color Scheme */
-    --secondary: #800080;
-    --secondary-rgb: 128, 0, 128;
-    --secondary-light: #9c27b0;
-    --secondary-dark: #6a0080;
+    --secondary: #6A2352; /* Velvet bloom light */
+    --secondary-rgb: 106, 35, 82;
+    --secondary-light: #8A2F6A;
+    --secondary-dark: #4E1A3D;
     
     /* Accent Colors */
     --accent: #9400d3;
