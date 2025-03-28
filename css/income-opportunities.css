@@ -1,6 +1,6 @@
 /* Income Opportunities Section */
 .income {
-  background: linear-gradient(135deg, var(--secondary, #5a3f9e) 0%, rgba(75, 0, 130, 0.95) 100%);
+  background: linear-gradient(135deg, #4E1A3D, #6A2352); /* Velvet bloom color gradient */
   padding: 60px 20px;
   font-family: 'Roboto', sans-serif;
   text-align: center;

@@ -4,8 +4,8 @@
     --secondary: #1f1c2c;
   }
   
-  .faq {
-    background: linear-gradient(135deg, #1f1c2c, #928dab); /* Dark purplish gradient */
+.faq {
+    background: linear-gradient(135deg, #4E1A3D, #6A2352); /* Velvet bloom color gradient */
     padding: 80px 20px;
     position: relative;
     font-family: 'Roboto', sans-serif;

@@ -1,6 +1,6 @@
 /* Features Section Styles */
 .features {
-    background: linear-gradient(135deg, var(--secondary, #1f1c2c) 0%, rgba(8, 28, 53, 0.98) 100%);
+    background: linear-gradient(135deg, #4E1A3D, #6A2352); /* Velvet bloom color gradient */
     padding: 40px 0;
     position: relative;
     overflow: hidden;

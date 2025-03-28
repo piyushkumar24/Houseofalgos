@@ -1,7 +1,6 @@
 /* Platform Section Styles */
 .platform {
-    /* Updated purplish background */
-    background: linear-gradient(135deg, #6a0572, #9a0d91);
+    background: linear-gradient(135deg, #4E1A3D, #6A2352); /* Velvet bloom color gradient */
     padding: 60px 20px;
     background-size: cover;
     font-family: 'Roboto', sans-serif;

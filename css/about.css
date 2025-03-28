@@ -1,7 +1,7 @@
 /* General Styling Enhancements */
 .about {
     padding: 80px 0;
-    background: var(--dark-bg);
+    background: linear-gradient(135deg, #4E1A3D, #6A2352); /* Velvet bloom color gradient */
     position: relative;
     color: var(--text-color);
   }
