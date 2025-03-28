@@ -1,119 +1,119 @@
 /* Vision & Mission Section Styles */
 .vision {
-    background-color: var(--primary);
+    background: linear-gradient(135deg, #4E1A3D, #6A2352); /* Velvet bloom color gradient */
     padding: 80px 20px;
     position: relative;
     overflow: hidden;
     text-align: center;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
-  }
-  
-  /* Section Header */
-  .vision .section-header h2 {
+}
+
+/* Section Header */
+.vision .section-header h2 {
     font-size: 2.5rem;
     margin-bottom: 10px;
     font-weight: 700;
-  }
-  .vision .section-divider {
+}
+.vision .section-divider {
     width: 80px;
     height: 4px;
     background-color: var(--gold);
     margin: 0 auto 20px;
     border-radius: 2px;
-  }
-  .vision .section-header p {
+}
+.vision .section-header p {
     font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
     color: rgba(255, 255, 255, 0.8);
-  }
-  
-  /* Vision Cards */
-  .vision-cards {
+}
+
+/* Vision Cards */
+.vision-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
     margin: 50px 0;
-  }
-  .vision-card {
+}
+.vision-card {
     padding: 20px;
     max-width: 500px;
     flex: 1;
     transition: transform 0.3s ease;
-  }
-  .vision-card:hover {
+}
+.vision-card:hover {
     transform: translateY(-5px);
-  }
-  .card-icon {
+}
+.card-icon {
     margin-bottom: 20px;
-  }
-  .icon-image {
+}
+.icon-image {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-  }
-  .vision-card h3 {
+}
+.vision-card h3 {
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--gold);
     margin-bottom: 15px;
-  }
-  .vision-card p {
+}
+.vision-card p {
     font-size: 1.1rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.9);
-  }
-  
-  /* Core Values */
-  .vision-values {
+}
+
+/* Core Values */
+.vision-values {
     margin-top: 60px;
-  }
-  .vision-values h3 {
+}
+.vision-values h3 {
     font-size: 2rem;
     color: var(--gold);
     margin-bottom: 40px;
-  }
-  .values-grid {
+}
+.values-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-  }
-  .value-item {
+}
+.value-item {
     padding: 15px;
     max-width: 250px;
     transition: transform 0.3s ease;
-  }
-  .value-item:hover {
+}
+.value-item:hover {
     transform: translateY(-3px);
-  }
-  .value-icon {
+}
+.value-icon {
     margin-bottom: 10px;
-  }
-  .icon-image-small {
+}
+.icon-image-small {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
-  }
-  .value-item h4 {
+}
+.value-item h4 {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 10px;
     color: #fff;
-  }
-  .value-item p {
+}
+.value-item p {
     font-size: 0.95rem;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.8);
-  }
-  
-  /* Background Effects */
-  .vision::before,
-  .vision::after {
+}
+
+/* Background Effects */
+.vision::before,
+.vision::after {
     content: '';
     position: absolute;
     width: 300px;
@@ -121,201 +121,37 @@
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
     z-index: 0;
-  }
-  .vision::before {
+}
+.vision::before {
     top: -150px;
     left: -150px;
-  }
-  .vision::after {
+}
+.vision::after {
     bottom: -150px;
     right: -150px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 992px) {
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
     .vision-cards,
     .values-grid {
-      flex-direction: column;
-      align-items: center;
+        flex-direction: column;
+        align-items: center;
     }
-  }
-  @media (max-width: 576px) {
+}
+@media (max-width: 576px) {
     .vision {
-      padding: 60px 10px;
+        padding: 60px 10px;
     }
     .vision-card, .value-item {
-      padding: 10px;
+        padding: 10px;
     }
     .icon-image {
-      width: 70px;
-      height: 70px;/* Vision & Mission Section Styles */
-      .vision {
-        background-color: var(--primary);
-        padding: 80px 20px;
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-        color: #fff;
-        font-family: 'Open Sans', sans-serif;
-      }
-      
-      /* Section Header */
-      .vision .section-header h2 {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-        font-weight: 700;
-      }
-      .vision .section-divider {
-        width: 80px;
-        height: 4px;
-        background-color: var(--gold);
-        margin: 0 auto 20px;
-        border-radius: 2px;
-      }
-      .vision .section-header p {
-        font-size: 1.1rem;
-        max-width: 600px;
-        margin: 0 auto;
-        color: rgba(255, 255, 255, 0.8);
-      }
-      
-      /* Vision Cards */
-      .vision-cards {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 40px;
-        margin: 50px 0;
-      }
-      .vision-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        max-width: 500px;
-        flex: 1;
-        transition: transform 0.3s ease;
-      }
-      .vision-card:hover {
-        transform: translateY(-5px);
-      }
-      .card-icon {
-        margin-bottom: 20px;
-      }
-      .icon-image {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-      .vision-card h3 {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: var(--gold);
-        margin-bottom: 15px;
-      }
-      .vision-card p {
-        font-size: 1.1rem;
-        line-height: 1.7;
-        color: rgba(255, 255, 255, 0.9);
-      }
-      
-      /* Core Values */
-      .vision-values {
-        margin-top: 60px;
-      }
-      .vision-values h3 {
-        font-size: 2rem;
-        color: var(--gold);
-        margin-bottom: 40px;
-      }
-      .values-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 30px;
-      }
-      .value-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 15px;
-        max-width: 250px;
-        transition: transform 0.3s ease;
-      }
-      .value-item:hover {
-        transform: translateY(-3px);
-      }
-      .value-icon {
-        margin-bottom: 10px;
-      }
-      .icon-image-small {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-      .value-item h4 {
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-bottom: 10px;
-        color: #fff;
-      }
-      .value-item p {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: rgba(255, 255, 255, 0.8);
-      }
-      
-      /* Background Effects */
-      .vision::before,
-      .vision::after {
-        content: '';
-        position: absolute;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
-        z-index: 0;
-      }
-      .vision::before {
-        top: -150px;
-        left: -150px;
-      }
-      .vision::after {
-        bottom: -150px;
-        right: -150px;
-      }
-      
-      /* Responsive Design */
-      @media (max-width: 992px) {
-        .vision-cards,
-        .values-grid {
-          flex-direction: column;
-          align-items: center;
-        }
-      }
-      @media (max-width: 576px) {
-        .vision {
-          padding: 60px 10px;
-        }
-        .vision-card, .value-item {
-          padding: 10px;
-        }
-        .icon-image {
-          width: 70px;
-          height: 70px;
-        }
-        .icon-image-small {
-          width: 40px;
-          height: 40px;
-        }
-      }
-      
+        width: 70px;
+        height: 70px;
     }
     .icon-image-small {
-      width: 40px;
-      height: 40px;
+        width: 40px;
+        height: 40px;
     }
-  }
-  
+}

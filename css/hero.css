@@ -8,7 +8,7 @@
     justify-content: center;
     text-align: center;
     padding-top: 20px; /* Adjusted padding for better mobile compatibility */
-    background: linear-gradient(135deg, rgba(var(--primary-dark-rgb), 0.9), rgba(var(--secondary-dark-rgb), 0.7));
+background: transparent;
 
     overflow: hidden;
     margin-top: 0;
@@ -88,7 +88,6 @@
     color: transparent;
     margin-bottom: 4vh;
     letter-spacing: -1.5px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     animation: fadeIn 1s ease-out forwards;
